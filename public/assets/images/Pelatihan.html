@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://127.0.0.1:5500/views/pages/pelatihan.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		
+		
+		<title>Pelatihan</title>
+	<link rel="stylesheet" href="./Pelatihan_files/style.css"><link rel="stylesheet" href="./Pelatihan_files/pelatihan.css"><link rel="stylesheet" href="./Pelatihan_files/all.min.css"></head>
+	<body id="pelatihan" class="fade-in">
+		<header id="navbar" class="header-effect" style="z-index: 100; position: fixed; top: 0px; animation: 1s ease 0s 1 normal none running fadeInDown;"><div id="header-container">
+  <div id="logo-container">
+    <img src="./Pelatihan_files/halalin-logo.png" alt="Halalin" width="150px">
+  </div>
+  <div id="responsive-dropdown-container">
+    <div onclick="toggleDropdown()" id="responsive-dropdown">
+      <img src="./Pelatihan_files/dropdown.png" alt="" width="25px" height="25px">
+    </div>
+  </div>
+  <div id="nav-container">
+    <p class="close-nav" onclick="toggleDropdown()">x</p>
+    <div class="navbar-items">
+      <nav>
+        <a id="beranda-navbar" href="http://127.0.0.1:5500/views/pages/dashboard.html">Beranda</a>
+        <a id="artikel-navbar" href="http://127.0.0.1:5500/views/pages/artikel.html">Artikel</a>
+        <a id="pelatihan-navbar" href="http://127.0.0.1:5500/views/pages/pelatihan.html" class="selected">Pelatihan</a>
+        <a id="chat-navbar" href="http://127.0.0.1:5500/views/pages/chat.html">Chat</a>
+      </nav>
+      <a href="http://127.0.0.1:5500/views/pages/biodata.html" title="Lihat Profil" class="user-container">
+        <div class="user-image">
+          <img src="./Pelatihan_files/user.png" alt="user" style="border-radius: 50%">
+        </div>
+        <div class="user-name-container">
+          <p class="profile-name">Muhammad Fikri</p>
+          <p>Lihat Profil</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</header>
+		<main id="main-pelatihan">
+			<div id="page-pelatihan"></div>
+			<div id="sidebar-pelatihan-container" style="left: -34%;">
+				<aside id="sidebar-pelatihan">
+					<div>
+						<h2>Daftar Pelatihan</h2>
+					</div>
+					<div class="percentage">
+						<div class="percentage-container">
+							<hr class="percentage-line-second" style="width: 0%;">
+							<hr class="percentage-line-first" style="width: 100%;">
+						</div>
+						<p class="percentage-text">0% selesai</p>
+					</div>
+					<div id="list-bab">
+						<div class="bab-container">
+							<div class="bab-dropdown">
+								<div class="fa fa-chevron-down"></div>
+								<h2>Bab 1</h2>
+							</div>
+							<ul>
+								<li id="sub-bab-1" onclick="goToPage(0)">Sub bab 1</li>
+								<li id="sub-bab-2" onclick="goToPage(1)">Sub bab 2</li>
+							</ul>
+						</div>
+					</div>
+				</aside>
+				<div id="open-bab" onclick="openSidebar(&#39;sidebar-pelatihan-container&#39;)" style="color: #4b5c98">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div id="content-pelatihan"><h1 id="title-pelatihan">Sub Bab 1</h1>
+<p>
+	Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, repellendus esse nisi consequatur
+	rem consectetur facere, ipsum earum voluptas, porro minus veritatis excepturi expedita eaque
+	aliquam assumenda! Cum, ducimus est! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+	Eos, repellendus esse nisi consequatur rem consectetur facere, ipsum earum voluptas, porro minus
+	veritatis excepturi expedita eaque aliquam assumenda! Cum, ducimus est! Lorem
+</p>
+<img src="./Pelatihan_files/manfaatpernikahan.jpg" alt="">
+<p>
+	Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, repellendus esse nisi consequatur
+	rem consectetur facere, ipsum earum voluptas, porro minus veritatis excepturi expedita eaque
+	aliquam assumenda! Cum, ducimus est! Lorem ipsum dolor sit, amet consectetur adipisicing elit
+</p>
+<p>
+	Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos, repellendus esse nisi consequatur
+	rem consectetur facere, ipsum earum voluptas, porro minus veritatis excepturi expedita eaque
+	aliquam assumenda! Cum, ducimus est! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+	Eos, repellendus esse nisi consequatur rem consectetur facere, ipsum earum voluptas, porro minus
+	veritatis excepturi expedita eaque aliquam assumenda! Cum, ducimus est! Lorem ipsum dolor sit,
+	amet consectetur adipisicing elit. Eos, repellendus esse nisi consequatur rem
+</p>
+</div>
+		</main>
+		<footer id="pelatihan-footer">
+			<div id="before" class="bab-choice fledir-row hide-item" onclick="prevPage()">
+				<div class="fa fa-chevron-left"></div>
+				<h3>Sub Bab 1</h3>
+			</div>
+			<div class="bab-title fledir-row">
+				<h2>Bab 1</h2>
+			</div>
+			<div id="after" class="bab-choice fledir-row" onclick="nextPage()">
+				<h3>Sub bab 2</h3>
+				<div class="fa fa-chevron-right"></div>
+			</div>
+		</footer>
+		<script>
+			fetchAPI();
+			var current_page = 0;
+			var page_before;
+			var changePage = false;
+			function nextPage() {
+				page_before = current_page;
+				current_page += 1;
+				if (current_page > 1) {
+					return;
+				}
+				changePage = true;
+				fetchAPI();
+			}
+
+			function prevPage() {
+				page_before = current_page;
+				current_page -= 1;
+				if (current_page < 0) {
+					return;
+				}
+				fetchAPI();
+			}
+			function goToPage(pageNumber) {
+				if (pageNumber == current_page) {
+					return;
+				}
+				page_before = current_page;
+				current_page = pageNumber;
+				if (current_page > page_before) {
+					changePage = true;
+				}
+				fetchAPI();
+			}
+			// Memuat file JSON menggunakan Fetch API
+			function fetchAPI() {
+				fetch("../essentials/data-pelatihan.json")
+					.then((response) => response.json())
+					.then((data) => {
+						if (current_page == 0) {
+							console.log("anjay");
+							document.getElementById("before").classList.add("hide-item");
+							document.getElementById("after").classList.remove("hide-item");
+						} else if (current_page == data.materi.bab1.length - 1) {
+							document.getElementById("before").classList.remove("hide-item");
+							document.getElementById("after").classList.add("hide-item");
+						}
+						if (changePage) {
+							data.materi.bab1[page_before].status = "Selesai";
+							console.log(page_before);
+							console.log(data.materi.bab1[page_before].status);
+							changePage = false;
+						}
+						var countSelesai = 0;
+						for (var i = 0; i < data.materi.bab1.length; i++) {
+							if (data.materi.bab1[i].status == "Selesai") {
+								var JudulBabSelesai = "sub-bab-" + data.materi.bab1[i].sub_bab;
+								document.getElementById(JudulBabSelesai).classList.add("list-done");
+								countSelesai++;
+								console.log("anjay");
+							}
+						}
+						console.log(countSelesai);
+						countSelesai = (countSelesai / data.materi.bab1.length) * 100;
+						document.getElementsByClassName("percentage-text")[0].innerHTML =
+							countSelesai + "% selesai";
+						document.querySelector(".percentage-line-second").style.width = countSelesai + "%";
+						document.querySelector(".percentage-line-first").style.width = 100 - countSelesai + "%";
+						var judulFile = "../essentials/" + data.materi.bab1[current_page].file_html;
+						fetch(judulFile)
+							.then((response) => response.text())
+							.then((data) => {
+								document.getElementById("content-pelatihan").innerHTML = data;
+							})
+							.catch((error) => console.error("Ada kesalahan:", error));
+					})
+					.catch((error) => console.error("Error loading JSON:", error));
+			}
+		</script>
+	<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+	<script type="text/javascript" src="./Pelatihan_files/script.js.download"></script>
+
+</body></html>
