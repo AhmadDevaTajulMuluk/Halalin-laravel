@@ -182,7 +182,7 @@ function login() {
 		// document.querySelector('.pass-input').style.borderColor = 'red';
 		return;
 	}
-	window.location.href = "./dashboard.html";
+	window.location.href = "/dashboard";
 }
 
 function selectNumber(element) {

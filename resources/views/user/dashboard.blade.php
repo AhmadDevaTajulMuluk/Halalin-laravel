@@ -39,7 +39,7 @@
 						Temukan jodohmu dengan aplikasi Halalin
 					</p>
 					<a
-						href="../views/pages/register.html"
+						href="/search"
 						class="button"
 						style="display: flex; padding: 0.8rem 1.2rem; margin: 1rem 0">
 						Cari Pasangan

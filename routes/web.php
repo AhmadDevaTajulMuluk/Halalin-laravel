@@ -29,3 +29,15 @@ Route::get('/pelatihan', function () {
 Route::get('/biodata', function () {
     return view('user.biodata');
 });
+
+Route::get('/login', function () {
+    return view('user.login');
+});
+
+Route::get('/register', function () {
+    return view('user.register');
+});
+
+Route::get('/search', function () {
+    return view('user.matching.search');
+});

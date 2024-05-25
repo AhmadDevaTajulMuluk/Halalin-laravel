@@ -13,10 +13,10 @@
 		<div id="next-page-container" onclick="closeTabNavigator('next-page-container')">
 			<div id="next-page">
 				<p>Buat akun untuk melanjutkan</p>
-				<a href="../views/pages/register.html" class="button">Register</a>
+				<a href="/register" class="button">Register</a>
 				<p>
 					Sudah punya akun?
-					<a href="../views/pages/login.html" class="login">Login</a>
+					<a href="/login" class="login">Login</a>
 				</p>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 							</a>
 							<a id="chat-navbar" onclick="navigateToRegister('next-page-container')">Chat</a>
 						</nav>
-						<a href="./pages/login.html" class="button masuk-button">Masuk</a>
+						<a href="/login" class="button masuk-button">Masuk</a>
 					</div>
 				</div>
 			</div>
