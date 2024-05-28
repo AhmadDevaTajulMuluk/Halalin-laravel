@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,13 +31,11 @@ Route::get('/pelatihan', function () {
 Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
 Route::post('/biodata', [BiodataController::class,'store'])->name('biodata.post');
 
-Route::get('/login', function () {
-    return view('user.login');
-});
-
-Route::get('/register', function () {
-    return view('user.register');
-});
+Route::get('/login',[SessionController::class,'index'])->name('sesi');
+Route::post('/login',[SessionController::class,'login'])->name('login');
+Route::get('/logout',[SessionController::class,'logout'])->name('logout');
+Route::get('/register',[SessionController::class,'register'])->name('register');
+Route::post('/create',[SessionController::class,'create'])->name('create');
 
 Route::get('/search', function () {
     return view('user.matching.search');

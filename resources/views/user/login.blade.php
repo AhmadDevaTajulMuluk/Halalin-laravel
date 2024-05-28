@@ -7,12 +7,28 @@
     <link rel="stylesheet" href="../../assets/css/style.css" />
   </head>
   <body>
+
+    @if (session('success'))
+    <div class="alert alert-success">
+    {{ session('success') }}
+    </div>
+    @endif
+
     <div id="login">
       <div class="login-container">
         <div class="wrapper">
           <img src="../../assets/images/halalin-logo.png" />
           <h1>Masuk ke akunmu</h1>
           <div class="field">
+              
+              @if (session('error'))
+              <div class="alert alert-danger">
+              {{ session('error') }}
+              </div>
+              @endif
+
+            <form class="form-login" action="{{ url('/login') }}" method="POST">     
+            @csrf                    
             <div class="boxfield">
               <svg class="svg-icon" viewBox="0 0 20 20">
                 <path
@@ -22,7 +38,9 @@
               <input
                 type="username"
                 class="user-input"
+                name="username"
                 placeholder="username"
+                value="{{ Session::get('username') }}"
               />
             </div>
             <div class="boxfield">
@@ -34,11 +52,13 @@
               <input
                 type="password"
                 class="pass-input"
+                name="password"
                 placeholder="password"
               />
             </div>
           </div>
           <button onclick="login()" class="login-btn">Login</button>
+          </form>
           <p class="hasil">
             Belum punya akun?
             <a

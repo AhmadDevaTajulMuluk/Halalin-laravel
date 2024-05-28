@@ -11,52 +11,30 @@
     <div id="register">
       <div class="container">
         <div class="wrapper-register">
+          @if (session('error'))
+          <div class="alert alert-danger">
+          {{ session('error') }}
+          </div>
+          @endif
           <img src="../../assets/images/halalin-logo.png" />
           <h1>Daftar disini</h1>
 
           <div class="field">
-            <div
-              class="boxfield"
-              style="display: flex; flex-direction: row; gap: 20px"
-            >
-              <div class="boxfield" id="name-regist">
-                <svg class="svg-icon" viewBox="0 0 20 20">
-                  <path
-                    d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"
-                  ></path>
-                </svg>
-                <input
-                  type="username"
-                  class="fname-input"
-                  placeholder="Nama Depan"
-                />
-              </div>
-              <div class="boxfield" id="name-regist" style="gap: 20px">
-                <svg class="svg-icon" viewBox="0 0 20 20">
-                  <path
-                    d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"
-                  ></path>
-                </svg>
-                <input
-                  type="username"
-                  class="lname-input"
-                  placeholder="Nama Belakang"
-                />
-              </div>
-            </div>
-            <!-- <input type="username" class="lname-input" placeholder="Nama Belakang" /> -->
+            <form class="form-register" action="{{ route('create') }}" method="POST">
+            @csrf
             <div class="boxfield">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="4">
                 <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"
                 ></path>
               </svg>
               <input
-                type="tel"
-                pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}"
+                type="username"
                 required
-                class="phone-input"
-                placeholder="Nomor Telepon"
+                class="username"
+                name="username"
+                placeholder="Username"
+                value="{{ Session::get('username') }}"
               />
             </div>
             <div class="boxfield">
@@ -71,7 +49,7 @@
                 ></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <input type="email" class="email-input" placeholder="Email" />
+              <input type="email" class="email-input" placeholder="Email" name="email" value="{{ Session::get('email') }}" />
             </div>
             <div class="boxfield">
               <svg class="svg-icon" viewBox="0 0 20 20">
@@ -83,6 +61,8 @@
                 type="password"
                 class="pass-input"
                 placeholder="password"
+                name="password"
+                value="{{ Session::get('password') }}"
               />
             </div>
             <div class="boxfield">
@@ -93,16 +73,16 @@
               </svg>
               <input
                 type="password"
-                class="confirmpass-input"
-                placeholder="Konfirmasi password"
+                class="pass-input"
+                placeholder="Confirm Password"
+                name="password_confirmation"
               />
             </div>
-          </div>
-          <div id="message"></div>
-          <button onclick="register()" class="login-btn">Daftar</button>
+          <button name="submit" type="submit" class="login-btn">Daftar</button>
+          </form>
           <p class="hasil">
             Sudah punya akun?
-            <a href="./login.html" style="text-decoration: none; color: inherit"
+            <a href="./login" style="text-decoration: none; color: inherit"
               ><strong>Login</strong></a
             >
           </p>

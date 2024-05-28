@@ -395,14 +395,14 @@ article img {
 	border-radius: 15px;
 	background-color: #ffffff;
 	box-shadow: 13px 13px 20px #cbced1, -5px 1px 20px #cbced1;
-	width: 400px;
+	width: 30%;
 	height: auto;
 	text-align: center;
 	gap: 25px;
 }
 
 .wrapper img {
-	width: 50%;
+	width: auto;
 	margin-right: 20px;
 	margin-top: 20px;
 }
@@ -413,6 +413,26 @@ article img {
 }
 
 .field {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	margin: auto;
+	gap: 20px;
+}
+
+.field form.form-register{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	margin: auto;
+	gap: 20px;
+}
+
+.field form.form-login {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -506,13 +526,14 @@ button:hover {
 	gap: 15px;
 }
 .wrapper-register img {
-	width: 40%;
+	width: auto;
 	margin-right: 20px;
 	margin-top: 20px;
 }
 .container {
 	display: flex;
 	align-items: center;
+	width: 50%;
 	justify-content: center;
 }
 #page-register {
@@ -2528,3 +2549,33 @@ aside#sidebar-pelatihan {
 		position: absolute;
 	}
 }
+
+/*Error message*/
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+/*Error message*/
+
+/*Successs message*/
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+/*Successs message*/
