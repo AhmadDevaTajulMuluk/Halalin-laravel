@@ -45,84 +45,82 @@
 					
 					<div class="form-bio" id="profil-form">
 						<h1>Biodata</h1>
-						<div class="field-bio">
-							<div class="foto">
-								<p>Foto Profil</p>
-								<div class="profile-foto">
-									<div class="pilihfoto">
-										<img src="/assets/images/defaultpic.png" id="profilepic">
-										<div>
-										<label for="input-foto">Upload image</label>
-										<input type="file" accept="image/jpeg, image/png, image/jpg" id="input-foto"></div>
-									</div>
-								</div>
-							</div>
-							<form action="{{ url('/biodata') }}" method="POST" enctype="multipart/form-data">
+						<form action="{{ url('/biodata') }}" method="POST" enctype="multipart/form-data">
 							@csrf
-							<div class="username">
-								<p>Username</p>
-								<input
-									type="username"
-									class="namalengkap-input"
-									placeholder="Masukkan nama lengkap" />
-							</div>
-							<div class="nomortelepon">
-								<p>Nomor Telepon</p>
-								<input type="username" class="namalengkap-input" placeholder="Masukkan nomor telepon" />
-							</div>
-							<div class="tempatlahir">
-								<p>Tempat Lahir</p>
-								<input type="username" class="namalengkap-input" placeholder="Masukkan tempat lahir" />
-							</div>
-							<div class="tanggallahir">
-								<p>Tanggal Lahir</p>
-								<input type="date" class="namalengkap-input" placeholder="Nama lengkap" />
-							</div>
-							<div class="jeniskelamin">
-								<p>Jenis Kelamin</p>
-								<div class="pilihanjeniskelamin">
-									<div class="pilihan-radio">
-										<input type="radio" id="laki-laki" name="jenis_kelamin" value="Laki-laki" />
-										<div class="icon-radio">
-											<ion-icon name="man"></ion-icon>
-											<label for="laki-laki">Laki-laki</label>
-										</div>
-									</div>
-									<div class="pilihan-radio">
-										<input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan" />
-										<div class="icon-radio">
-											<ion-icon name="woman"></ion-icon>
-											<label for="perempuan">Perempuan</label>
+							<div class="field-bio">
+								<div class="foto">
+									<p>Foto Profil</p>
+									<div class="profile-foto">
+										<div class="pilihfoto">
+											<img src="/assets/images/defaultpic.png" id="profilepic">
+											<div>
+												<label for="input-foto">Upload image</label>
+												<input type="file" accept="image/jpeg, image/png, image/jpg" id="input-foto" name="image">
+											</div>
 										</div>
 									</div>
 								</div>
+								<div class="namalengkap">
+									<p>Nama Lengkap</p>
+									<input type="text" class="namalengkap-input" placeholder="Masukkan nama lengkap" name="fullname" required />
+								</div>
+								<div class="nomortelepon">
+									<p>Nomor Telepon</p>
+									<input type="text" class="nomortelepon-input" placeholder="Masukkan nomor telepon" name="phone_number" required />
+								</div>
+								<div class="tempatlahir">
+									<p>Tempat Lahir</p>
+									<input type="text" class="tempatlahir-input" placeholder="Masukkan tempat lahir" name="place_date" required />
+								</div>
+								<div class="tanggallahir">
+									<p>Tanggal Lahir</p>
+									<input type="date" class="tanggallahir-input" placeholder="Tanggal lahir" name="birth_date" required />
+								</div>
+								<div class="jeniskelamin">
+									<p>Jenis Kelamin</p>
+									<div class="pilihanjeniskelamin">
+										<div class="pilihan-radio">
+											<input type="radio" id="laki-laki" name="gender" value="laki-laki" required />
+											<div class="icon-radio">
+												<ion-icon name="man"></ion-icon>
+												<label for="laki-laki">Laki-laki</label>
+											</div>
+										</div>
+										<div class="pilihan-radio">
+											<input type="radio" id="perempuan" name="gender" value="perempuan" required />
+											<div class="icon-radio">
+												<ion-icon name="woman"></ion-icon>
+												<label for="perempuan">Perempuan</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="pekerjaan">
+									<p>Pekerjaan</p>
+									<input type="text" class="pekerjaan-input" placeholder="Masukkan pekerjaan" name="job" required />
+								</div>
+								<div class="gaji">
+									<p>Gaji</p>
+									<input type="number" class="gaji-input" placeholder="Masukkan gaji anda perbulan" name="salary" required />
+								</div>
+								<div class="status">
+									<p>Status</p>
+									<select class="pilihanstatus" name="married_status" required>
+										<option value="" disabled selected>--- Pilih Status Anda ---</option>
+										<option value="Sudah menikah">Sudah Menikah</option>
+										<option value="Belum menikah">Belum Menikah</option>
+										<option value="Janda">Cerai</option>
+									</select>
+								</div>
+								<div class="suku">
+									<p>Suku</p>
+									<input type="text" class="suku-input" placeholder="Masukkan suku anda" name="ethnic" required />
+								</div>
 							</div>
-							<div class="pekerjaan">
-								<p>Pekerjaan</p>
-								<input type="username" class="pekerjaan-input" placeholder="Masukkan pekerjaan" />
+							<div class="divbutton">
+								<button type="submit" class="simpan-btn">Simpan</button>
 							</div>
-							<div class="gaji">
-								<p>Gaji</p>
-								<input type="username" class="gaji-input" placeholder="Masukkan gaji anda perbulan" />
-							</div>
-							<div class="status">
-								<p>Status</p>
-								<select class="pilihanstatus">
-									<option value="-" disabled selected>--- Pilih Status Anda ---</option>
-  									<option value="Sudah menikah">Sudah Menikah</option>
-  									<option value="Belum menikah">Belum Menikah</option>
-  									<option value="Janda">Cerai</option>
-								</select>
-							</div>
-							<div class="namalengkap">
-								<p>Suku</p>
-								<input type="username" class="namalengkap-input" placeholder="Masukkan suku anda" />
-							</div>
-						</div>
-						<div class="divbutton">
-							<button class="simpan-btn">Simpan</button>
-							</form>
-						</div>
+						</form>
 					</div>
 
 					<div class="form-bio" id="gambaran-diri-form" style="display: none;">
