@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BiodataController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,9 +27,8 @@ Route::get('/pelatihan', function () {
     return view('user.pelatihan');
 })->name('pelatihan');
 
-Route::get('/biodata', function () {
-    return view('user.biodata');
-});
+Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
+Route::post('/biodata', [BiodataController::class,'store'])->name('biodata.post');
 
 Route::get('/login', function () {
     return view('user.login');

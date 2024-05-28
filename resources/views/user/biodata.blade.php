@@ -57,6 +57,8 @@
 									</div>
 								</div>
 							</div>
+							<form action="{{ url('/biodata') }}" method="POST" enctype="multipart/form-data">
+							@csrf
 							<div class="username">
 								<p>Username</p>
 								<input
@@ -119,7 +121,8 @@
 						</div>
 						<div class="divbutton">
 							<button class="simpan-btn">Simpan</button>
-							</div>
+							</form>
+						</div>
 					</div>
 
 					<div class="form-bio" id="gambaran-diri-form" style="display: none;">
@@ -416,7 +419,8 @@
 		<!----Icon Jenis Kelamin--->
 		<script
 			type="module"
-			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+		</script>
 		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	
 		<script>
