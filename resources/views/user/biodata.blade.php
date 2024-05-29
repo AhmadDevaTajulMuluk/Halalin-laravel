@@ -63,19 +63,19 @@
 								</div>
 								<div class="namalengkap">
 									<p>Nama Lengkap</p>
-									<input type="text" class="namalengkap-input" placeholder="Masukkan nama lengkap" name="fullname" required />
+									<input type="text" class="namalengkap-input" placeholder="Masukkan nama lengkap" name="fullname" value="{{ old('fullname') }}" required />
 								</div>
 								<div class="nomortelepon">
 									<p>Nomor Telepon</p>
-									<input type="text" class="nomortelepon-input" placeholder="Masukkan nomor telepon" name="phone_number" required />
+									<input type="text" class="nomortelepon-input" placeholder="Masukkan nomor telepon" name="phone_number" value="{{ old('phone_number') }}" required />
 								</div>
 								<div class="tempatlahir">
 									<p>Tempat Lahir</p>
-									<input type="text" class="tempatlahir-input" placeholder="Masukkan tempat lahir" name="place_date" required />
+									<input type="text" class="tempatlahir-input" placeholder="Masukkan tempat lahir" name="place_date" value="{{ old('place_date') }}" required />
 								</div>
 								<div class="tanggallahir">
 									<p>Tanggal Lahir</p>
-									<input type="date" class="tanggallahir-input" placeholder="Tanggal lahir" name="birth_date" required />
+									<input type="date" class="tanggallahir-input" placeholder="Tanggal lahir" name="birth_date" value="{{ old('birth_date') }}" required />
 								</div>
 								<div class="jeniskelamin">
 									<p>Jenis Kelamin</p>
@@ -98,11 +98,11 @@
 								</div>
 								<div class="pekerjaan">
 									<p>Pekerjaan</p>
-									<input type="text" class="pekerjaan-input" placeholder="Masukkan pekerjaan" name="job" required />
+									<input type="text" class="pekerjaan-input" placeholder="Masukkan pekerjaan" name="job" value="{{ old('job') }}" required />
 								</div>
 								<div class="gaji">
 									<p>Gaji</p>
-									<input type="number" class="gaji-input" placeholder="Masukkan gaji anda perbulan" name="salary" required />
+									<input type="number" class="gaji-input" placeholder="Masukkan gaji anda perbulan" name="salary" value="{{ old('salary') }}" required />
 								</div>
 								<div class="status">
 									<p>Status</p>
@@ -115,7 +115,7 @@
 								</div>
 								<div class="suku">
 									<p>Suku</p>
-									<input type="text" class="suku-input" placeholder="Masukkan suku anda" name="ethnic" required />
+									<input type="text" class="suku-input" placeholder="Masukkan suku anda" name="ethnic" value="{{ old('ethnic') }}" required />
 								</div>
 							</div>
 							<div class="divbutton">
