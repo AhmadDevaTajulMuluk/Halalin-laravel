@@ -63,7 +63,7 @@
 						Temukan jodohmu dengan aplikasi Halalin
 					</p>
 					<a
-						href="../views/pages/register.html"
+						href="{{ route('register') }}"
 						class="button"
 						style="display: flex; padding: 0.8rem 1.2rem; margin: 1rem 0">
 						Daftar Sekarang
