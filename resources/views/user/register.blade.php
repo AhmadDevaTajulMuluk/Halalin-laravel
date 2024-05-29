@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>REGISTER</title>
     <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="icon" type="image/jpg" href="../../assets/images/halalin-logo.png">
     <script type="text/javascript" src="../../assets/js/script.js"></script>
   </head>
   <body id="page-register">

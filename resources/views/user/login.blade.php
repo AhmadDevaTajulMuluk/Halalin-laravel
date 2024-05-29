@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LOGIN</title>
     <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="icon" type="image/jpg" href="../../assets/images/halalin-logo.png">
   </head>
   <body>
 
