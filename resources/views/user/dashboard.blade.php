@@ -74,7 +74,7 @@
 							<p>Lihat artikel terkait dengan pernikahan.</p>
 						</div>
 					</div>
-					<div class="item-box-layanan">
+					<div class="item-box-layanan" >
 						<div class="layanan-text">
 							<h3>Cari Pasangan</h3>
 							<hr />

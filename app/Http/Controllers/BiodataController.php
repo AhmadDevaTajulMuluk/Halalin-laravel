@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 
+
 class BiodataController extends Controller
 {
     /**
@@ -12,7 +13,8 @@ class BiodataController extends Controller
      */
     public function index()
     {
-        return view('user.biodata');
+        $profile = Profile::where('user_id', auth()->id())->first();
+        return view('user.biodata', ['profile' => $profile]);
     }
 
     /**
@@ -39,7 +41,7 @@ class BiodataController extends Controller
             'salary' => 'required|numeric',
             'married_status' => 'required|string|max:30',
             'ethnic' => 'required|string|max:30',
-        ],[
+        ], [
             'image.required' => 'Silahkan masukkan foto terlebih dahulu',
             'image.mimes' => 'Foto harus berekstensi JPEG/JPG/PNG/GIF',
             'image.max' => 'Foto maksimal berukuran 2MB',
@@ -62,6 +64,7 @@ class BiodataController extends Controller
             'ethnic.required' => 'Silahkan Masukkan Etnis Anda',
             'ethnic.max' => 'Etnis Maksimal diisi 30 karakter',
         ]);
+
         $data = [
             'user_id' => auth()->user()->id,
             'fullname' => $request->input('fullname'),
@@ -87,7 +90,7 @@ class BiodataController extends Controller
 
         Profile::create($data);
 
-        return redirect('/biodata')->with('success', 'Biodata berhasil disimpan!');
+        return redirect()->route('biodata')->with('success', 'Profil berhasil disimpan!');
     }
 
     /**
@@ -103,15 +106,17 @@ class BiodataController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // $profile = Profile::where('user_id', auth()->id())->first();
+        // return view('user.biodata', ['profile' => $profile]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, String $id)
     {
-        //
+        
+        
     }
 
     /**

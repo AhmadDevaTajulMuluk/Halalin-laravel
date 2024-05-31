@@ -84,28 +84,28 @@
 			<article id="services-halalin" class="about-halalin-container container-effect">
 				<h2 id="title-dasboard" style="margin: 0; font-size: 42px">Layanan Kami</h2>
 				<div class="items-container">
-					<div class="item-box-layanan">
+					<div class="item-box-layanan" onclick="navigateToRegister('next-page-container')">
 						<div class="layanan-text">
 							<h3>Buat CV</h3>
 							<hr />
 							<p>Buat CV ta’aruf anda agar mendapatkan pasangan yang cocok.</p>
 						</div>
 					</div>
-					<div class="item-box-layanan">
+					<div class="item-box-layanan" onclick="navigateToRegister('next-page-container')">
 						<div class="layanan-text">
 							<h3>Lihat Artikel</h3>
 							<hr />
 							<p>Lihat artikel terkait dengan pernikahan.</p>
 						</div>
 					</div>
-					<div class="item-box-layanan">
+					<div class="item-box-layanan" onclick="navigateToRegister('next-page-container')">
 						<div class="layanan-text">
 							<h3>Cari Pasangan</h3>
 							<hr />
 							<p>Mencari pasangan dengan searching and matching.</p>
 						</div>
 					</div>
-					<div class="item-box-layanan">
+					<div class="item-box-layanan" onclick="navigateToRegister('next-page-container')">
 						<div class="layanan-text">
 							<h3>Latihan Pranikah</h3>
 							<hr />
@@ -148,7 +148,7 @@
 				style="margin-bottom: 2rem">
 				<h2 id="title-dasboard" style="margin: 0; font-size: 42px">Artikel</h2>
 				<div class="items-container">
-					<div class="item-box" id="artikelbox">
+					<div class="item-box" id="artikelbox" onclick="navigateToRegister('next-page-container')">
 						<article>
 							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
 							<div class="article-text">
@@ -166,7 +166,7 @@
 							</div>
 						</article>
 					</div>
-					<div class="item-box" id="artikelbox">
+					<div class="item-box" id="artikelbox" onclick="navigateToRegister('next-page-container')">
 						<article>
 							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
 							<div class="article-text">
@@ -184,7 +184,7 @@
 							</div>
 						</article>
 					</div>
-					<div class="item-box" id="artikelbox">
+					<div class="item-box" id="artikelbox" onclick="navigateToRegister('next-page-container')">
 						<article>
 							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
 							<div class="article-text">
@@ -202,7 +202,7 @@
 							</div>
 						</article>
 					</div>
-					<div class="item-box" id="artikelbox">
+					<div class="item-box" id="artikelbox" onclick="navigateToRegister('next-page-container')">
 						<article>
 							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
 							<div class="article-text">
@@ -220,7 +220,7 @@
 							</div>
 						</article>
 					</div>
-					<div class="item-box" id="artikelbox">
+					<div class="item-box" id="artikelbox" onclick="navigateToRegister('next-page-container')">
 						<article>
 							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
 							<div class="article-text">
@@ -238,7 +238,7 @@
 							</div>
 						</article>
 					</div>
-					<div class="item-box" id="artikelbox">
+					<div class="item-box" id="artikelbox" onclick="navigateToRegister('next-page-container')">
 						<article>
 							<img src="../assets/images/manfaatpernikahan.jpg" alt="Artikel" />
 							<div class="article-text">

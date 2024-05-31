@@ -30,6 +30,8 @@ Route::get('/pelatihan', function () {
 
 Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
 Route::post('/biodata', [BiodataController::class,'store'])->name('biodata.post');
+Route::get('/biodata/{id}/edit', [BiodataController::class, 'edit'])->name('biodata.edit');
+
 
 Route::get('/login',[SessionController::class,'index'])->name('sesi');
 Route::post('/login',[SessionController::class,'login'])->name('login');

@@ -53,7 +53,7 @@
 									<p>Foto Profil</p>
 									<div class="profile-foto">
 										<div class="pilihfoto">
-											<img src="/assets/images/defaultpic.png" id="profilepic">
+											<img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" id="profilepic">
 											<div>
 												<label for="input-foto">Upload image</label>
 												<input type="file" accept="image/jpeg, image/png, image/jpg" id="input-foto" name="image">
@@ -63,32 +63,32 @@
 								</div>
 								<div class="namalengkap">
 									<p>Nama Lengkap</p>
-									<input type="text" class="namalengkap-input" placeholder="Masukkan nama lengkap" name="fullname" value="{{ old('fullname') }}" required />
+									<input type="text" class="namalengkap-input" placeholder="Masukkan nama lengkap" name="fullname" value="{{ old('fullname', $profile ? $profile->fullname : '') }}" required />
 								</div>
 								<div class="nomortelepon">
 									<p>Nomor Telepon</p>
-									<input type="text" class="nomortelepon-input" placeholder="Masukkan nomor telepon" name="phone_number" value="{{ old('phone_number') }}" required />
+									<input type="text" class="nomortelepon-input" placeholder="Masukkan nomor telepon" name="phone_number" value="{{ old('phone_number', $profile ? $profile->phone_number : '') }}" required />
 								</div>
 								<div class="tempatlahir">
 									<p>Tempat Lahir</p>
-									<input type="text" class="tempatlahir-input" placeholder="Masukkan tempat lahir" name="place_date" value="{{ old('place_date') }}" required />
+									<input type="text" class="tempatlahir-input" placeholder="Masukkan tempat lahir" name="place_date" value="{{ old('place_date', $profile ? $profile->place_date : '') }}" required />
 								</div>
 								<div class="tanggallahir">
 									<p>Tanggal Lahir</p>
-									<input type="date" class="tanggallahir-input" placeholder="Tanggal lahir" name="birth_date" value="{{ old('birth_date') }}" required />
+									<input type="date" class="tanggallahir-input" placeholder="Tanggal lahir" name="birth_date" value="{{ old('birth_date', $profile ? $profile->birth_date : '') }}" required />
 								</div>
 								<div class="jeniskelamin">
 									<p>Jenis Kelamin</p>
 									<div class="pilihanjeniskelamin">
 										<div class="pilihan-radio">
-											<input type="radio" id="laki-laki" name="gender" value="laki-laki" required />
+											<input type="radio" id="laki-laki" name="gender" value="laki-laki" {{ old('gender', $profile ? $profile->gender : '') == 'laki-laki' ? 'checked' : '' }} required />
 											<div class="icon-radio">
 												<ion-icon name="man"></ion-icon>
 												<label for="laki-laki">Laki-laki</label>
 											</div>
 										</div>
 										<div class="pilihan-radio">
-											<input type="radio" id="perempuan" name="gender" value="perempuan" required />
+											<input type="radio" id="perempuan" name="gender" value="perempuan" {{ old('gender', $profile ? $profile->gender : '') == 'perempuan' ? 'checked' : '' }} required />
 											<div class="icon-radio">
 												<ion-icon name="woman"></ion-icon>
 												<label for="perempuan">Perempuan</label>
@@ -98,24 +98,24 @@
 								</div>
 								<div class="pekerjaan">
 									<p>Pekerjaan</p>
-									<input type="text" class="pekerjaan-input" placeholder="Masukkan pekerjaan" name="job" value="{{ old('job') }}" required />
+									<input type="text" class="pekerjaan-input" placeholder="Masukkan pekerjaan" name="job" value="{{ old('job', $profile ? $profile->job : '') }}" required />
 								</div>
 								<div class="gaji">
 									<p>Gaji</p>
-									<input type="number" class="gaji-input" placeholder="Masukkan gaji anda perbulan" name="salary" value="{{ old('salary') }}" required />
+									<input type="number" class="gaji-input" placeholder="Masukkan gaji anda perbulan" name="salary" value="{{ old('salary', $profile ? $profile->salary : '') }}" required />
 								</div>
 								<div class="status">
 									<p>Status</p>
 									<select class="pilihanstatus" name="married_status" required>
-										<option value="" disabled selected>--- Pilih Status Anda ---</option>
-										<option value="Sudah menikah">Sudah Menikah</option>
-										<option value="Belum menikah">Belum Menikah</option>
-										<option value="Janda">Cerai</option>
+										<option value="" disabled selected {{ !$profile ? 'selected' : '' }}>--- Pilih Status Anda ---</option>
+										<option value="Sudah menikah" {{ old('married_status', $profile ? $profile->married_status : '') == 'Sudah menikah' ? 'selected' : '' }}>Sudah Menikah</option>
+										<option value="Belum menikah" {{ old('married_status', $profile ? $profile->married_status : '') == 'Belum menikah' ? 'selected' : '' }}>Belum Menikah</option>
+										<option value="Janda" {{ old('married_status', $profile ? $profile->married_status : '') == 'Janda' ? 'selected' : '' }}>Cerai</option>
 									</select>
 								</div>
 								<div class="suku">
 									<p>Suku</p>
-									<input type="text" class="suku-input" placeholder="Masukkan suku anda" name="ethnic" value="{{ old('ethnic') }}" required />
+									<input type="text" class="suku-input" placeholder="Masukkan suku anda" name="ethnic" value="{{ old('ethnic', $profile ? $profile->ethnic : '') }}" required />
 								</div>
 							</div>
 							<div class="divbutton">
