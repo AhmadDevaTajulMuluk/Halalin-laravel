@@ -46,7 +46,7 @@
 					
 					<div class="form-bio" id="profil-form">
 						<h1>Biodata</h1>
-						<form action="{{ url('/biodata') }}" method="POST" enctype="multipart/form-data">
+						<form action="{{ route('profile.post') }}" method="POST" enctype="multipart/form-data">
 							@csrf
 							<div class="field-bio">
 								<div class="foto">
@@ -126,39 +126,42 @@
 
 					<div class="form-bio" id="gambaran-diri-form" style="display: none;">
 						<h1>Gambaran Diri</h1>
-						<div class="field-bio">
-							<div class="motto">
-								<p>Motto Diri</p>
-								<input type="username" class="motto-input" placeholder="Sebutkan motto diri anda" />
+						<form action="{{ route('selfapp.post') }}" method="POST" enctype="multipart/form-data">
+							@csrf
+							<div class="field-bio">
+								<div class="motto">
+									<p>Motto Diri</p>
+									<input type="username" class="motto-input" placeholder="Sebutkan motto diri anda" value="{{ old('motto', $selfApp ? $selfApp->motto : '') }}" required />
+								</div>
+								<div class="targethidup">
+									<p>Target Hidup</p>
+									<input type="username" class="targethidup-input" placeholder="Sebukan target hidup anda" value="{{ old('target', $selfApp ? $selfApp->target : '') }}" required />
+								</div>
+								<div class="hobi">
+									<p>Hobi</p>
+									<input type="username" class="hobi-input" placeholder="Sebutkan hobi anda" value="{{ old('hobby', $selfApp ? $selfApp->hobby : '') }}" required />
+								</div>
+								<div class="haldisukai">
+									<p>Hal yang disukai</p>
+									<input type="username" class="haldisukai-input" placeholder="Jelaskan hal yang disukai anda" value="{{ old('like', $selfApp ? $selfApp->like : '') }}" required />
+								</div>
+								<div class="sifatpositif">
+									<p>Sifat positif</p>
+									<input type="username" class="sifatpositif-input" placeholder="Jelaskan sifat positif anda" value="{{ old('positive', $selfApp ? $selfApp->positive : '') }}" required />
+								</div>
+								<div class="sifatnegatif">
+									<p>Sifat negatif</p>
+									<input type="username" class="sifatnegatif-input" placeholder="Jelaskan sifat negatif anda" value="{{ old('negative', $selfApp ? $selfApp->negative : '') }}" required />
+								</div>
+								<div class="alasan">
+									<p>Alasan taaruf</p>
+									<input type="username" class="alasan-input" placeholder="Jelaskan alasan anda taaruf" value="{{ old('reason', $selfApp ? $selfApp->reason : '') }}" required />
+								</div>
 							</div>
-							<div class="targethidup">
-								<p>Target Hidup</p>
-								<input type="username" class="targethidup-input" placeholder="Sebukan target hidup anda" />
+							<div class="divbutton">
+								<button class="simpan-btn">Simpan</button>
 							</div>
-							<div class="hobi">
-								<p>Hobi</p>
-								<input type="username" class="hobi-input" placeholder="Sebutkan hobi anda" />
-							</div>
-							<div class="haldisukai">
-								<p>Hal yang disukai</p>
-								<input type="username" class="haldisukai-input" placeholder="Jelaskan hal yang disukai anda" />
-							</div>
-							<div class="sifatpositif">
-								<p>Sifat positif</p>
-								<input type="username" class="sifatpositif-input" placeholder="Jelaskan sifat positif anda" />
-							</div>
-							<div class="sifatnegatif">
-								<p>Sifat negatif</p>
-								<input type="username" class="sifatnegatif-input" placeholder="Jelaskan sifat negatif anda" />
-							</div>
-							<div class="alasan">
-								<p>Alasan taaruf</p>
-								<input type="username" class="alasan-input" placeholder="Jelaskan alasan anda taaruf" />
-							</div>
-						</div>
-						<div class="divbutton">
-							<button class="simpan-btn">Simpan</button>
-							</div>
+						</form>
 					</div>
 
 					<div class="form-bio" id="gambaran-keluarga-form" style="display: none;">

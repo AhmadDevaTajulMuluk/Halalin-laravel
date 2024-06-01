@@ -29,10 +29,10 @@ Route::get('/pelatihan', function () {
 })->name('pelatihan');
 
 Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
-Route::post('/biodata', [BiodataController::class,'store'])->name('biodata.post');
-Route::get('/biodata/{id}/edit', [BiodataController::class, 'edit'])->name('biodata.edit');
-Route::put('/biodata/{id}', [BiodataController::class, 'update'])->name('biodata.update');
-
+Route::post('/biodata/profile', [BiodataController::class,'storeProfile'])->name('profile.post');
+Route::post('/biodata/selfapp', [BiodataController::class,'storeSelfApp'])->name('selfapp.post');
+// Route::get('/biodata/{id}/edit', [BiodataController::class, 'edit'])->name('biodata.edit');
+// Route::put('/biodata/{id}', [BiodataController::class, 'update'])->name('biodata.update');
 
 Route::get('/login',[SessionController::class,'index'])->name('sesi');
 Route::post('/login',[SessionController::class,'login'])->name('login');
