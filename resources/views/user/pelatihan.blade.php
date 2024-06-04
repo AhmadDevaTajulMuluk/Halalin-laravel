@@ -13,7 +13,7 @@
 	<body id="pelatihan">
 
         {{-- manggil navbar --}}
-		<x-navbar></x-navbar>
+		<x-navbar :profile="$profile"></x-navbar>
 		<main id="main-pelatihan">
 			<div id="page-pelatihan"></div>
 			<div id="sidebar-pelatihan-container">

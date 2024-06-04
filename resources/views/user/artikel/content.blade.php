@@ -12,7 +12,7 @@
     <title>Tiga Manfaat Pernikahan dalam Islam</title>
   </head>
   <body id="page-content-article">
-    <x-navbar></x-navbar>
+    <x-navbar :profile="$profile"></x-navbar>
     <main class="header-content-article">
       <button onclick="window.history.back()" class="back-button">
         <i class="fa fa-chevron-left" aria-hidden="true"></i> Kembali

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,23 +12,26 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/artikel', function () {
-    return view('user.artikel.artikel');
-})->name('artikel');
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+
+Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
+
+Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+
 
 Route::get('/artikel-content', function () {
     return view('user.artikel.content');
 });
 
-Route::get('/chat', function () {
-    return view('user.chat');
-})->name('chat');
+// Route::get('/chat', function () {
+//     return view('user.chat');
+// })->name('chat');
 
-Route::get('/pelatihan', function () {
-    return view('user.pelatihan');
-})->name('pelatihan');
+// Route::get('/pelatihan', function () {
+//     return view('user.pelatihan');
+// })->name('pelatihan');
 
 Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
 Route::post('/biodata/profile', [BiodataController::class,'storeProfile'])->name('profile.post');

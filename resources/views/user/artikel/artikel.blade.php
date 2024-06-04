@@ -9,7 +9,7 @@
   </head>
   <body>
     {{-- manggil navbar --}}
-    <x-navbar></x-navbar>
+    <x-navbar :profile="$profile"></x-navbar>
     <main id="page-artikel" style="background-color: white">
       <div class="artikel-container">
         <h2>Artikel Populer</h2>

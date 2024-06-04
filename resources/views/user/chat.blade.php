@@ -15,7 +15,7 @@
 </head>
 <body id="page-chat">
     {{-- manggil navbar --}}
-	<x-navbar></x-navbar>
+	<x-navbar :profile="$profile"></x-navbar>
 	<main id="page-konsultasi">
 		<div class="konsultasi-chat">
 			<div class="container-leftchat">
