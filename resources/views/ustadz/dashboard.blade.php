@@ -21,8 +21,7 @@
 				</p>
 			</div>
 		</div>
-		{{-- manggil navbar --}}
-		<x-navbar :profile="$profile"></x-navbar>
+		<x-navbarustadz></x-navbarustadz>
 		<main id="page-dashboard">
 			<article id="promotion-container">
 				<div id="promotion-text">
@@ -39,12 +38,6 @@
 					<p style="font-size: 20px; margin: 10px; text-align: center">
 						Temukan jodohmu dengan aplikasi Halalin
 					</p>
-					<a
-						href="/search"
-						class="button"
-						style="display: flex; padding: 0.8rem 1.2rem; margin: 1rem 0">
-						Cari Pasangan
-					</a>
 				</div>
 			</article>
 			<article id="about-halalin" class="about-halalin-container container-effect">

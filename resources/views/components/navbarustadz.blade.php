@@ -1,11 +1,3 @@
-@props(['profile'])
-<style>
-    .active{
-        color: #4b5c98;
-	    font-weight: 700;
-    }
-</style>
-
 <header class="header-effect">
     <div id="header-container">
         <div id="logo-container">
@@ -20,38 +12,31 @@
             <p class="close-nav" onclick="toggleDropdown()">x</p>
             <div class="navbar-items">
                 <nav>
-                    <a id="beranda-navbar" href="/dashboard" class="{{ Request::is('dashboard') ? 'active' : '' }}">Beranda</a>
-                    <a id="artikel-navbar" href="/artikel" class="{{ Request::is('artikel') ? 'active' : '' }}">Artikel</a>
-                    <a id="pelatihan-navbar" href="/pelatihan" class="{{ Request::is('pelatihan') ? 'active' : '' }}">Pelatihan</a>
+                    <a id="beranda-navbar" href="/ustadz" class="{{ Request::is('ustadz') ? 'active' : '' }}">Beranda</a>
+                    <a id="artikel-navbar" href="/artikel-ustadz" class="{{ Request::is('artikel-ustadz') ? 'active' : '' }}">Artikel</a>
                     <a id="chat-navbar" href="/chat" class="{{ Request::is('chat') ? 'active' : '' }}">Chat</a>
+                    <a id="notif-navbar" href="/notif-ustadz" class="{{ Request::is('notif-ustadz') ? 'active' : '' }}">Notifikasi</a>
                 </nav>
                 <a href="#" onclick="toggleProfilePopup()" title="Lihat Profil" class="user-container">
-                  <div class="user-image">
-                      <img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" alt="user" style="border-radius: 50%" />
-                  </div>
-                  <div class="user-name-container">
-                    @if($profile && $profile->fullname)
-                        <p class="profile-fullname">{{ $profile->fullname }}</p>
-                    @else
-                        <p class="profile-name">Silakan Login</p>
-                    @endif  
-                    <p>Lihat Profil</p>
-                  </div>
-              </a>
+                    <div class="user-image">
+                        <img src="../../assets/images/user.png" alt="user" style="border-radius: 50%" />
+                    </div>
+                    <div class="user-name-container">
+                        <p class="profile-name">Muhammad Fikri</p>
+                        <p>Lihat Profil</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </header>
-
-    <!-- Modal Popup -->
-    <div id="profile-popup" class="profile-popup">
+<div id="profile-popup" class="profile-popup">
       <div class="profile-popup-content">
           <span class="close" onclick="toggleProfilePopup()">&times;</span>
           <a href="/biodata">Lihat Profil</a>
           <a href="/logout">Logout</a>
       </div>
   </div>
-
 <style>
 /* Styling untuk elemen yang sudah ada */
 .active {
@@ -104,7 +89,6 @@
     color: #4b5c98;
 }
 </style>
-
 <script>
   function toggleDropdown() {
       var nav = document.getElementById('nav-container');

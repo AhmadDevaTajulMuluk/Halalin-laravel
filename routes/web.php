@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,9 +9,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/dashboard', function () {
-    return view('user.dashboard');
-})->name('dashboard'); 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); 
 
 Route::get('/artikel', function () {
     return view('user.artikel.artikel');
@@ -42,4 +41,16 @@ Route::post('/create',[SessionController::class,'create'])->name('create');
 
 Route::get('/search', function () {
     return view('user.matching.search');
+});
+
+Route::get('/ustadz', function () {
+    return view('ustadz.dashboard');
+})->name('dashboard');
+
+Route::get('/artikel-ustadz', function () {
+    return view('ustadz.artikel');
+})->name('artikel-ustadz');
+
+Route::get('/notif-ustadz', function () {
+    return view('ustadz.notif');
 });
