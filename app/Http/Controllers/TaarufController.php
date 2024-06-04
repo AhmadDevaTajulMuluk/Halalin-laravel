@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
-class ChatController extends Controller
+class TaarufController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class ChatController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        return view('user.chat.chat', compact('profile'));
+        return view('user.chat.taaruf', compact('profile'));
     }
 
     public function render()

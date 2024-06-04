@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TaarufController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,8 @@ Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
 
 Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+
+Route::get('/sedang-taaruf', [TaarufController::class, 'index'])->name('chat');
 
 
 Route::get('/artikel-content', function () {

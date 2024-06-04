@@ -345,7 +345,7 @@ function kePelatihan() {
 }
 
 function roomChat() {
-	window.location.href = "../pages/chat-sedangtaaruf.html";
+	window.location.href = "/sedang-taaruf";
 }
 
 document.getElementsByClassName("notify-item").addEventListener("click", lihatnotif);
