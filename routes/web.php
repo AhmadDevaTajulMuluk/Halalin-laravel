@@ -37,10 +37,16 @@ Route::get('/artikel-content', function () {
 // })->name('pelatihan');
 
 Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
-Route::post('/biodata/profile', [BiodataController::class,'storeProfile'])->name('profile.post');
-Route::post('/biodata/selfapp', [BiodataController::class,'storeSelfApp'])->name('selfapp.post');
-// Route::get('/biodata/{id}/edit', [BiodataController::class, 'edit'])->name('biodata.edit');
-// Route::put('/biodata/{id}', [BiodataController::class, 'update'])->name('biodata.update');
+Route::post('/biodata', [BiodataController::class,'storeProfile'])->name('profile.post');
+Route::put('/biodata', [BiodataController::class, 'updateProfile'])->name('profile.update');
+
+Route::get('/biodata/self-app', [BiodataController::class, 'indexSelfApp'])->name('biodata.selfapp');
+Route::post('/biodata/self-app', [BiodataController::class, 'storeSelfApp'])->name('selfapp.post');
+Route::put('/biodata/self-app', [BiodataController::class, 'updateSelfApp'])->name('selfapp.update');
+
+Route::get('/biodata/physical-app', [BiodataController::class, 'indexPhysicalApp'])->name('biodata.physicalapp');
+Route::post('/biodata/physical-app', [BiodataController::class, 'storePhysicalApp'])->name('physicalapp.post');
+Route::put('/biodata/physical-app', [BiodataController::class, 'updatePhysicalApp'])->name('physicalapp.update');
 
 Route::get('/login',[SessionController::class,'index'])->name('sesi');
 Route::post('/login',[SessionController::class,'login'])->name('login');

@@ -9,6 +9,10 @@ class SelfApp extends Model
 {
     use HasFactory;
 
+    protected $table = 'self_apps';
+
+    protected $primaryKey = 'self_id';
+
     protected $fillable = [
         'user_id',
         'motto',

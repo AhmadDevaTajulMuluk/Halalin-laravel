@@ -2,36 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biodata\PhysicalApp;
+use App\Models\Biodata\SelfApp;
 use Illuminate\Http\Request;
 use App\Models\Profile;
-use App\Models\Biodata\SelfApp;
-
 
 
 class BiodataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $selfApp = SelfApp::where('user_id', auth()->id())->first();
-        
-        return view('user.biodata', compact('profile', 'selfApp'));
+        $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();       
+        return view('user.biodata', compact('profile', 'selfApp', 'physicalApp'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function storeProfile(Request $request)
     {
         $request->validate([
@@ -92,28 +78,92 @@ class BiodataController extends Controller
             return back()->withErrors(['image' => 'Image upload failed.']);
         }
 
-        Profile::create($data);
-
-        return redirect()->route('biodata')->with('success', 'Profil berhasil disimpan!');
+        $profile = Profile::where('user_id', auth()->id())->first();
+        if ($profile) {
+            $profile->update($data);
+            return redirect()->route('biodata')->with('success', 'Profil berhasil diperbarui!');
+        } else {
+            Profile::create($data);
+            return redirect()->route('biodata')->with('success', 'Profil berhasil disimpan!');
+        }
     }
-    public function storeSelfApp(Request $request)
+    
+    public function editProfile(string $id)
     {
+        $profile = Profile::where('user_id', auth()->id())->first();
+        return view('user.profil.edit', compact('profile'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+
+        $request->validate([
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'fullname' => 'required|string|max:50',
+            'phone_number' => 'required|string|max:15',
+            'place_date' => 'required|string|max:30',
+            'birth_date' => 'required|date',
+            'gender' => 'required|string|max:15',
+            'job' => 'required|string|max:30',
+            'salary' => 'required|numeric',
+            'married_status' => 'required|string|max:30',
+            'ethnic' => 'required|string|max:30',
+        ]);
+
+        $profile = Profile::where('user_id', auth()->id())->first();
+
+        $data = [
+            'fullname' => $request->input('fullname'),
+            'phone_number' => $request->input('phone_number'),
+            'place_date' => $request->input('place_date'),
+            'birth_date' => $request->input('birth_date'),
+            'gender' => $request->input('gender'),
+            'job' => $request->input('job'),
+            'salary' => $request->input('salary'),
+            'married_status' => $request->input('married_status'),
+            'ethnic' => $request->input('ethnic'),
+        ];
+        
+        if ($request->hasFile('image')) {
+            $image_file = $request->file('image');
+            $image_extension = $image_file->extension();
+            $image_name = date('ymdhis').".".$image_extension;
+            $image_file->move(public_path('image'), $image_name);
+            $data['image'] = $image_name;
+        }
+        $profile->update($data);
+
+
+        return redirect()->route('biodata')->with('success', 'Profil berhasil diperbarui!');
+    }
+
+
+    // Gambaran Diri Controller
+    public function indexSelfApp(){
+        $selfApp = SelfApp::where('user_id', auth()->id())->first();
+        if (!$selfApp) {
+            $selfApp = new SelfApp(); // Membuat objek baru jika data tidak ditemukan
+        }
+        return view('user.biodata', compact('selfApp'));
+    }
+
+    public function storeSelfApp(Request $request){
         $request->validate([
             'motto' => 'required|string|max:255',
             'lifegoals' => 'required|string|max:255',
             'hobbies' => 'required|string|max:255',
             'favThings' => 'required|string|max:255',
-            'positiveTraits' => 'required|string|max:255',
-            'negativeTraits' => 'required|string|max:255',
+            'positiveTraits' => 'required|string|max:100',
+            'negativeTraits' => 'required|string|max:100',
             'taarufReason' => 'required|string|max:255',
-        ],[
-            'motto.required' => 'Silahkan Masukkan Motto Anda',
-            'lifegoals.required' => 'Silahkan Masukkan Goals Anda',
-            'hobbies.required' => 'Silahkan Masukkan Hobi Anda',
-            'favThings.required' => 'Silahkan Masukkan Hal yang disukai Anda',
-            'positiveTraits.required' => 'Silahkan Masukkan Sifat Positif Anda',
-            'negativeTraits.required' => 'Silahkan Masukkan Sifat Negatif Anda',
-            'taarufReason.required' => 'Silahkan Masukkan Alasan Anda taaruf',
+        ], [
+            'motto.required' => 'Motto harus diisi.',
+            'lifegoals.required' => 'Tujuan hidup harus diisi.',
+            'hobbies.required' => 'Hobi harus diisi.',
+            'favThings.required' => 'Cita-cita harus diisi.',
+            'positiveTraits.required' => 'Ciri positif harus diisi.',
+            'negativeTraits.required' => 'Ciri negatif harus diisi.',
+            'taarufReason.required' => 'Alasan harus diisi.',
         ]);
 
         $data = [
@@ -127,40 +177,128 @@ class BiodataController extends Controller
             'taarufReason' => $request->input('taarufReason'),
         ];
 
-        SelfApp::create($data);
-        return redirect()->back('biodata')->with('success', 'Gambaran diri berhasil disimpan!');
+        $selfApp = SelfApp::where('user_id', auth()->id())->first();
+        if ($selfApp) {
+            $selfApp->update($data);
+            return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil diperbarui!');
+        } else {
+            SelfApp::create($data);
+            return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil disimpan!');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function updateSelfApp(Request $request)
     {
-        //
+
+        $request->validate([
+            'motto' => 'required|string|max:255|min:10',
+            'lifegoals' => 'required|string|max:255|min:10',
+            'hobbies' => 'required|string|max:255|min:10',
+            'favThings' => 'required|string|max:255|min:10',
+            'positiveTraits' => 'required|string|max:100|min:5',
+            'negativeTraits' => 'required|string|max:100|min:5',
+            'taarufReason' => 'required|string|max:255|min:15',
+        ]);
+
+        $selfApp = SelfApp::where('user_id', auth()->id())->first();
+
+        $data = [
+            'user_id' => auth()->user()->id,
+            'motto' => $request->input('motto'),
+            'lifegoals' => $request->input('lifegoals'),
+            'hobbies' => $request->input('hobbies'),
+            'favThings' => $request->input('favThings'),
+            'positiveTraits' => $request->input('positiveTraits'),
+            'negativeTraits' => $request->input('negativeTraits'),
+            'taarufReason' => $request->input('taarufReason'),
+        ];
+        
+        $selfApp->update($data);
+
+        return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil diperbarui!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        // $profile = Profile::where('user_id', auth()->id())->first();
-        // return view('user.biodata', ['profile' => $profile]);
+    // Gambaran Fisik Controller
+
+    public function indexPhysicalApp(){
+        $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
+        if (!$physicalApp) {
+            $selfApp = new PhysicalApp(); // Membuat objek baru jika data tidak ditemukan
+        }
+        return view('user.biodata', compact('physicalApp'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, String $id)
-    {
-        //
-    }
+    public function storePhysicalApp(Request $request){
+        $request->validate([
+            'skincolor' => 'required|string|max:50',
+            'haircolor' => 'required|string|max:30',
+            'hairtype' => 'required|string|max:30',
+            'height' => 'required|numeric|min:0',
+            'weight' => 'required|numeric|min:0',
+            'illness' => 'nullable|string|max:255',
+            'uniqueTraits' => 'nullable|string|max:255',
+            'disability' => 'nullable|string|max:255',
+        ], [
+            'skincolor.required' => 'Warna kulit harus diisi.',
+            'haircolor.required' => 'Warna rambut harus diisi.',
+            'hairtype.required' => 'Tipe rambut harus diisi.',
+            'height.required' => 'Tinggi harus diisi.',
+            'weight.required' => 'Berat harus diisi.',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $data = [
+            'user_id' => auth()->user()->id,
+            'skincolor' => $request->input('skincolor'),
+            'haircolor' => $request->input('haircolor'),
+            'hairtype' => $request->input('hairtype'),
+            'height' => $request->input('height'),
+            'weight' => $request->input('weight'),
+            'illness' => $request->input('illness'),
+            'uniqueTraits' => $request->input('uniqueTraits'),
+            'disability' => $request->input('disability'),
+        ];
+
+        $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
+        if ($physicalApp) {
+            $physicalApp->update($data);
+            return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+        } else {
+            PhysicalApp::create($data);
+            return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil disimpan!');
+        }
+    
     }
+    public function updatePhysicalApp(Request $request)
+    {
+
+        $request->validate([
+            'skincolor' => 'required|string|max:50',
+            'haircolor' => 'required|string|max:30',
+            'hairtype' => 'required|string|max:30',
+            'height' => 'required|numeric|min:0',
+            'weight' => 'required|numeric|min:0',
+            'illness' => 'nullable|string|max:255',
+            'uniqueTraits' => 'nullable|string|max:255',
+            'disability' => 'nullable|string|max:255',
+        ]);
+
+        $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
+
+        $data = [
+            'user_id' => auth()->user()->id,
+            'skincolor' => $request->input('skincolor'),
+            'haircolor' => $request->input('haircolor'),
+            'hairtype' => $request->input('hairtype'),
+            'height' => $request->input('height'),
+            'weight' => $request->input('weight'),
+            'illness' => $request->input('illness'),
+            'uniqueTraits' => $request->input('uniqueTraits'),
+            'disability' => $request->input('disability'),
+        ];
+        
+        $physicalApp->update($data);
+
+        return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+    }
+    
 }
