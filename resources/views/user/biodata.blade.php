@@ -58,9 +58,9 @@
 									<p>Foto Profil</p>
 									<div class="profile-foto">
 										<div class="pilihfoto">
-											@if(isset($profile) && $profile->image)
-												<img src="{{ asset('image/' . $profile->image) }}" id="profilepic">
-											@endif
+											
+											<img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" id="profilepic">
+											
 											<div>
 												<label for="input-foto">Upload image</label>
 												<input type="file" accept="image/jpeg, image/png, image/jpg" id="input-foto" name="image">
@@ -186,137 +186,155 @@
 
 					<div class="form-bio" id="gambaran-keluarga-form" style="display: none;">
 						<h1>Gambaran Keluarga</h1>
-						<div class="field-bio">
-							<div class="namaayah">
-								<p>Nama ayah</p>
-								<input type="text" class="namaayah-input" placeholder="Masukkan nama ayah anda" />
+						<form action="{{ isset($familyApp) ? route('familyapp.update', $familyApp->id) : route('familyapp.post') }}" method="POST" enctype="multipart/form-data">
+							@csrf
+							@if(isset($familyApp))
+								@method('PUT')
+							@endif
+							<div class="field-bio">
+								<div class="namaayah">
+									<p>Nama ayah</p>
+									<input type="text" class="namaayah-input" placeholder="Masukkan nama ayah anda" name="fathers_name" value="{{ old('fathers_name', $familyApp ? $familyApp->fathers_name : '') }}" required/>
+								</div>
+								<div class="pekerjaanayah">
+									<p>Pekerjaan ayah</p>
+									<input type="text" class="pekerjaanayah-input" placeholder="Masukkan pekerjaan ayah anda" name="fathers_job" value="{{ old('fathers_job', $familyApp ? $familyApp->fathers_job : '') }}" required />
+								</div>
+								<div class="namaibu">
+									<p>Nama ibu</p>
+									<input type="text" class="namaibu-input" placeholder="Masukkan nama ibu anda" name="mothers_name" value="{{ old('mothers_name', $familyApp ? $familyApp->mothers_name : '') }}" required />
+								</div>
+								<div class="pekerjaanibu">
+									<p>Pekerjaan ibu</p>
+									<input type="text" class="pekerjaanibu-input" placeholder="Masukkan pekerjaan ibu anda" name="mothers_job" value="{{ old('mothers_job', $familyApp ? $familyApp->mothers_job : '') }}" required/>
+								</div>
+								<div class="jumlahkakak">
+									<p>Jumlah kakak</p>
+									<input type="number" class="jumlahkakak-input" placeholder="Berapa jumlah kakak anda" name="old_siblings" value="{{ old('old_siblings', $familyApp ? $familyApp->old_siblings : '') }}" required/>
+								</div>
+								<div class="jumlahkakak">
+									<p>Jumlah adik</p>
+									<input type="number" class="jumlahadik-input" placeholder="Berapa jumlah adik anda" name="young_siblings" value="{{ old('young_siblings', $familyApp ? $familyApp->young_siblings : '') }}" required/>
+								</div>
+								<div class="status">
+									<p>Tulang punggung keluarga</p>
+									<select class="pilihanstatus" name="backbone_family">
+										<option value="-" disabled selected>--- Pilih tulang punggung keluarga ---</option>
+										<option value="Saya" {{ old('backbone_family', $familyApp ? $familyApp->backbone_family : '') == 'Saya' ? 'selected' : '' }}>Saya</option>
+										<option value="Ayah" {{ old('backbone_family', $familyApp ? $familyApp->backbone_family : '') == 'Ayah' ? 'selected' : '' }}>Ayah</option>
+										<option value="Ibu" {{ old('backbone_family', $familyApp ? $familyApp->backbone_family : '') == 'Ibu' ? 'selected' : '' }}>Ibu</option>
+										<option value="Kakak" {{ old('backbone_family', $familyApp ? $familyApp->backbone_family : '') == 'Kakak' ? 'selected' : '' }}>Kakak</option>
+										<option value="Adik" {{ old('backbone_family', $familyApp ? $familyApp->backbone_family : '') == 'Adik' ? 'selected' : '' }}>Adik</option>
+									</select>
+								</div>
 							</div>
-							<div class="pekerjaanayah">
-								<p>Pekerjaan ayah</p>
-								<input type="text" class="pekerjaanayah-input" placeholder="Masukkan pekerjaan ayah anda" />
+							<div class="divbutton">
+							<button type="submit" class="simpan-btn">Simpan</button>
 							</div>
-							<div class="namaibu">
-								<p>Nama ibu</p>
-								<input type="text" class="namaibu-input" placeholder="Masukkan nama ibu anda" />
-							</div>
-							<div class="pekerjaanibu">
-								<p>Pekerjaan ibu</p>
-								<input type="text" class="pekerjaanibu-input" placeholder="Masukkan pekerjaan ibu anda" />
-							</div>
-							<div class="jumlahkakak">
-								<p>Jumlah kakak</p>
-								<input type="number" class="jumlahkakak-input" placeholder="Berapa jumlah kakak anda" />
-							</div>
-							<div class="jumlahkakak">
-								<p>Jumlah adik</p>
-								<input type="number" class="jumlahadik-input" placeholder="Berapa jumlah adik anda" />
-							</div>
-							<div class="status">
-								<p>Tulang punggung keluarga</p>
-								<select class="pilihanstatus">
-									<option value="-" disabled selected>--- Pilih tulang punggung keluarga ---</option>
-  									<option value="Saya">Saya</option>
-  									<option value="Ayah">Ayah</option>
-  									<option value="Ibu">Ibu</option>
-  									<option value="Kakak">Kakak</option>
-  									<option value="Adik">Adik</option>
-								</select>
-							</div>
-						</div>
-						<div class="divbutton">
-						<button type="submit" class="simpan-btn">Simpan</button>
-						</div>
+						</form>
 					</div>
 
 					<div class="form-bio" id="pendidikan-form" style="display: none;">
 						<h1>Pendidikan</h1>
-						<div class="field-bio">
-							<div class="sekolahdasar">
-								<p>Sekolah Dasar (SD)</p>
-								<input type="text" class="sekolahdasar-input" placeholder="Dimana anda bersekolah dasar" />
+						<form action="{{ isset($education) ? route('education.update', $education->id) : route('education.post') }}" method="POST" enctype="multipart/form-data">
+							@csrf
+							@if(isset($education))
+								@method('PUT')
+							@endif
+							<div class="field-bio">
+								<div class="sekolahdasar">
+									<p>Sekolah Dasar (SD)</p>
+									<input type="text" class="sekolahdasar-input" placeholder="Dimana anda bersekolah dasar" name="elementarySchool" value="{{ old('elementarySchool', $education ? $education->elementarySchool : '') }}" required/>
+								</div>
+								<div class="sekolahmenengahpertama">
+									<p>Sekolah Menengah Pertama (SMP)</p>
+									<input type="text" class="sekolahmenengahpertama-input" placeholder="Dimana anda bersekolah menengah pertama" name="juniorHighSchool" value="{{ old('juniorHighSchool', $education ? $education->juniorHighSchool : '') }}" />
+								</div>
+								<div class="sekolahmenengahatas">
+									<p>Sekolah Menengah Atas (SMA)</p>
+									<input type="text" class="sekolahmenengahatas-input" placeholder="Dimana anda bersekolah menengah atas" name="seniorHighSchool" value="{{ old('seniorHighSchool', $education ? $education->seniorHighSchool : '') }}"/>
+								</div>
+								<div class="perguruantinggis1">
+									<p>Perguruan Tinggi (S1)</p>
+									<input type="text" class="perguruantinggis1-input" placeholder="Dimana anda bersekolah perguruan tinggi" name="collegeS1" value="{{ old('collegeS1', $education ? $education->collegeS1 : '') }}"/>
+								</div>
+								<div class="jurusan">
+									<p>Jurusan</p>
+									<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" name="majorS1" value="{{ old('majorS1', $education ? $education->majorS1 : '') }}" />
+								</div>
+								<div class="perguruantinggis2">
+									<p>Perguruan Tinggi (S2)</p>
+									<input type="text" class="perguruantinggis2-input" placeholder="Dimana anda bersekolah perguruan tinggi" name="collegeS2" value="{{ old('collegeS2', $education ? $education->collegeS2 : '') }}"/>
+								</div>
+								<div class="jurusan">
+									<p>Jurusan</p>
+									<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" name="majorS2" value="{{ old('majorS2', $education ? $education->majorS2 : '') }}"/>
+								</div>
+								<div class="perguruantinggis3">
+									<p>Perguruan Tinggi (S3)</p>
+									<input type="text" class="perguruantinggis3-input" placeholder="Dimana anda bersekolah perguruan tinggi" name="collegeS3" value="{{ old('collegeS3', $education ? $education->collegeS3 : '') }}"/>
+								</div>
+								<div class="jurusan">
+									<p>Jurusan</p>
+									<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" name="majorS3" value="{{ old('majorS3', $education ? $education->majorS3 : '') }}"/>
+								</div>
 							</div>
-							<div class="sekolahmenengahpertama">
-								<p>Sekolah Menengah Pertama (SMP)</p>
-								<input type="text" class="sekolahmenengahpertama-input" placeholder="Dimana anda bersekolah menengah pertama" />
+							<div class="divbutton">
+								<button type="submit" class="simpan-btn">Simpan</button>
 							</div>
-							<div class="sekolahmenengahatas">
-								<p>Sekolah Menengah Atas (SMA)</p>
-								<input type="text" class="sekolahmenengahatas-input" placeholder="Dimana anda bersekolah menengah atas" />
-							</div>
-							<div class="perguruantinggis1">
-								<p>Perguruan Tinggi (S1)</p>
-								<input type="text" class="perguruantinggis1-input" placeholder="Dimana anda bersekolah perguruan tinggi" />
-							</div>
-							<div class="jurusan">
-								<p>Jurusan</p>
-								<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" />
-							</div>
-							<div class="perguruantinggis2">
-								<p>Perguruan Tinggi (S2)</p>
-								<input type="text" class="perguruantinggis2-input" placeholder="Dimana anda bersekolah perguruan tinggi" />
-							</div>
-							<div class="jurusan">
-								<p>Jurusan</p>
-								<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" />
-							</div>
-							<div class="perguruantinggis3">
-								<p>Perguruan Tinggi (S3)</p>
-								<input type="text" class="perguruantinggis3-input" placeholder="Dimana anda bersekolah perguruan tinggi" />
-							</div>
-							<div class="jurusan">
-								<p>Jurusan</p>
-								<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" />
-							</div>
-						</div>
-						<div class="divbutton">
-							<button type="submit" class="simpan-btn">Simpan</button>
-							</div>
+						</form>
 					</div>
 
 					<div class="form-bio" id="ibadah-form" style="display: none;">
 						<h1>Ibadah</h1>
-						<div class="field-bio">
-							<div class="hafalan">
-								<p>Hafalan al-quran</p>
-								<input type="text" class="sekolahdasar-input" placeholder="Masukkan hafalan al-quran anda" />
+						<form action="{{ isset($religion) ? route('religion.update', $religion->id) : route('religion.post') }}" method="POST" enctype="multipart/form-data">
+							@csrf
+							@if(isset($religion))
+								@method('PUT')
+							@endif
+							<div class="field-bio">
+								<div class="hafalan">
+									<p>Hafalan al-quran</p>
+									<input type="text" class="sekolahdasar-input" placeholder="Masukkan hafalan al-quran anda" name="quranMemory" value="{{ old('quranMemory', $religion ? $religion->quranMemory : '') }}" required/>
+								</div>
+								<div class="status">
+									<p>Bacaan al-quran</p>
+									<select class="pilihanstatus" name="level">
+										<option value="-" disabled selected>--- Pilih Bacaan Al-quran Anda ---</option>
+										<option value="Lancar" {{ old('level', $religion ? $religion->level : '') == 'Lancar' ? 'selected' : '' }}>Lancar</option>
+										<option value="Sedang" {{ old('level', $religion ? $religion->level : '') == 'Sedang' ? 'selected' : '' }}>Sedang</option>
+										<option value="Masih belajar" {{ old('level', $religion ? $religion->level : '') == 'Masih Belajar' ? 'selected' : '' }}>Masih Belajar</option>
+									</select>
+								</div>
+								<div class="kajianustad">
+									<p>Kajian ustad yang diikuti</p>
+									<input type="text" class="kajianustad-input" placeholder="Dimana anda bersekolah menengah atas" name="answer1" value="{{ old('answer1', $religion ? $religion->answer1 : '') }}" required/>
+								</div>
+								<div class="pertanyaan1">
+									<p>Apa pemahaman Anda tentang akhirat dan persiapannya dalam ajaran Islam?</p>
+									<input type="text" class="pertanyaan1-input" placeholder="Jelaskan pendapat anda" name="answer2" value="{{ old('answer2', $religion ? $religion->answer2 : '') }}" required/>
+								</div>
+								<div class="pertanyaan2">
+									<p>Apa yang Anda ketahui tentang proses pencarian pasangan hidup (taaruf) dalam Islam dan bagaimana Anda mempersiapkan diri untuk itu?</p>
+									<input type="text" class="pertanyaan2-input" placeholder="Jelaskan pendapat anda" name="answer3" value="{{ old('answer3', $religion ? $religion->answer3 : '') }}" required/>
+								</div>
+								<div class="pertanyaan3">
+									<p>Bagaimana Anda memahami konsep mahar (maskawin) dalam Islam dan bagaimana Anda menentukan nilai atau jenis mahar yang sesuai?</p>
+									<input type="text" class="pertanyaan3-input" placeholder="Jelaskan pendapat anda" name="answer4" value="{{ old('answer4', $religion ? $religion->answer4 : '') }}" required/>
+								</div>
+								<div class="pertanyaan4">
+									<p>Bagaimana Anda mengatasi konflik antara kebutuhan untuk memenuhi tuntutan dunia modern dengan menjalankan ajaran agama dalam kehidupan sehari-hari?</p>
+									<input type="text" class="pertanyaan4-input" placeholder="Jelaskan pendapat anda" name="answer5" value="{{ old('answer5', $religion ? $religion->answer5 : '') }}" required/>
+								</div>
+								<div class="pertanyaan5">
+									<p>Bagaimana Anda memandang pentingnya kesetiaan dalam pernikahan dalam Islam, terutama dalam konteks modern yang penuh dengan godaan dan tantangan?</p>
+									<input type="text" class="pertanyaan5-input" placeholder="Jelaskan pendapat anda" name="answer6" value="{{ old('answer6', $religion ? $religion->answer6 : '') }}" required/>
+								</div>
 							</div>
-							<div class="status">
-								<p>Bacaan al-quran</p>
-								<select class="pilihanstatus">
-									<option value="-" disabled selected>--- Pilih Bacaan Al-quran Anda ---</option>
-  									<option value="Lancar">Lancar</option>
-  									<option value="Sedang">Sedang</option>
-  									<option value="Masih belajar">Masih Belajar</option>
-								</select>
+							<div class="divbutton">
+								<button type="submit" class="simpan-btn">Simpan</button>
 							</div>
-							<div class="kajianustad">
-								<p>Kajian ustad yang diikuti</p>
-								<input type="text" class="kajianustad-input" placeholder="Dimana anda bersekolah menengah atas" />
-							</div>
-							<div class="pertanyaan1">
-								<p>Apa pemahaman Anda tentang akhirat dan persiapannya dalam ajaran Islam?</p>
-								<input type="text" class="pertanyaan1-input" placeholder="Jelaskan pendapat anda" />
-							</div>
-							<div class="pertanyaan2">
-								<p>Apa yang Anda ketahui tentang proses pencarian pasangan hidup (taaruf) dalam Islam dan bagaimana Anda mempersiapkan diri untuk itu?</p>
-								<input type="text" class="pertanyaan2-input" placeholder="Jelaskan pendapat anda" />
-							</div>
-							<div class="pertanyaan3">
-								<p>Bagaimana Anda memahami konsep mahar (maskawin) dalam Islam dan bagaimana Anda menentukan nilai atau jenis mahar yang sesuai?</p>
-								<input type="text" class="pertanyaan3-input" placeholder="Jelaskan pendapat anda" />
-							</div>
-							<div class="pertanyaan4">
-								<p>Bagaimana Anda mengatasi konflik antara kebutuhan untuk memenuhi tuntutan dunia modern dengan menjalankan ajaran agama dalam kehidupan sehari-hari?</p>
-								<input type="text" class="pertanyaan4-input" placeholder="Jelaskan pendapat anda" />
-							</div>
-							<div class="pertanyaan5">
-								<p>Bagaimana Anda memandang pentingnya kesetiaan dalam pernikahan dalam Islam, terutama dalam konteks modern yang penuh dengan godaan dan tantangan?</p>
-								<input type="text" class="pertanyaan5-input" placeholder="Jelaskan pendapat anda" />
-							</div>
-						</div>
-						<div class="divbutton">
-							<button type="submit" class="simpan-btn">Simpan</button>
-							</div>
+						</form>
 					</div>
 
 					<div class="form-bio" id="gambaran-fisik-form" style="display: none;">
@@ -383,7 +401,7 @@
 										type="text"
 										class="hobi-input"
 										placeholder="Jelaskan riwayat penyakit anda" 
-										name="illness" value="{{ old('illness', $physicalApp ? $physicalApp->illness : '-') }}"/>
+										name="illness" value="{{ old('illness', $physicalApp ? $physicalApp->illness : '') }}"/>
 								</div>
 								<div class="hobi">
 									<p>Jelaskan ciri khas anda (jika ada)</p>
@@ -391,7 +409,7 @@
 										type="text"
 										class="hobi-input"
 										placeholder="Jelaskan ciri khas anda"
-										name="uniqueTraits" value="{{ old('uniqueTraits', $physicalApp ? $physicalApp->uniqueTraits : '-') }}"/>
+										name="uniqueTraits" value="{{ old('uniqueTraits', $physicalApp ? $physicalApp->uniqueTraits : '') }}"/>
 								</div>
 								<div class="hobi">
 									<p>Jelaskan cacat fisik anda (jika ada)</p>
@@ -399,7 +417,7 @@
 										type="text"
 										class="hobi-input"
 										placeholder="Jelaskan cacat fisik anda"
-										name="disability" value="{{ old('disability', $physicalApp ? $physicalApp->disability : '-') }}" />
+										name="disability" value="{{ old('disability', $physicalApp ? $physicalApp->disability : '') }}" />
 								</div>
 							</div>
 						

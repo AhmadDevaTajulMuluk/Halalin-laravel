@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biodata\Educations;
+use App\Models\Biodata\FamilyApp;
 use App\Models\Biodata\PhysicalApp;
+use App\Models\Biodata\Religion;
 use App\Models\Biodata\SelfApp;
 use Illuminate\Http\Request;
 use App\Models\Profile;
@@ -15,8 +18,11 @@ class BiodataController extends Controller
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $selfApp = SelfApp::where('user_id', auth()->id())->first();
-        $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();       
-        return view('user.biodata', compact('profile', 'selfApp', 'physicalApp'));
+        $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
+        $familyApp = FamilyApp::where('user_id', auth()->id())->first(); 
+        $education = Educations::where('user_id', auth()->id())->first(); 
+        $religion = Religion::where('user_id', auth()->id())->first();     
+        return view('user.biodata', compact('profile', 'selfApp', 'physicalApp', 'familyApp', 'education', 'religion'));
     }
     public function storeProfile(Request $request)
     {
@@ -223,7 +229,7 @@ class BiodataController extends Controller
     public function indexPhysicalApp(){
         $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
         if (!$physicalApp) {
-            $selfApp = new PhysicalApp(); // Membuat objek baru jika data tidak ditemukan
+            $physicalApp = new PhysicalApp(); // Membuat objek baru jika data tidak ditemukan
         }
         return view('user.biodata', compact('physicalApp'));
     }
@@ -299,6 +305,249 @@ class BiodataController extends Controller
         $physicalApp->update($data);
 
         return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+    }
+
+    public function indexFamilyApp(){
+        $familyApp = FamilyApp::where('user_id', auth()->id())->first();
+        if (!$familyApp) {
+            $familyApp = new FamilyApp(); // Membuat objek baru jika data tidak ditemukan
+        }
+        return view('user.biodata', compact('familyApp'));
+    }
+
+    public function storeFamilyApp(Request $request){
+        $request->validate([
+            'fathers_name' => 'required|string|max:50',
+            'fathers_job' => 'required|string|max:30',
+            'mothers_name' => 'required|string|max:50',
+            'mothers_job' => 'required|string|max:30',
+            'old_siblings' => 'required|numeric|min:0',
+            'young_siblings' => 'required|numeric|min:0',
+            'backbone_family' => 'required|string|max:255',
+        ], [
+            'fathers_name.required' => 'Nama ayah harus diisi.',
+            'fathers_job.required' => 'Pekerjaan ayah harus diisi.',
+            'mothers_name.required' => 'Nama ibu harus diisi.',
+            'mothers_job.required' => 'Pekerjaan ibu harus diisi.',
+            'old_siblings.required' => 'Jumlah kakak harus diisi.',
+            'young_siblings.required' => 'Jumlah adik harus diisi.',
+        ]);
+
+        $data = [
+            'user_id' => auth()->user()->id,
+            'fathers_name' => $request->input('fathers_name'),
+            'fathers_job' => $request->input('fathers_job'),
+            'mothers_name' => $request->input('mothers_name'),
+            'mothers_job' => $request->input('mothers_job'),
+            'old_siblings' => $request->input('old_siblings'),
+            'young_siblings' => $request->input('young_siblings'),
+            'backbone_family' => $request->input('backbone_family'),
+        ];
+
+        $familyApp = FamilyApp::where('user_id', auth()->id())->first();
+        if ($familyApp) {
+            $familyApp->update($data);
+            return redirect()->route('biodata')->with('success', 'Gambaran keluarga berhasil diperbarui!');
+        } else {
+            FamilyApp::create($data);
+            return redirect()->route('biodata')->with('success', 'Gambaran keluarga berhasil disimpan!');
+        }
+    }
+
+    public function updateFamilyApp(Request $request)
+    {
+        $request->validate([
+            'fathers_name' => 'required|string|max:50',
+            'fathers_job' => 'required|string|max:30',
+            'mothers_name' => 'required|string|max:50',
+            'mothers_job' => 'required|string|max:30',
+            'old_siblings' => 'required|numeric|min:0',
+            'young_siblings' => 'required|numeric|min:0',
+            'backbone_family' => 'required|string|max:255',
+        ]);
+
+        $familyApp = FamilyApp::where('user_id', auth()->id())->first();
+
+        $data = [
+            'user_id' => auth()->user()->id,
+            'fathers_name' => $request->input('fathers_name'),
+            'fathers_job' => $request->input('fathers_job'),
+            'mothers_name' => $request->input('mothers_name'),
+            'mothers_job' => $request->input('mothers_job'),
+            'old_siblings' => $request->input('old_siblings'),
+            'young_siblings' => $request->input('young_siblings'),
+            'backbone_family' => $request->input('backbone_family'),
+        ];
+        
+        $familyApp->update($data);
+
+        return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+    }
+    
+    
+    
+    public function indexEducation(){
+        $education = Educations::where('user_id', auth()->id())->first();
+        if (!$education) {
+            $education = new Educations(); // Membuat objek baru jika data tidak ditemukan
+        }
+        return view('user.biodata', compact('education'));
+    }
+
+    public function storeEducation(Request $request){
+        $request->validate([
+            'elementarySchool' => 'required|string|max:50',
+            'juniorHighSchool' => 'nullable|string|max:50',
+            'seniorHighSchool' => 'nullable|string|max:50',
+            'collegeS1' => 'nullable|string|max:50',
+            'majorS1' => 'nullable|string|max:50',
+            'collegeS2' => 'nullable|string|max:50',
+            'majorS2' => 'nullable|string|max:50',
+            'collegeS3' => 'nullable|string|max:50',
+            'majorS3' => 'nullable|string|max:50',
+        ], [
+            'elementarySchool.required' => 'Nama SD dasar harus diisi.',
+        ]);
+
+        $data = [
+            'user_id' => auth()->user()->id,
+            'elementarySchool' => $request->input('elementarySchool'),
+            'juniorHighSchool' => $request->input('juniorHighSchool'),
+            'seniorHighSchool' => $request->input('seniorHighSchool'),
+            'collegeS1' => $request->input('collegeS1'),
+            'majorS1' => $request->input('majorS1'),
+            'collegeS2' => $request->input('collegeS2'),
+            'majorS2' => $request->input('majorS2'),
+            'collegeS3' => $request->input('collegeS3'),
+            'majorS3' => $request->input('majorS3'),
+        ];
+
+        $education = Educations::where('user_id', auth()->id())->first();
+        if ($education) {
+            $education->update($data);
+            return redirect()->route('biodata')->with('success', 'Data pendidikan berhasil diperbarui!');
+        } else {
+            Educations::create($data);
+            return redirect()->route('biodata')->with('success', 'Data pendidikan keluarga berhasil disimpan!');
+        }
+    }
+
+    public function updateEducation(Request $request)
+    {
+        $request->validate([
+            'elementarySchool' => 'required|string|max:50',
+            'juniorHighSchool' => 'nullable|string|max:50',
+            'seniorHighSchool' => 'nullable|string|max:50',
+            'collegeS1' => 'nullable|string|max:50',
+            'majorS1' => 'nullable|string|max:50',
+            'collegeS2' => 'nullable|string|max:50',
+            'majorS2' => 'nullable|string|max:50',
+            'collegeS3' => 'nullable|string|max:50',
+            'majorS3' => 'nullable|string|max:50',
+        ]);
+
+        $education = Educations::where('user_id', auth()->id())->first();
+
+        $data = [
+            'user_id' => auth()->user()->id,
+            'elementarySchool' => $request->input('elementarySchool'),
+            'juniorHighSchool' => $request->input('juniorHighSchool'),
+            'seniorHighSchool' => $request->input('seniorHighSchool'),
+            'collegeS1' => $request->input('collegeS1'),
+            'majorS1' => $request->input('majorS1'),
+            'collegeS2' => $request->input('collegeS2'),
+            'majorS2' => $request->input('majorS2'),
+            'collegeS3' => $request->input('collegeS3'),
+            'majorS3' => $request->input('majorS3'),
+        ];
+        
+        $education->update($data);
+
+        return redirect()->route('biodata')->with('success', 'Data pendidikan berhasil diperbarui!');
+    }
+
+
+    public function indexReligion(){
+        $religion = Religion::where('user_id', auth()->id())->first();
+        if (!$religion) {
+            $religion = new Religion(); // Membuat objek baru jika data tidak ditemukan
+        }
+        return view('user.biodata', compact('religion'));
+    }
+    
+    public function storeReligion(Request $request){
+        $request->validate([
+            'quranMemory' => 'required|string|max:50',
+            'level' => 'required|string|max:50',
+            'answer1' => 'required|string',
+            'answer2' => 'required|string',
+            'answer3' => 'required|string',
+            'answer4' => 'required|string',
+            'answer5' => 'required|string',
+            'answer6' => 'required|string',
+        ], [
+            'quranMemory.required' => 'Hafalan quran harus diisi.',
+            'level.required' => 'Bacaan quran harus diisi.',
+            'answer1.required' => 'Jawaban pertanyaan 1 harus diisi.',
+            'answer2.required' => 'Jawaban pertanyaan 2 harus diisi.',
+            'answer3.required' => 'Jawaban pertanyaan 3 harus diisi.',
+            'answer4.required' => 'Jawaban pertanyaan 4 harus diisi.',
+            'answer5.required' => 'Jawaban pertanyaan 5 harus diisi.',
+            'answer6.required' => 'Jawaban pertanyaan 6 harus diisi.',
+        ]);
+    
+        $data = [
+            'user_id' => auth()->user()->id,
+            'quranMemory' => $request->input('quranMemory'),
+            'level' => $request->input('level'),
+            'answer1' => $request->input('answer1'),
+            'answer2' => $request->input('answer2'),
+            'answer3' => $request->input('answer3'),
+            'answer4' => $request->input('answer4'),
+            'answer5' => $request->input('answer5'),
+            'answer6' => $request->input('answer6'),
+        ];
+    
+        $religion = Religion::where('user_id', auth()->id())->first();
+        if ($religion) {
+            $religion->update($data);
+            return redirect()->route('biodata')->with('success', 'Data ibadah berhasil diperbarui!');
+        } else {
+            Religion::create($data);
+            return redirect()->route('biodata')->with('success', 'Data ibadah berhasil disimpan!');
+        }
+    }
+    
+    public function updateReligion(Request $request)
+    {
+        $request->validate([
+            'quranMemory' => 'required|string|max:50',
+            'level' => 'required|string|max:50',
+            'answer1' => 'required|string',
+            'answer2' => 'required|string',
+            'answer3' => 'required|string',
+            'answer4' => 'required|string',
+            'answer5' => 'required|string',
+            'answer6' => 'required|string',
+        ]);
+    
+        $religion = Religion::where('user_id', auth()->id())->first();
+    
+        $data = [
+            'user_id' => auth()->user()->id,
+            'quranMemory' => $request->input('quranMemory'),
+            'level' => $request->input('level'),
+            'answer1' => $request->input('answer1'),
+            'answer2' => $request->input('answer2'),
+            'answer3' => $request->input('answer3'),
+            'answer4' => $request->input('answer4'),
+            'answer5' => $request->input('answer5'),
+            'answer6' => $request->input('answer6'),
+        ];
+        
+        $religion->update($data);
+    
+        return redirect()->route('biodata')->with('success', 'Data ibadah berhasil diperbarui!');
     }
     
 }
