@@ -24,50 +24,50 @@
               <div id="physicalSearch" class="search" style="display: none;">
                 <h2>Kriteria Fisik</h2>
                 <label for="skincolor">Warna Kulit:</label>
-                <select id="skincolor" name="skincolor">
+                <select id="skincolor" name="skincolor" required>
                   <option value="" selected disabled>-- Pilih Warna Kulit --</option>
                   <option value="Putih" >Putih</option>
                   <option value="Putih Kecoklatan" >Putih Kecoklatan</option>
                   <option value="Gelap" >Gelap</option>
                 </select>
                 <label for="haircolor">Warna Rambut:</label>
-                <select id="haircolor" name="haircolor">
+                <select id="haircolor" name="haircolor" required>
                   <option value="" selected disabled>-- Pilih Warna Rambut --</option>
                   <option value="Coklat" >Coklat</option>
                   <option value="Hitam" >Hitam</option>
                   <option value="Pirang" >Pirang</option>
                 </select>
                 <label for="minWeight">Berat Badan (minimal):</label>
-                <input type="text" id="minWeight" placeholder="Masukkan berat badan minimal" name="minWeight" />
+                <input type="text" id="minWeight" placeholder="Masukkan berat badan minimal" name="minWeight" required/>
                 <label for="maxWeight">Berat Badan (maksimal):</label>
-                <input type="text" id="maxWeight" placeholder="Masukkan berat badan maksimal" name="maxWeight" />
+                <input type="text" id="maxWeight" placeholder="Masukkan berat badan maksimal" name="maxWeight" required/>
                 <label for="minHeight">Tinggi Badan (minimal):</label>
-                <input type="text" id="minHeight" placeholder="Masukkan tinggi badan minimal" name="minHeight" />
+                <input type="text" id="minHeight" placeholder="Masukkan tinggi badan minimal" name="minHeight" required/>
                 <label for="maxHeight">Tinggi Badan (maksimal):</label>
-                <input type="text" id="maxHeight" placeholder="Masukkan tinggi badan maksimal" name="maxHeight" />
+                <input type="text" id="maxHeight" placeholder="Masukkan tinggi badan maksimal" name="maxHeight" required/>
               </div>
         
               <div id="nonPhysicalSearch" class="search" style="display:none;">
                 <h2>Kriteria Non-Fisik</h2>
                 <label for="minAge">Umur (minimal):</label>
-                <input type="text" id="minAge" name="minAge" value="0" />
+                <input type="text" id="minAge" placeholder="Masukkan umur minimal" name="minAge" required/>
                 <label for="maxAge">Umur (maksimal):</label>
-                <input type="text" id="maxAge" name="maxAge" value="100" />
+                <input type="text" id="maxAge" placeholder="Masukkan umur maksimal" name="maxAge" required/>
                 <label for="quran">Minimal Hafalan:</label>
-                <input type="text" id="quran" name="minHafalan" value="0" />
+                <input type="text" id="quran" placeholder="Masukkan minimal hafalan" name="minHafalan" required/>
                 <label for="Education">Pendidikan:</label>
-                    <select id="education" name="last_education">
-                      <option value="">-- Pilih Pendidikan Terakhir --</option>
+                    <select id="education" name="last_education" required>
+                      <option value="" selected disabled>-- Pilih Pendidikan Terakhir --</option>
                       <option value="Sarjana">Sarjana</option>
                       <option value="Sekolah Menengah Atas">Sekolah Menengah Atas</option>
                       <option value="Sekolah Menengah Pertama">Sekolah Menengah Pertama</option>
                       <option value="Sekolah Dasar">Sekolah Dasar</option>
                     </select>
                 <label for="location">Domisili:</label>
-                <input type="text" id="location" name="place_date" />
+                <input type="text" id="location" placeholder="Masukkan domisili" name="place_date" required />
                 <label for="maritalStatus">Status:</label>
-                    <select id="maritalStatus" name="married_status">
-                      <option value="">-- Pilih Status --</option>
+                    <select id="maritalStatus" name="married_status" required>
+                      <option value="" selected disabled>-- Pilih Status --</option>
                       <option value="Belum menikah">Belum menikah</option>
                       <option value="Sudah menikah">Sudah menikah</option>
                       <option value="Cerai">Cerai</option>
@@ -78,6 +78,26 @@
           </div>
           <div class="container-result">
             <div id="results" class="card-container">
+              @if(empty($results))
+                @foreach($users as $user)
+                <div class="card">
+                  <div style="margin : 1rem">
+                    <h2>{{ $user->fullname }}</h2>
+                    @php
+                        $birthdate = new DateTime($user->birth_date);
+                        $today = new DateTime('today');
+                        $age = $birthdate->diff($today)->y;
+                    @endphp
+                    <p>Umur: {{ $age }}</p>
+                    <p>Tempat Lahir: {{ $user->place_date }}</p>
+                    <p>Pendidikan: {{ $user->last_education }}</p>
+                    <p>Hafalan: {{ $user->quran }}</p>
+                    <p>Motto: {{ $user->motto }}</p>
+                    <p>Alasan Taaruf: {{ $user->reason }}</p>
+                  </div>
+                </div>
+                @endforeach
+              @endif
               @isset($results)
                 @foreach($results as $result)
                 <div class="card">
