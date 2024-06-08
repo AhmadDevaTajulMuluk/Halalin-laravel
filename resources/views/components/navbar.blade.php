@@ -27,7 +27,7 @@
                 </nav>
                 <a href="#" onclick="toggleProfilePopup()" title="Lihat Profil" class="user-container">
                   <div class="user-image">
-                      <img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" alt="user" style="border-radius: 50%" />
+                      <img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" alt="user" />
                   </div>
                   <div class="user-name-container">
                     @if($profile && $profile->fullname)
