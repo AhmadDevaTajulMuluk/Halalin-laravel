@@ -17,6 +17,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 
+Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+
 Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
 
 Route::get('/chat', [ChatController::class, 'index'])->name('chat');

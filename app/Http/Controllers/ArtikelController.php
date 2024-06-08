@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArtikelController extends Controller
 {
@@ -13,7 +15,8 @@ class ArtikelController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        return view('user.artikel.artikel', compact('profile'));
+        $articles = Article::all();
+        return view('user.artikel.artikel', compact('profile'), compact('articles'));
     }
 
     public function render()
@@ -21,9 +24,6 @@ class ArtikelController extends Controller
         $profile = Profile::where('user_id', auth()->id())->first();
         return view('components.navbar', compact('profile'));
     }
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -44,9 +44,13 @@ class ArtikelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // $article = Article::findOrFail($id);
+        $profile = Profile::where('user_id', auth()->id())->first();
+        $article = DB::table('articles')->where('article_id', $id)->first();
+
+        return view('user.artikel.content', compact('article'), compact('profile'));
     }
 
     /**
