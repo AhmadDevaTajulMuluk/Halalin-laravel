@@ -85,12 +85,13 @@
                 @foreach($users as $user)
                 <div class="card">
                   <div style="margin : 1rem">
-                    <h2>{{ $user->fullname }}</h2>
+                    <h2>{{ $user->username }}</h2>
                     @php
                         $birthdate = new DateTime($user->birth_date);
                         $today = new DateTime('today');
                         $age = $birthdate->diff($today)->y;
                     @endphp
+                    <p>Nama Panjang: {{ $user->fullname }}</p>
                     <p>Umur: {{ $age }}</p>
                     <p>Tempat Lahir: {{ $user->place_date }}</p>
                     <p>Pendidikan: {{ $user->last_education }}</p>

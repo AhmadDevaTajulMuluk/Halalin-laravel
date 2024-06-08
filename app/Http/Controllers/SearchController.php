@@ -19,6 +19,31 @@ class SearchController extends Controller
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $users = User::where('id', '!=', auth()->id())->get();
+        foreach ($users as $user) {
+            $selectedProfile = Profile::where('user_id', $user->id)->first();
+            $education = Educations::where('user_id', $user->id)->first();
+            $religion = Religion::where('user_id', $user->id)->first();
+            $selfApps = SelfApp::where('user_id', $user->id)->first();
+            
+            if ($selectedProfile) {
+                $user->fullname = $selectedProfile->fullname ?? null;
+                $user->birth_date = $selectedProfile->birth_date ?? null;
+                $user->place_date = $selectedProfile->place_date ?? null;
+            }
+
+            if ($education) {
+                $user->last_education = $education->last_education ?? null;
+            }
+
+            if ($religion) {
+                $user->quran = $religion->quranMemory ?? null;
+            }
+
+            if ($selfApps) {
+                $user->motto = $selfApps->motto ?? null;
+                $user->reason = $selfApps->taarufReason ?? null;
+            }
+        }
         return view('user.matching.search', compact('users'), compact('profile'));
     }
     public function searchPartner(Request $request)
