@@ -396,6 +396,7 @@ class BiodataController extends Controller
 
     public function storeEducation(Request $request){
         $request->validate([
+            'last_education' => 'required|string|max:50',
             'elementarySchool' => 'required|string|max:50',
             'juniorHighSchool' => 'nullable|string|max:50',
             'seniorHighSchool' => 'nullable|string|max:50',
@@ -411,6 +412,7 @@ class BiodataController extends Controller
 
         $data = [
             'user_id' => auth()->user()->id,
+            'last_education' => $request->input('last_education'),
             'elementarySchool' => $request->input('elementarySchool'),
             'juniorHighSchool' => $request->input('juniorHighSchool'),
             'seniorHighSchool' => $request->input('seniorHighSchool'),
@@ -435,6 +437,7 @@ class BiodataController extends Controller
     public function updateEducation(Request $request)
     {
         $request->validate([
+            'last_education' => 'required|string|max:50',
             'elementarySchool' => 'required|string|max:50',
             'juniorHighSchool' => 'nullable|string|max:50',
             'seniorHighSchool' => 'nullable|string|max:50',
@@ -450,6 +453,7 @@ class BiodataController extends Controller
 
         $data = [
             'user_id' => auth()->user()->id,
+            'last_education' => $request->input('last_education'),
             'elementarySchool' => $request->input('elementarySchool'),
             'juniorHighSchool' => $request->input('juniorHighSchool'),
             'seniorHighSchool' => $request->input('seniorHighSchool'),

@@ -125,7 +125,7 @@
 										<option value="" disabled selected {{ !$profile ? 'selected' : '' }}>--- Pilih Status Anda ---</option>
 										<option value="Sudah menikah" {{ old('married_status', $profile ? $profile->married_status : '') == 'Sudah menikah' ? 'selected' : '' }}>Sudah Menikah</option>
 										<option value="Belum menikah" {{ old('married_status', $profile ? $profile->married_status : '') == 'Belum menikah' ? 'selected' : '' }}>Belum Menikah</option>
-										<option value="Janda" {{ old('married_status', $profile ? $profile->married_status : '') == 'Janda' ? 'selected' : '' }}>Cerai</option>
+										<option value="Cerai" {{ old('married_status', $profile ? $profile->married_status : '') == 'Cerai' ? 'selected' : '' }}>Cerai</option>
 									</select>
 								</div>
 								<!-- Input Suku -->
@@ -242,6 +242,16 @@
 								@method('PUT')
 							@endif
 							<div class="field-bio">
+								<p>Pendidikan Terakhir</p>
+									<select class="pendidikanterakhir" name="last_education" required>
+										<option value="" disabled selected {{ !$education ? 'selected' : '' }}>--- Pilih Pendidikan Terakhir Anda ---</option>
+										<option value="SD" {{ old('last_education', $education ? $education->last_education : '') == 'SD' ? 'selected' : '' }}>SD</option>
+										<option value="SMP sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMP' ? 'selected' : '' }}>SMP sederajat</option>
+										<option value="SMA sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMA' ? 'selected' : '' }}>SMA sederajat</option>
+										<option value="Sarjana" {{ old('last_education', $education ? $education->last_education : '') == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
+										<option value="Magister" {{ old('last_education', $education ? $education->last_education : '') == 'Magister' ? 'selected' : '' }}>Magister</option>
+										<option value="Doktor" {{ old('last_education', $education ? $education->last_education : '') == 'Doktor' ? 'selected' : '' }}>Doktor</option>
+									</select>
 								<div class="sekolahdasar">
 									<p>Sekolah Dasar (SD)</p>
 									<input type="text" class="sekolahdasar-input" placeholder="Dimana anda bersekolah dasar" name="elementarySchool" value="{{ old('elementarySchool', $education ? $education->elementarySchool : '') }}" required/>
@@ -364,9 +374,6 @@
 										<option value="Hitam" {{ old('haircolor', $physicalApp ? $physicalApp->haircolor : '') == 'Hitam' ? 'selected' : '' }}>Hitam</option>
 										<option value="Coklat" {{ old('haircolor', $physicalApp ? $physicalApp->haircolor : '') == 'Coklat' ? 'selected' : '' }}>Coklat</option>
 										<option value="Pirang" {{ old('haircolor', $physicalApp ? $physicalApp->haircolor : '') == 'Pirang' ? 'selected' : '' }}>Pirang</option>
-										<option value="Coklat Sawo Matang" {{ old('haircolor', $physicalApp ? $physicalApp->haircolor : '') == 'Coklat Sawo Matang' ? 'selected' : '' }}>Coklat Sawo Matang</option>
-										<option value="Coklat Kehitaman" {{ old('haircolor', $physicalApp ? $physicalApp->haircolor : '') == 'Coklat Kehitaman' ? 'selected' : '' }}>Coklat Kehitaman</option>
-										<option value="Gelap" {{ old('haircolor', $physicalApp ? $physicalApp->haircolor : '') == 'Gelap' ? 'selected' : '' }}>Gelap</option>
 									</select>
 								</div>
 								<div class="status">
