@@ -31,13 +31,13 @@ class SearchController extends Controller
             $results = $this->searchByNonPhysicalCriteria($request);
         }
         foreach ($results as $result) {
-            $profile = Profile::where('user_id', $result->user_id)->first();
+            $selectedProfile = Profile::where('user_id', $result->user_id)->first();
             $education = Educations::where('user_id', $result->user_id)->first();
             $religion = Religion::where('user_id', $result->user_id)->first();
             $selfApps = SelfApp::where('user_id', $result->user_id)->first();
-            $result->fullname = $profile->fullname;
-            $result->birth_date = $profile->birth_date;
-            $result->place_date = $profile->place_date;
+            $result->fullname = $selectedProfile->fullname;
+            $result->birth_date = $selectedProfile->birth_date;
+            $result->place_date = $selectedProfile->place_date;
             $result->last_education = $education->last_education;
             $result->quran = $religion->quranMemory;
             $result->motto = $selfApps->motto;
