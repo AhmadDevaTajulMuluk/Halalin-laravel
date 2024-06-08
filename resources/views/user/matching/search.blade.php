@@ -19,7 +19,7 @@
                 <option value="nonPhysical">Non-Fisik</option>
               </select>
         
-              <div id="physicalSearch" class="search">
+              <div id="physicalSearch" class="search" style="display: block;">
                 <h2>Kriteria Fisik</h2>
                 <label for="skincolor">Warna Kulit:</label>
                 <select id="skincolor" name="skincolor">
@@ -76,7 +76,6 @@
           </div>
           <div class="container-result">
             <div id="results" class="card-container">
-              
               @isset($results)
               @foreach($results as $result)
               <div class="card">
@@ -102,7 +101,23 @@
           </div>
     </main>
     <x-footer></x-footer>
-    <script type="text/javascript" src="../../assets/js/search.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const searchType = document.getElementById('searchType');
+        const physicalSearch = document.getElementById('physicalSearch');
+        const nonPhysicalSearch = document.getElementById('nonPhysicalSearch');
+        
+        searchType.addEventListener('change', function() {
+          if (this.value === 'physical') {
+            physicalSearch.style.display = 'block';
+            nonPhysicalSearch.style.display = 'none';
+          } else if (this.value === 'nonPhysical') {
+            physicalSearch.style.display = 'none';
+            nonPhysicalSearch.style.display = 'block';
+          }
+        });
+      });
+    </script>
     <script type="text/javascript" src="../../assets/js/script.js"></script>
 </body>
 </html>
