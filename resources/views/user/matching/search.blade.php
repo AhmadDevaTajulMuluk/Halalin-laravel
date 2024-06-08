@@ -11,7 +11,7 @@
     <main>
         <div class="container-search">
             <h1 id="h1-search">Mencari Kriteria Pasangan</h1>
-            <form action="{{ route('search.partners') }}" method="POST">
+            <form action="{{ route('search.partner') }}" method="POST">
               @csrf
               <label for="searchType">Pilih Tipe Pencarian:</label>
               <select id="searchType" name="searchType">
