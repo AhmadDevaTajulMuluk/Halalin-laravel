@@ -25,14 +25,49 @@
               </article>
             @endforeach
           </div>
-        <div id="navigator">
-          <a href="#" class="selected">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">></a>
-        </div>
+          <div id="navigator">
+            <style>
+              .pagination {
+                display: flex;
+                padding: 0;
+                flex-direction: row;
+                justify-content: center;
+              }
+              .pagination ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+              }
+              .pagination li {
+                display: inline-block;
+                margin-right: 5px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+              }
+              .pagination li a {
+                color: #333;
+                text-decoration: none;
+                padding: 5px 10px;
+                border: none;
+                border-radius: 3px;
+              }
+              .pagination li.active {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+                padding: 2px 10px;
+              }
+              .pagination li.disabled {
+                color: #ccc;
+                pointer-events: none;
+                padding: 2px 10px;
+              }
+              .d-sm-none {
+                display: none;
+              }
+            </style>
+            {{ $articles->links() }}
+          </div>
       </div>
     </main>
     <x-footer></x-footer>

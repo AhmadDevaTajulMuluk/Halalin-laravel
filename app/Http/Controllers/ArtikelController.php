@@ -15,7 +15,7 @@ class ArtikelController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        $articles = Article::all();
+        $articles = Article::paginate(5); // Menampilkan 10 artikel per halaman
         return view('user.artikel.artikel', compact('profile'), compact('articles'));
     }
 
