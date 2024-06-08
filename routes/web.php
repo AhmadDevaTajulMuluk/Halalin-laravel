@@ -43,7 +43,7 @@ Route::post('/create',[SessionController::class,'create'])->name('create');
 
 Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
 Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
-Route::get('/admin/login', [adminController::class, 'login'])->name('login');
+Route::get('/admin/login', [adminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [adminController::class, 'login_action'])->name('login.action');
 Route::get('/admin/logout', [adminController::class, 'logout'])->name('logout');
 Route::get('/admin/dashboard-admin', [AdminController::class, 'dashboard'])->middleware(AuthenticateAdmin::class)->name('admin.dashboard-admin');

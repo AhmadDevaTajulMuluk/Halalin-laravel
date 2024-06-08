@@ -93,156 +93,46 @@
 			<article id="comments-halalin" class="about-halalin-container container-effect">
 				<h2 id="title-dasboard" style="margin: 0; font-size: 42px">Apa Kata Mereka</h2>
 				<div class="items-container">
-					<div class="item-box" id="testimoni">
-						<img src="../assets/images/user.png" alt="group" />
-						<div class="testimonial">
-							<p class="testimonial-author">Dadang Injeksi</p>
-							<p class="testimonial-content">
-								"Alhamdulillah berkat website ini saya mendapat pasangan hidup yang cocok"
-							</p>
+					@if($testimoni->isEmpty())
+						<div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+							<p>Belum ada testimoni yang tersedia.</p>
 						</div>
-					</div>
-					<div class="item-box" id="testimoni">
-						<img src="../assets/images/user.png" alt="group" />
-						<div class="testimonial">
-							<p class="testimonial-author">Toha Mukena</p>
-							<p class="testimonial-content">"Website pencari jodoh halal terbaik !"</p>
-						</div>
-					</div>
-					<div class="item-box" id="testimoni">
-						<img src="../assets/images/user.png" alt="group" />
-						<div class="testimonial">
-							<p class="testimonial-author">Sutoyo Kabel</p>
-							<p class="testimonial-content">"Panjang umur kebaikan, ilmu padi capt"</p>
-						</div>
-					</div>
+					@else
+						@foreach($testimoni as $testimonial)
+							<div class="item-box" id="testimoni">
+								<img src="{{ $testimonial->image ? asset('image/' . $testimonial->image) : asset('assets/images/user.png') }}" alt="group" />
+								<div class="testimonial">
+									<p class="testimonial-author">{{ $testimonial->author }}</p>
+									<p class="testimonial-content">"{{ $testimonial->content }}"</p>
+								</div>
+							</div>
+						@endforeach
+					@endif
 				</div>
 			</article>
-			<article
-				id="articles-halalin"
-				class="about-halalin-container container-effect"
-				style="margin-bottom: 2rem">
+			<article id="articles-halalin" class="about-halalin-container container-effect" style="margin-bottom: 2rem">
 				<h2 id="title-dasboard" style="margin: 0; font-size: 42px">Artikel</h2>
 				<div class="items-container">
-					<div class="item-box" id="artikelbox">
-						<article>
-							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
-							<div class="article-text">
-								<h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-								<p>
-									Pernikahan dalam Islam memiliki peran yang sangat penting dalam membentuk
-									kehidupan berkeluarga yang harmonis dan memberikan berbagai manfaat bagi individu,
-									keluarga, dan masyarakat secara keseluruhan. Dalam ajaran Islam, pernikahan
-									dianggap sebagai salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-									keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam penjelasan berikut,
-									akan diuraikan secara rinci tiga manfaat pernikahan dalam Islam yang meliputi
-									membentuk keluarga yang stabil, mendapatkan keberkahan, dan melengkapi diri serta
-									mencapai keseimbangan.
-								</p>
+					@if($articles->isEmpty())
+						<div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+							<p>Belum ada artikel yang tersedia.</p>
+						</div>
+					@else
+						@foreach($articles as $article)
+							<div class="item-box" id="artikelbox">
+								<article>
+									<img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
+									<div class="article-text">
+										<h3>{{ $article->title }}</h3>
+										<p>{{ Str::limit($article->content, 150) }}</p>
+										<a href="{{ route('artikel.show', $article->article_id) }}" class="button">Selengkapnya</a>
+									</div>
+								</article>
 							</div>
-						</article>
-					</div>
-					<div class="item-box" id="artikelbox">
-						<article>
-							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
-							<div class="article-text">
-								<h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-								<p>
-									Pernikahan dalam Islam memiliki peran yang sangat penting dalam membentuk
-									kehidupan berkeluarga yang harmonis dan memberikan berbagai manfaat bagi individu,
-									keluarga, dan masyarakat secara keseluruhan. Dalam ajaran Islam, pernikahan
-									dianggap sebagai salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-									keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam penjelasan berikut,
-									akan diuraikan secara rinci tiga manfaat pernikahan dalam Islam yang meliputi
-									membentuk keluarga yang stabil, mendapatkan keberkahan, dan melengkapi diri serta
-									mencapai keseimbangan.
-								</p>
-							</div>
-						</article>
-					</div>
-					<div class="item-box" id="artikelbox">
-						<article>
-							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
-							<div class="article-text">
-								<h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-								<p>
-									Pernikahan dalam Islam memiliki peran yang sangat penting dalam membentuk
-									kehidupan berkeluarga yang harmonis dan memberikan berbagai manfaat bagi individu,
-									keluarga, dan masyarakat secara keseluruhan. Dalam ajaran Islam, pernikahan
-									dianggap sebagai salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-									keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam penjelasan berikut,
-									akan diuraikan secara rinci tiga manfaat pernikahan dalam Islam yang meliputi
-									membentuk keluarga yang stabil, mendapatkan keberkahan, dan melengkapi diri serta
-									mencapai keseimbangan.
-								</p>
-							</div>
-						</article>
-					</div>
-					<div class="item-box" id="artikelbox">
-						<article>
-							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
-							<div class="article-text">
-								<h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-								<p>
-									Pernikahan dalam Islam memiliki peran yang sangat penting dalam membentuk
-									kehidupan berkeluarga yang harmonis dan memberikan berbagai manfaat bagi individu,
-									keluarga, dan masyarakat secara keseluruhan. Dalam ajaran Islam, pernikahan
-									dianggap sebagai salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-									keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam penjelasan berikut,
-									akan diuraikan secara rinci tiga manfaat pernikahan dalam Islam yang meliputi
-									membentuk keluarga yang stabil, mendapatkan keberkahan, dan melengkapi diri serta
-									mencapai keseimbangan.
-								</p>
-							</div>
-						</article>
-					</div>
-					<div class="item-box" id="artikelbox">
-						<article>
-							<img src="../assets/images/gambar-artikel1.png" alt="Artikel" />
-							<div class="article-text">
-								<h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-								<p>
-									Pernikahan dalam Islam memiliki peran yang sangat penting dalam membentuk
-									kehidupan berkeluarga yang harmonis dan memberikan berbagai manfaat bagi individu,
-									keluarga, dan masyarakat secara keseluruhan. Dalam ajaran Islam, pernikahan
-									dianggap sebagai salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-									keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam penjelasan berikut,
-									akan diuraikan secara rinci tiga manfaat pernikahan dalam Islam yang meliputi
-									membentuk keluarga yang stabil, mendapatkan keberkahan, dan melengkapi diri serta
-									mencapai keseimbangan.
-								</p>
-							</div>
-						</article>
-					</div>
-					<div class="item-box" id="artikelbox">
-						<article>
-							<img src="../assets/images/manfaatpernikahan.jpg" alt="Artikel" />
-							<div class="article-text">
-								<h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-								<p>
-									Pernikahan dalam Islam memiliki peran yang sangat penting dalam membentuk
-									kehidupan berkeluarga yang harmonis dan memberikan berbagai manfaat bagi individu,
-									keluarga, dan masyarakat secara keseluruhan. Dalam ajaran Islam, pernikahan
-									dianggap sebagai salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-									keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam penjelasan berikut,
-									akan diuraikan secara rinci tiga manfaat pernikahan dalam Islam yang meliputi
-									membentuk keluarga yang stabil, mendapatkan keberkahan, dan melengkapi diri serta
-									mencapai keseimbangan.
-								</p>
-							</div>
-						</article>
-					</div>
+						@endforeach
+					@endif
 				</div>
-				<a
-					href="/artikel"
-					style="
-						font-size: 16px;
-						font-weight: 400;
-						margin-top: 10px;
-						text-decoration: none;
-						color: #4b4b4b;
-						margin: 0;
-					">
+				<a href="{{ route('artikel') }}" style="font-size: 16px; font-weight: 400; margin-top: 10px; text-decoration: none; color: #4b4b4b; margin: 0;">
 					Lebih Banyak..
 				</a>
 			</article>

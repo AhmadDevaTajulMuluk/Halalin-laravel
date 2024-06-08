@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\Profile;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class TestimoniController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $profile = Profile::where('user_id', auth()->id())->first();
-        $articles = Article::latest()->take(5)->get();
         $testimoni = Testimoni::all();
-        return view('user.dashboard', compact('profile', 'articles', 'testimoni'));
+        return view('user.dashboard', compact('testimoni'));
     }
-    public function render()
-    {
-        $profile = Profile::where('user_id', auth()->id())->first();
-        return view('components.navbar', compact('profile'));
-    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -30,7 +30,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->username),
         ]);
         $admin->save();
-        return redirect()->route('login')->with('Success', 'Registrasi Berhasil, Silahkan Login!');
+        return redirect()->route('admin.login')->with('Success', 'Registrasi Berhasil, Silahkan Login!');
     }
 
     public function login()
@@ -60,7 +60,7 @@ class AdminController extends Controller
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard-admin')->with('success', 'Berhasil Login');
         } else {
-            return redirect()->route('login')->with('error', 'Username atau Password yang dimasukkan tidak valid');
+            return redirect()->route('admin.login')->with('error', 'Username atau Password yang dimasukkan tidak valid');
         }
     }
 
@@ -74,7 +74,7 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 }
 
