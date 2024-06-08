@@ -5,6 +5,7 @@ use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelatihanController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TaarufController;
 use Illuminate\Support\Facades\Route;
@@ -69,11 +70,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/biodata/religionstat', [BiodataController::class, 'indexReligion'])->name('biodata.religion');
     Route::post('/biodata/religionstat', [BiodataController::class, 'storeReligion'])->name('religion.post');
     Route::put('/biodata/religionstat', [BiodataController::class, 'updateReligion'])->name('religion.update');
+
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::post('/search/partner', [SearchController::class, 'searchPartner'])->name('search.partner');
 });
 
-Route::get('/search', function () {
-    return view('user.matching.search');
-});
+// Route::get('/search', function () {
+//     return view('user.matching.search');
+// });
 
 Route::get('/ustadz', function () {
     return view('ustadz.dashboard');
