@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biodata\Educations;
+use App\Models\Biodata\PhysicalApp;
+use App\Models\Biodata\Religion;
+use App\Models\Biodata\SelfApp;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -20,14 +24,26 @@ class SearchController extends Controller
     public function searchPartner(Request $request)
     {
         $searchType = $request->input('searchType');
-
+        $profile = Profile::where('user_id', auth()->id())->first();
         if ($searchType == 'physical') {
             $results = $this->searchByPhysicalCriteria($request);
         } elseif ($searchType == 'nonPhysical') {
             $results = $this->searchByNonPhysicalCriteria($request);
         }
-
-        return view('user.matching.search', compact('results'));
+        foreach ($results as $result) {
+            $profile = Profile::where('user_id', $result->user_id)->first();
+            $education = Educations::where('user_id', $result->user_id)->first();
+            $religion = Religion::where('user_id', $result->user_id)->first();
+            $selfApps = SelfApp::where('user_id', $result->user_id)->first();
+            $result->fullname = $profile->fullname;
+            $result->birth_date = $profile->birth_date;
+            $result->place_date = $profile->place_date;
+            $result->last_education = $education->last_education;
+            $result->quran = $religion->quranMemory;
+            $result->motto = $selfApps->motto;
+            $result->reason = $selfApps->taarufReason;
+        }
+        return view('user.matching.search', compact('results'), compact('profile'));
     }
     private function searchByPhysicalCriteria(Request $request)
     {
@@ -39,7 +55,7 @@ class SearchController extends Controller
             'minHeight' => 'required|numeric',
             'maxHeight' => 'required|numeric',
         ]);
-        $results = User::where('skincolor', $request->input('skincolor'))
+        $results = PhysicalApp::where('skincolor', $request->input('skincolor'))
                         ->where('haircolor', $request->input('haircolor'))
                         ->whereBetween('weight', [$request->input('minWeight'), $request->input('maxWeight')])
                         ->whereBetween('height', [$request->input('minHeight'), $request->input('maxHeight')])

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body id="page-search">
+    {{-- @dd($profile) --}}
     <x-navbar :profile="$profile"></x-navbar>
     <main>
         <div class="container-search">
@@ -79,20 +80,20 @@
               @isset($results)
               @foreach($results as $result)
               <div class="card">
-                  <h2>{{ $result->username }}</h2>
-                  
+                <div style="margin : 1rem">
+                  <h2>{{ $result->fullname }}</h2>
                   @php
-                      $birthdate = new DateTime($result->profile->birth_date);
+                      $birthdate = new DateTime($result->birth_date);
                       $today = new DateTime('today');
                       $age = $birthdate->diff($today)->y;
                   @endphp
-                  <h3>{{ $result->username }}</h3>
                   <p>Umur: {{ $age }}</p>
-                  <p>Tempat Lahir: {{ $result->profile->place_date }}</p>
-                  <p>Pendidikan: {{ $result->education->last_education }}</p>
-                  <p>Hafalan: {{ $result->profile->quran }}</p>
-                  <p>Motto: {{ $result->profile->motto }}</p>
-                  <p>Alasan Taaruf: {{ $result->profile->reason }}</p>
+                  <p>Tempat Lahir: {{ $result->place_date }}</p>
+                  <p>Pendidikan: {{ $result->last_education }}</p>
+                  <p>Hafalan: {{ $result->quran }}</p>
+                  <p>Motto: {{ $result->motto }}</p>
+                  <p>Alasan Taaruf: {{ $result->reason }}</p>
+                </div>
               </div>
               @endforeach
               @endisset
