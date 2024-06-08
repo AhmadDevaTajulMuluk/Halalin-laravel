@@ -13,17 +13,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-<<<<<<< HEAD
-=======
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
-
-Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
-
-Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
-
->>>>>>> c0e992f434b2f7aa6ea48574f9d3026b0b0d7d05
 Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 
 Route::get('/sedang-taaruf', [TaarufController::class, 'index'])->name('chat');
@@ -55,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+    Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
     Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
     Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
     Route::post('/biodata', [BiodataController::class,'storeProfile'])->name('profile.post');
