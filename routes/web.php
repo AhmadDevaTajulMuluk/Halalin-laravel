@@ -8,6 +8,8 @@ use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TaarufController;
+use App\Http\Controllers\adminController;
+use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +40,13 @@ Route::post('/login',[SessionController::class,'login'])->name('login');
 Route::get('/logout',[SessionController::class,'logout'])->name('logout');
 Route::get('/register',[SessionController::class,'register'])->name('register');
 Route::post('/create',[SessionController::class,'create'])->name('create');
+
+Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
+Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
+Route::get('/admin/login', [adminController::class, 'login'])->name('login');
+Route::post('/admin/login', [adminController::class, 'login_action'])->name('login.action');
+Route::get('/admin/logout', [adminController::class, 'logout'])->name('logout');
+Route::get('/admin/dashboard-admin', [AdminController::class, 'dashboard'])->middleware(AuthenticateAdmin::class)->name('admin.dashboard-admin');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
