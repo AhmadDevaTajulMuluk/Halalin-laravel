@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body id="page-search">
-    <x-navbar></x-navbar>
+    <x-navbar :profile="$profile"></x-navbar>
     <main>
         <div class="container-search">
             <h1 id="h1-search">Mencari Kriteria Pasangan</h1>
-
             <form action="{{ route('search.partners') }}" method="POST">
               @csrf
               <label for="searchType">Pilih Tipe Pencarian:</label>

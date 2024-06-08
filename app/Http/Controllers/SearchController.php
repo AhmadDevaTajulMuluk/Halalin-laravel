@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -12,8 +13,9 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
+        $profile = Profile::where('user_id', auth()->id())->first();
         $users = User::where('id', '!=', auth()->id())->get();
-        return view('user.matching.search', compact('users'));
+        return view('user.matching.search', compact('users'), compact('profile'));
     }
     public function searchPartner(Request $request)
     {
