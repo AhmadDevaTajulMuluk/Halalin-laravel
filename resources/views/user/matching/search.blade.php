@@ -25,9 +25,12 @@
                 <label for="skincolor">Warna Kulit:</label>
                 <select id="skincolor" name="skincolor">
                   <option value="" selected disabled>-- Pilih Warna Kulit --</option>
-                  <option value="Putih">Putih</option>
-                  <option value="Putih Kecoklatan">Putih Kecoklatan</option>
-                  <option value="Gelap">Gelap</option>
+                  <option value="Putih" >Putih</option>
+                  <option value="Putih Kemerahan" >Putih Kemerahan</option>
+                  <option value="Putih Kecoklatan" >Putih Kecoklatan</option>
+                  <option value="Coklat Sawo Matang">Coklat Sawo Matang</option>
+                  <option value="Coklat Kehitaman" >Coklat Kehitaman</option>
+                  <option value="Gelap" >Gelap</option>
                 </select>
                 <label for="haircolor">Warna Rambut:</label>
                 <select id="haircolor" name="haircolor">
