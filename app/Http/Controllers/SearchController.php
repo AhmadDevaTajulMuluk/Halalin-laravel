@@ -25,11 +25,18 @@ class SearchController extends Controller
     {
         $searchType = $request->input('searchType');
         $profile = Profile::where('user_id', auth()->id())->first();
-        if ($searchType == 'physical') {
-            $results = $this->searchByPhysicalCriteria($request);
-        } elseif ($searchType == 'nonPhysical') {
-            $results = $this->searchByNonPhysicalCriteria($request);
+
+        if (empty($searchType) || ($request->fails())) {
+            $results = User::where('id', '!=', auth()->id())->get();
+        } else{
+            if ($searchType == 'physical') {
+                $results = $this->searchByPhysicalCriteria($request);
+            } elseif ($searchType == 'nonPhysical') {
+                $results = $this->searchByNonPhysicalCriteria($request);
+            }
         }
+
+        
         foreach ($results as $result) {
             $selectedProfile = Profile::where('user_id', $result->user_id)->first();
             $education = Educations::where('user_id', $result->user_id)->first();
@@ -54,7 +61,19 @@ class SearchController extends Controller
             'maxWeight' => 'required|numeric',
             'minHeight' => 'required|numeric',
             'maxHeight' => 'required|numeric',
+        ],[
+            'skincolor.required' => 'Warna kulit harus diisi',
+            'haircolor.required' => 'Warna rambut harus diisi',
+            'minWeight.required' => 'Berat minimal harus diisi',
+            'maxWeight.required' => 'Berat maksimal harus diisi',
+            'minHeight.required' => 'Tinggi minimal harus diisi',
+            'maxHeight.required' => 'Tinggi maksimal harus diisi',
         ]);
+
+        if ($request->fails()) {
+            return redirect()->back()->withErrors($request->errors());
+        }
+
         $results = PhysicalApp::where('skincolor', $request->input('skincolor'))
                         ->where('haircolor', $request->input('haircolor'))
                         ->whereBetween('weight', [$request->input('minWeight'), $request->input('maxWeight')])
@@ -72,7 +91,19 @@ class SearchController extends Controller
             'last_education' => 'required',
             'married_status' => 'required',
             'place_date' => 'required',
+        ],[
+            'minAge.required' => 'Usia minimal harus diisi',
+            'maxAge.required' => 'Usia maksimal harus diisi',
+            'minHafalan.required' => 'Hafalan minimal harus diisi',
+            'last_education.required' => 'Pendidikan terakhir harus diisi',
+            'married_status.required' => 'Status perkawinan harus diisi',
+            'place_date.required' => 'Tempat lahir harus diisi',
         ]);
+
+        if ($request->fails()) {
+            return redirect()->back()->withErrors($request->errors());
+        }
+
         $results = User::whereBetween('age', [$request->input('minAge'), $request->input('maxAge')])
                         ->where('place_date', $request->input('place_date'))
                         ->where('quranMemory', '>=', $request->input('minHafalan'))
