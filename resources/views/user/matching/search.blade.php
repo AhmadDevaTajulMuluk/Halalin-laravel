@@ -132,19 +132,23 @@
                                         <a href="{{ route('profile.show', ['username' => $user->username]) }}"
                                             style="text-decoration: none; color: inherit;">
                                             <div style="margin : 1rem">
+                                                <div class="card-img">
+                                                <img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" alt="user" />                                                
+                                            </div>
                                                 <h2>{{ $user->username }}</h2>
                                                 @php
                                                     $birthdate = new DateTime($user->birth_date);
                                                     $today = new DateTime('today');
                                                     $age = $birthdate->diff($today)->y;
                                                 @endphp
-                                                <p>Nama Panjang: {{ $user->fullname }}</p>
-                                                <p>Umur: {{ $age }}</p>
-                                                <p>Tempat Lahir: {{ $user->place_date }}</p>
-                                                <p>Pendidikan: {{ $user->last_education }}</p>
-                                                <p>Hafalan: {{ $user->quran }}</p>
-                                                <p>Motto: {{ $user->motto }}</p>
-                                                <p>Alasan Taaruf: {{ $user->reason }}</p>
+                                                <hr>
+                                                <p><b>Nama Lengkap:</b> {{ $user->fullname }}</p>
+                                                <p><b>Umur:</b> {{ $age }}</p>
+                                                <p><b>Tempat Lahir:</b> {{ $user->place_date }}</p>
+                                                <p><b>Pendidikan:</b> {{ $user->last_education }}</p>
+                                                <p><b>Hafalan:</b> {{ $user->quran }}</p>
+                                                <p><b>Motto:</b> {{ $user->motto }}</p>
+                                                <p><b>Alasan Taaruf:</b> {{ $user->reason }}</p>
                                             </div>
                                         </a>
                                     </div>

@@ -1935,12 +1935,43 @@ input[type="text"] {
 .card {
     flex: 0 0 350px; /* Lebar dinamis untuk tiga card dalam satu baris */
     margin: 10px;
+    margin-right: 60px;
     background-color: #f9f9f9;
     border-radius: 20px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
 }
+
+.card img {
+    display: block;
+    justify-content: center;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    margin-bottom: 1px;
+}
+
+.card-img {
+    display: flex;
+    justify-content: center;
+}
+
+/* Garis pemisah */
+.card hr {
+    margin: 20px 0;
+    border: none;
+    height: 2px;
+    background: #ddd;
+}
+
+.card h2 {
+    color: #4b5c98;
+    display: flex;
+    justify-content: center;
+}
+
 .card:hover {
     transform: scale(1.05);
 }
