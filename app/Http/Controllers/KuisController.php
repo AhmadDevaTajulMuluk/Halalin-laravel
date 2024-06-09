@@ -31,9 +31,13 @@ class KuisController extends Controller
     public function store(Request $request)
     {
         $jawabanBenar = 0;
+        $jawabanDiberikan = [];
+        $jawabanDipilih = $request->jawaban;
+
         foreach ($request->jawaban as $jawabanId) {
             $jawaban = Jawaban::find($jawabanId);
-            if ($jawaban->benar) {
+            $jawabanDiberikan[] = $jawaban; // Kumpulkan jawaban ke array
+            if ($jawaban && $jawaban->benar) {
                 $jawabanBenar++;
             }
         }
@@ -43,7 +47,7 @@ class KuisController extends Controller
         $jumlah_benar = $jawabanBenar;
         $jumlah_salah = $totalSoal - $jawabanBenar;
 
-        return view('user.hasil', compact('nilai','jawaban','jumlah_benar','jumlah_salah'));
+        return view('user.hasil', compact('nilai', 'jawabanDiberikan', 'jumlah_benar', 'jumlah_salah', 'jawabanDipilih'));
     }
 
     /**
