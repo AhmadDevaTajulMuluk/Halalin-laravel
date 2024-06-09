@@ -11,15 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id('article_id');
-            $table->string('title', 225);
-            $table->string('writer', 100);
-            $table->text('content');
-            $table->date('publish_date');
-            $table->text('reference');
-            $table->text('article_image');
-            $table->timestamps();
+        Schema::table('articles', function (Blueprint $table) {
+            if (!Schema::hasColumn('articles', 'article_id')) {
+                $table->id('article_id');
+            }
+            if (!Schema::hasColumn('articles', 'title')) {
+                $table->string('title', 225);
+            }
+            if (!Schema::hasColumn('articles', 'writer')) {
+                $table->string('writer', 100);
+            }
+            if (!Schema::hasColumn('articles', 'content')) {
+                $table->text('content');
+            }
+            if (!Schema::hasColumn('articles', 'publish_date')) {
+                $table->date('publish_date');
+            }
+            if (!Schema::hasColumn('articles', 'reference')) {
+                $table->text('reference');
+            }
+            if (!Schema::hasColumn('articles', 'article_image')) {
+                $table->text('article_image');
+            }
+            if (!Schema::hasColumns('articles', ['created_at', 'updated_at'])) {
+                $table->timestamps();
+            }
         });
     }
 

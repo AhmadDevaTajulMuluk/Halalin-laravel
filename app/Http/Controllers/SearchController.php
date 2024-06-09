@@ -17,8 +17,17 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
+        $thisUser = User::where('id', auth()->id())->first();
+        // Jika is_complete pengguna saat ini adalah 0, kembalikan ke halaman sebelumnya dengan pesan error
+        if ($thisUser->is_complete === 0) {
+            return back()->with('error', 'Lengkapi profil Anda terlebih dahulu.');
+        }
         $profile = Profile::where('user_id', auth()->id())->first();
-        $users = User::where('id', '!=', auth()->id())->get();
+        $users = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+                    ->where('users.id', '!=', auth()->id())
+                    ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
+                    ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
+                    ->get();
         foreach ($users as $user) {
             $selectedProfile = Profile::where('user_id', $user->id)->first();
             $education = Educations::where('user_id', $user->id)->first();
@@ -30,15 +39,12 @@ class SearchController extends Controller
                 $user->birth_date = $selectedProfile->birth_date ?? null;
                 $user->place_date = $selectedProfile->place_date ?? null;
             }
-
             if ($education) {
                 $user->last_education = $education->last_education ?? null;
             }
-
             if ($religion) {
                 $user->quran = $religion->quranMemory ?? null;
             }
-
             if ($selfApps) {
                 $user->motto = $selfApps->motto ?? null;
                 $user->reason = $selfApps->taarufReason ?? null;
@@ -51,8 +57,8 @@ class SearchController extends Controller
         $searchType = $request->input('searchType');
         $profile = Profile::where('user_id', auth()->id())->first();
 
-        if (empty($searchType) || ($request->fails())) {
-            $results = User::where('id', '!=', auth()->id())->get();
+        if (empty($searchType)) {
+            return redirect()->route('search');
         } else{
             if ($searchType == 'physical') {
                 $results = $this->searchByPhysicalCriteria($request);
@@ -61,7 +67,6 @@ class SearchController extends Controller
             }
         }
 
-        
         foreach ($results as $result) {
             $selectedProfile = Profile::where('user_id', $result->user_id)->first();
             $education = Educations::where('user_id', $result->user_id)->first();
@@ -75,10 +80,11 @@ class SearchController extends Controller
             $result->motto = $selfApps->motto;
             $result->reason = $selfApps->taarufReason;
         }
-        return view('user.matching.search', compact('results'), compact('profile'));
+        return view('user.matching.search', compact('results', 'profile'));
     }
     private function searchByPhysicalCriteria(Request $request)
     {
+        $profile = Profile::where('user_id', auth()->id())->first();
         $request->validate([
             'skincolor' => 'required',
             'haircolor' => 'required',
@@ -95,15 +101,15 @@ class SearchController extends Controller
             'maxHeight.required' => 'Tinggi maksimal harus diisi',
         ]);
 
-        if ($request->fails()) {
-            return redirect()->back()->withErrors($request->errors());
-        }
-
-        $results = PhysicalApp::where('skincolor', $request->input('skincolor'))
-                        ->where('haircolor', $request->input('haircolor'))
-                        ->whereBetween('weight', [$request->input('minWeight'), $request->input('maxWeight')])
-                        ->whereBetween('height', [$request->input('minHeight'), $request->input('maxHeight')])
-                        ->get();
+        $results = PhysicalApp::join('users', 'physical_apps.user_id', '=', 'users.id')
+                                ->join('profiles', 'physical_apps.user_id', '=', 'profiles.user_id')
+                                ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
+                                ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
+                                ->where('physical_apps.skincolor', $request->input('skincolor'))
+                                ->where('physical_apps.haircolor', $request->input('haircolor'))
+                                ->whereBetween('physical_apps.weight', [$request->input('minWeight'), $request->input('maxWeight')])
+                                ->whereBetween('physical_apps.height', [$request->input('minHeight'), $request->input('maxHeight')])
+                                ->get();
         return $results;
     }
 
@@ -125,15 +131,12 @@ class SearchController extends Controller
             'place_date.required' => 'Tempat lahir harus diisi',
         ]);
 
-        if ($request->fails()) {
-            return redirect()->back()->withErrors($request->errors());
-        }
-
         $results = User::whereBetween('age', [$request->input('minAge'), $request->input('maxAge')])
                         ->where('place_date', $request->input('place_date'))
                         ->where('quranMemory', '>=', $request->input('minHafalan'))
                         ->where('last_education', $request->input('last_education'))
                         ->where('married_status', $request->input('married_status'))
+                        ->where('is_complete', '1')
                         ->get();
         return $results;
     }

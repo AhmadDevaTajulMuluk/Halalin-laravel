@@ -9,7 +9,7 @@ use App\Models\Biodata\Religion;
 use App\Models\Biodata\SelfApp;
 use Illuminate\Http\Request;
 use App\Models\Profile;
-
+use Illuminate\Support\Facades\DB;
 
 class BiodataController extends Controller
 {
@@ -87,9 +87,11 @@ class BiodataController extends Controller
         $profile = Profile::where('user_id', auth()->id())->first();
         if ($profile) {
             $profile->update($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Profil berhasil diperbarui!');
         } else {
             Profile::create($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Profil berhasil disimpan!');
         }
     }
@@ -186,9 +188,11 @@ class BiodataController extends Controller
         $selfApp = SelfApp::where('user_id', auth()->id())->first();
         if ($selfApp) {
             $selfApp->update($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil diperbarui!');
         } else {
             SelfApp::create($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil disimpan!');
         }
     }
@@ -267,9 +271,11 @@ class BiodataController extends Controller
         $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
         if ($physicalApp) {
             $physicalApp->update($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
         } else {
             PhysicalApp::create($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil disimpan!');
         }
     
@@ -347,9 +353,11 @@ class BiodataController extends Controller
         $familyApp = FamilyApp::where('user_id', auth()->id())->first();
         if ($familyApp) {
             $familyApp->update($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran keluarga berhasil diperbarui!');
         } else {
             FamilyApp::create($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran keluarga berhasil disimpan!');
         }
     }
@@ -427,9 +435,11 @@ class BiodataController extends Controller
         $education = Educations::where('user_id', auth()->id())->first();
         if ($education) {
             $education->update($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Data pendidikan berhasil diperbarui!');
         } else {
             Educations::create($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Data pendidikan keluarga berhasil disimpan!');
         }
     }
@@ -515,9 +525,11 @@ class BiodataController extends Controller
         $religion = Religion::where('user_id', auth()->id())->first();
         if ($religion) {
             $religion->update($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Data ibadah berhasil diperbarui!');
         } else {
             Religion::create($data);
+            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Data ibadah berhasil disimpan!');
         }
     }

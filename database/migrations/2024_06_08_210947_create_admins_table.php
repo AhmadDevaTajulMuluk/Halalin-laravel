@@ -11,12 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->timestamps();
+        Schema::table('admins', function (Blueprint $table) {
+            if (!Schema::hasColumn('admins', 'admin_id')) {
+                $table->id();
+            }
+            if (!Schema::hasColumn('admins', 'fullname')) {
+                $table->string('fullname');
+            }
+            if (!Schema::hasColumn('admins', 'username')) {
+                $table->string('username')->unique();
+            }
+            if (!Schema::hasColumn('admins', 'password')) {
+                $table->string('password');
+            }
+            if (!Schema::hasColumns('admins', ['created_at', 'updated_at'])) {
+                $table->timestamps();
+            }
         });
     }
 

@@ -11,6 +11,20 @@
 		<title>Dashboard</title>
 	</head>
 	<body>
+		@if (session('error'))
+			<div id="error-alert" style="display: flex; width: 100%; justify-content: center; transition: 5s ease; z-index: 9999; position: fixed; top: 20;">
+				<div class="alert alert-danger" style=" text-align: center; width: 30%; padding: 40px 0;">
+					{{ session('error') }}
+				</div>
+			</div>
+			<script>
+				// Setelah 3 detik, sembunyikan pesan error
+				setTimeout(function() {
+					var errorAlert = document.getElementById('error-alert');
+					errorAlert.style.transform = 'translateY(-500px)';
+				}, 2000);
+			</script>
+		@endif
 		<div id="next-page-container" onclick="closeTabNavigator('next-page-container')">
 			<div id="next-page">
 				<p>Buat akun untuk melanjutkan</p>
