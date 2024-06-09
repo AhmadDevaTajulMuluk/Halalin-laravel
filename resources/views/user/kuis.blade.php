@@ -22,6 +22,13 @@
                   background-color: #4b5c98;
                   color: #fff 
                 }
+                .number-box {
+                  cursor: pointer;
+                }
+                .number-box.active {
+                  background-color: #4b5c98;
+                  color: #fff;
+                }
               </style>
 		<title>Pelatihan</title>
 	</head>
@@ -57,7 +64,7 @@
 						</div>
 						<div id="number-container">
                             @foreach($soals as $index => $soal)
-                                <div class="number-box">{{ $index + 1 }}</div>
+                                <div class="number-box" data-index="{{ $index }}">{{ $index + 1 }}</div>
                             @endforeach
                         </div>
 					</aside>
@@ -122,42 +129,45 @@
           </script>
 
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
+               document.addEventListener('DOMContentLoaded', function() {
                     const soalElements = document.querySelectorAll('.soal');
+                    const numberBoxElements = document.querySelectorAll('.number-box');
                     let currentSoalIndex = 0;
 
                     function showSoal(index) {
                         soalElements.forEach(function(soalElement, idx) {
-                            if (idx === index) {
-                                soalElement.style.display = 'block';
-                            } else {
-                                soalElement.style.display = 'none';
-                            }
+                            soalElement.style.display = idx === index ? 'block' : 'none';
                         });
 
-                        if (index === 0) {
-                            document.getElementById('back-btn').style.display = 'none';
-                        } else {
-                            document.getElementById('back-btn').style.display = 'inline-block';
-                        }
+                        numberBoxElements.forEach(function(numberBoxElement, idx) {
+                            numberBoxElement.classList.toggle('active', idx === index);
+                        });
 
-                        if (index === soalElements.length - 1) {
-                            document.getElementById('next-btn').style.display = 'none';
-                            document.getElementById('kumpul-btn').style.display = 'inline-block';
-                        } else {
-                            document.getElementById('next-btn').style.display = 'inline-block';
-                            document.getElementById('kumpul-btn').style.display = 'none';
-                        }
+                        document.getElementById('back-btn').style.display = index === 0 ? 'none' : 'inline-block';
+                        document.getElementById('next-btn').style.display = index === soalElements.length - 1 ? 'none' : 'inline-block';
+                        document.getElementById('kumpul-btn').style.display = index === soalElements.length - 1 ? 'inline-block' : 'none';
                     }
 
                     document.getElementById('next-btn').addEventListener('click', function() {
-                        currentSoalIndex++;
-                        showSoal(currentSoalIndex);
+                        if (currentSoalIndex < soalElements.length - 1) {
+                            currentSoalIndex++;
+                            showSoal(currentSoalIndex);
+                        }
                     });
 
                     document.getElementById('back-btn').addEventListener('click', function() {
-                        currentSoalIndex--;
-                        showSoal(currentSoalIndex);
+                        if (currentSoalIndex > 0) {
+                            currentSoalIndex--;
+                            showSoal(currentSoalIndex);
+                        }
+                    });
+
+                    numberBoxElements.forEach(function(numberBoxElement) {
+                        numberBoxElement.addEventListener('click', function() {
+                            const index = parseInt(numberBoxElement.getAttribute('data-index'), 10);
+                            currentSoalIndex = index;
+                            showSoal(currentSoalIndex);
+                        });
                     });
 
                     // Menampilkan soal pertama saat halaman dimuat
