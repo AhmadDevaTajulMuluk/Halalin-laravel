@@ -9,6 +9,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TaarufController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\KuisController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +83,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::post('/search/partner', [SearchController::class, 'searchPartner'])->name('search.partner');
+
+    Route::get('/kuis', [KuisController::class, 'index']);
+    Route::post('/kuis', [KuisController::class, 'store'])->name('kuis.store');
+
+    Route::get('/hasil-kuis', function () {
+        return view('user.hasil');
+    });
 });
 
 // Route::get('/search', function () {

@@ -185,160 +185,160 @@ function login() {
 	window.location.href = "/dashboard";
 }
 
-function selectNumber(element) {
-	var numbers = document.querySelectorAll(".number-box");
-	for (var i = 0; i < numbers.length; i++) {
-		numbers[i].classList.remove("selected");
-	}
-	element.classList.add("selected");
-}
+// function selectNumber(element) {
+// 	var numbers = document.querySelectorAll(".number-box");
+// 	for (var i = 0; i < numbers.length; i++) {
+// 		numbers[i].classList.remove("selected");
+// 	}
+// 	element.classList.add("selected");
+// }
 
-window.addEventListener("load", function () {
-	var mainContent = document.querySelector("body");
-	mainContent.classList.add("fade-in");
-});
+// window.addEventListener("load", function () {
+// 	var mainContent = document.querySelector("body");
+// 	mainContent.classList.add("fade-in");
+// });
 
-function selectChoice(element) {
-	var choices = document.querySelectorAll(".choice-prefix, .choice-text");
-	for (var i = 0; i < choices.length; i++) {
-		choices[i].classList.remove("clicked");
-	}
+// function selectChoice(element) {
+// 	var choices = document.querySelectorAll(".choice-prefix, .choice-text");
+// 	for (var i = 0; i < choices.length; i++) {
+// 		choices[i].classList.remove("clicked");
+// 	}
 
-	if (element.classList.contains("choice-text")) {
-		var prefixElement = element.parentNode.querySelector(".choice-prefix");
-		prefixElement.classList.add("clicked");
-		selectedAnswer = prefixElement.textContent.trim();
-	} else {
-		element.classList.add("clicked");
-		selectedAnswer = element.textContent.trim();
-	}
-}
+// 	if (element.classList.contains("choice-text")) {
+// 		var prefixElement = element.parentNode.querySelector(".choice-prefix");
+// 		prefixElement.classList.add("clicked");
+// 		selectedAnswer = prefixElement.textContent.trim();
+// 	} else {
+// 		element.classList.add("clicked");
+// 		selectedAnswer = element.textContent.trim();
+// 	}
+// }
 
-const choices = Array.from(document.getElementsByClassName("choice-text"));
+// const choices = Array.from(document.getElementsByClassName("choice-text"));
 
-let soal = [
-	{
-		judul: "Soal 1",
-		isi: "Apa saja syarat ta'aruf",
-		choice1: "Niat yang buruk",
-    choice2: "Dapat Izin dari wali",
-    choice3: "Tidak direstui",
-    choice4: "Sembunyi sembunyi",
-    answer: 1
-	},
-	{
-		judul: "Soal 2",
-		isi: "Apa hikmah dan manfaat dari menjalani proses taaruf yang baik dan benar?",
-		choice1: "Mendapatkan jodoh sesuai dengan syariat islam",
-    choice2: "Punya istri 2",
-    choice3: "Kenalan sama orang baru",
-    choice4: "Tidak ada",
-    answer: 1
-	},
-	{
-		judul: "Soal 3",
-		isi: "Mengapa taaruf dianggap penting dalam Islam?",
-		choice1: "Karena termasuk rukun iman",
-    choice2: "Karena termasuk rukun islam",
-    choice3: "Karena dapat mendapat jodoh dengan cara sesuai syariat",
-    choice4: "Tidak tahu",
-    answer: 2
-	},
-];
+// let soal = [
+// 	{
+// 		judul: "Soal 1",
+// 		isi: "Apa saja syarat ta'aruf",
+// 		choice1: "Niat yang buruk",
+//     choice2: "Dapat Izin dari wali",
+//     choice3: "Tidak direstui",
+//     choice4: "Sembunyi sembunyi",
+//     answer: 1
+// 	},
+// 	{
+// 		judul: "Soal 2",
+// 		isi: "Apa hikmah dan manfaat dari menjalani proses taaruf yang baik dan benar?",
+// 		choice1: "Mendapatkan jodoh sesuai dengan syariat islam",
+//     choice2: "Punya istri 2",
+//     choice3: "Kenalan sama orang baru",
+//     choice4: "Tidak ada",
+//     answer: 1
+// 	},
+// 	{
+// 		judul: "Soal 3",
+// 		isi: "Mengapa taaruf dianggap penting dalam Islam?",
+// 		choice1: "Karena termasuk rukun iman",
+//     choice2: "Karena termasuk rukun islam",
+//     choice3: "Karena dapat mendapat jodoh dengan cara sesuai syariat",
+//     choice4: "Tidak tahu",
+//     answer: 2
+// 	},
+// ];
 
-function tampilkanSoal(index) {
-	var judulSoalElement = document.getElementById("judul-soal");
-	var isiSoalElement = document.getElementById("isi-soal");
-	var jawabanElement = document.querySelectorAll(".choice-text, .answer-text");
-	var clickedElements = document.querySelectorAll(".choice-prefix.clicked, .choice-text.clicked");
-	clickedElements.forEach(function (element) {
-		element.classList.remove("clicked");
-	});
+// function tampilkanSoal(index) {
+// 	var judulSoalElement = document.getElementById("judul-soal");
+// 	var isiSoalElement = document.getElementById("isi-soal");
+// 	var jawabanElement = document.querySelectorAll(".choice-text, .answer-text");
+// 	var clickedElements = document.querySelectorAll(".choice-prefix.clicked, .choice-text.clicked");
+// 	clickedElements.forEach(function (element) {
+// 		element.classList.remove("clicked");
+// 	});
 
-	judulSoalElement.innerHTML = soal[index].judul;
-	isiSoalElement.innerHTML = soal[index].isi;
+// 	judulSoalElement.innerHTML = soal[index].judul;
+// 	isiSoalElement.innerHTML = soal[index].isi;
 
-	jawabanElement.forEach(function(element, i) {
-    element.textContent = soal[index]["choice" + (i+1)];
-    element.setAttribute("data-number", i+1); 
-});
-}
+// 	jawabanElement.forEach(function(element, i) {
+//     element.textContent = soal[index]["choice" + (i+1)];
+//     element.setAttribute("data-number", i+1); 
+// });
+// }
 
-document.addEventListener("DOMContentLoaded", function () {
-	tampilkanSoal(currentSoal);
-});
+// document.addEventListener("DOMContentLoaded", function () {
+// 	tampilkanSoal(currentSoal);
+// });
 
-var currentSoal = 0;
-function next() {
-	if (currentSoal < soal.length - 1) {
-		currentSoal++;
-		if (currentSoal === 1) {
-			document.querySelector(".prev-button").style.display = "inline";
-		}
-		if (currentSoal === soal.length - 1) {
-			document.querySelector(".next-button").style.display = "none";
-		}
-	}
+// var currentSoal = 0;
+// function next() {
+// 	if (currentSoal < soal.length - 1) {
+// 		currentSoal++;
+// 		if (currentSoal === 1) {
+// 			document.querySelector(".prev-button").style.display = "inline";
+// 		}
+// 		if (currentSoal === soal.length - 1) {
+// 			document.querySelector(".next-button").style.display = "none";
+// 		}
+// 	}
 
-	tampilkanSoal(currentSoal);
+// 	tampilkanSoal(currentSoal);
 
-	selectedAnswer = null;
-}
+// 	selectedAnswer = null;
+// }
 
-function prev() {
-	if (currentSoal > 0) {
-		currentSoal--;
-		if (currentSoal === 0) {
-			document.querySelector(".prev-button").style.display = "none";
-		}
-		document.querySelector(".next-button").style.display = "inline";
-	}
+// function prev() {
+// 	if (currentSoal > 0) {
+// 		currentSoal--;
+// 		if (currentSoal === 0) {
+// 			document.querySelector(".prev-button").style.display = "none";
+// 		}
+// 		document.querySelector(".next-button").style.display = "inline";
+// 	}
 
-	tampilkanSoal(currentSoal);
+// 	tampilkanSoal(currentSoal);
 
-	selectedAnswer = null;
-}
+// 	selectedAnswer = null;
+// }
 
-document.getElementById("kumpul-btn").addEventListener("click", kumpulkan);
-function kumpulkan() {
-	showPopup();
-}
+// document.getElementById("kumpul-btn").addEventListener("click", kumpulkan);
+// function kumpulkan() {
+// 	showPopup();
+// }
 
-function showPopup() {
-	var popup = document.getElementById("konfirmasi-popup");
-	var overlay = document.getElementById("popup-overlay");
+// function showPopup() {
+// 	var popup = document.getElementById("konfirmasi-popup");
+// 	var overlay = document.getElementById("popup-overlay");
 
-	popup.classList.add("show");
-	overlay.classList.add("show");
-}
+// 	popup.classList.add("show");
+// 	overlay.classList.add("show");
+// }
 
-function closePopup() {
-	var popup = document.getElementById("konfirmasi-popup");
-	var overlay = document.getElementById("popup-overlay");
+// function closePopup() {
+// 	var popup = document.getElementById("konfirmasi-popup");
+// 	var overlay = document.getElementById("popup-overlay");
 
-	popup.classList.remove("show");
-	overlay.classList.remove("show");
-}
+// 	popup.classList.remove("show");
+// 	overlay.classList.remove("show");
+// }
 
-document.getElementById("yes-btn").addEventListener("click", function () {
-	showDonePopup();
-});
+// document.getElementById("yes-btn").addEventListener("click", function () {
+// 	showDonePopup();
+// });
 
-function showDonePopup() {
-	var popup = document.getElementById("done-popup");
-	popup.classList.add("show");
-}
+// function showDonePopup() {
+// 	var popup = document.getElementById("done-popup");
+// 	popup.classList.add("show");
+// }
 
-function selesai() {
-	var popups = document.querySelectorAll(".popup");
-	popups.forEach(function (popup) {
-		popup.classList.remove("show");
-	});
+// function selesai() {
+// 	var popups = document.querySelectorAll(".popup");
+// 	popups.forEach(function (popup) {
+// 		popup.classList.remove("show");
+// 	});
 
-	setTimeout(function () {
-		window.location.href = "summary.html";
-	}, 500);
-}
+// 	setTimeout(function () {
+// 		window.location.href = "/hasil-kuis";
+// 	}, 500);
+// }
 
 function kePelatihan() {
 	window.location.href = "../pages/pelatihan.html";
