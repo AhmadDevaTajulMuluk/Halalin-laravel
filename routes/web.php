@@ -42,12 +42,24 @@ Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
 Route::get('/register', [SessionController::class, 'register'])->name('register');
 Route::post('/create', [SessionController::class, 'create'])->name('create');
 
-Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
-Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
+// Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
+// Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
+
+
+// Route::get('/admin/register', [adminController::class, 'register'])->name('register');
+// Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
 Route::get('/admin/login', [adminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [adminController::class, 'login_action'])->name('login.action');
-Route::get('/admin/logout', [adminController::class, 'logout'])->name('logout');
-Route::get('/admin/dashboard-admin', [AdminController::class, 'dashboard'])->middleware(AuthenticateAdmin::class)->name('admin.dashboard-admin');
+
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/admin/dashboard-admin', [AdminController::class, 'dashboard'])->name('admin.dashboard-admin');
+    Route::get('/admin/logout', [adminController::class, 'logout'])->name('admin.logout');
+    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+    Route::get('/admin/edit/{admin_id}', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::post('/admin/update/{admin_id}', [AdminController::class, 'update'])->name('admin.update');
+    Route::post('/admin/delete/{admin_id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
