@@ -72,6 +72,7 @@ class SearchController extends Controller
             $education = Educations::where('user_id', $result->user_id)->first();
             $religion = Religion::where('user_id', $result->user_id)->first();
             $selfApps = SelfApp::where('user_id', $result->user_id)->first();
+            $result->image = $selectedProfile->image;
             $result->fullname = $selectedProfile->fullname;
             $result->birth_date = $selectedProfile->birth_date;
             $result->place_date = $selectedProfile->place_date;

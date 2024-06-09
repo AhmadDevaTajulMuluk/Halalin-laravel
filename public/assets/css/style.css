@@ -2002,6 +2002,10 @@ input[type="text"] {
 }
 
 .card-body {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
 }
 
@@ -2677,3 +2681,43 @@ aside#sidebar-pelatihan {
     border-color: #d6e9c6;
 }
 /*Successs message*/
+
+/*Show Search*/
+.page-show {
+    background: linear-gradient(97deg, #e3e3e3 2.97%, #eddeb7 120.26%);
+}
+
+#show-card {
+    display: flex;
+    flex-flow: column;
+    width: 700px;
+    flex: 0 0 350px; /* Lebar dinamis untuk tiga card dalam satu baris */
+    margin-bottom: 20px;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#show-card h3 {
+    color: #4b5c98;
+}
+
+.show-img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    margin-top: 30px;
+}
+
+.show-img img {
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    width: 200px;
+    object-fit: cover;
+    height: 200px;
+}
+/*Show Search*/

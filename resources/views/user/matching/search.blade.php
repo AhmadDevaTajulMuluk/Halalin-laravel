@@ -131,9 +131,9 @@
                                     <div class="card">
                                         <a href="{{ route('profile.show', ['username' => $user->username]) }}"
                                             style="text-decoration: none; color: inherit;">
-                                            <div style="margin : 1rem">
+                                            <div style="margin : 1rem">                                            
                                                 <div class="card-img">
-                                                <img src="{{ $profile && $profile->image ? asset('image/' . $profile->image) : '/assets/images/defaultpic.png' }}" alt="user" />                                                
+                                                    <img src="{{ $user && $user->image ? asset('image/' . $user->image) : asset('assets/images/defaultpic.png') }}" alt="user" />           
                                             </div>
                                                 <h2>{{ $user->username }}</h2>
                                                 @php
