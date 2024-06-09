@@ -11,6 +11,18 @@
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+            <style>
+                .choice input[type="radio"] {
+                  display: none;
+                }
+                .choice {
+                  cursor: pointer;
+                }
+                .choice.selected .choice-prefix {
+                  background-color: #4b5c98;
+                  color: #fff 
+                }
+              </style>
 		<title>Pelatihan</title>
 	</head>
 	<body id="soal-page">
@@ -84,5 +96,27 @@
 			</div>
 		</main>
 		<script type="text/javascript" src="../../assets/js/script.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              document.querySelectorAll('.choice').forEach(function(choiceElement) {
+                choiceElement.addEventListener('click', function() {
+                  // Unselect other choices in the same container
+                  const choiceContainer = choiceElement.closest('.choice-container');
+                  choiceContainer.querySelectorAll('.choice').forEach(function(el) {
+                    el.classList.remove('selected');
+                  });
+                  
+                  // Select this choice
+                  choiceElement.classList.add('selected');
+                  
+                  // Check the hidden radio input
+                  const radioInput = choiceElement.querySelector('input[type="radio"]');
+                  if (radioInput) {
+                    radioInput.checked = true;
+                  }
+                });
+              });
+            });
+          </script>
 	</body>
 </html>
