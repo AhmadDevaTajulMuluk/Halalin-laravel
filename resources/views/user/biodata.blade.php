@@ -318,7 +318,7 @@
 								</div>
 								<div class="kajianustad">
 									<p>Kajian ustad yang diikuti</p>
-									<input type="text" class="kajianustad-input" placeholder="Dimana anda bersekolah menengah atas" name="answer1" value="{{ old('answer1', $religion ? $religion->answer1 : '') }}" required/>
+									<input type="text" class="kajianustad-input" placeholder="Sebutkan kajian ustad yang anda ikuti" name="answer1" value="{{ old('answer1', $religion ? $religion->answer1 : '') }}" required/>
 								</div>
 								<div class="pertanyaan1">
 									<p>Apa pemahaman Anda tentang akhirat dan persiapannya dalam ajaran Islam?</p>
