@@ -9,19 +9,20 @@ use App\Models\Biodata\Religion;
 use App\Models\Biodata\SelfApp;
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class BiodataController extends Controller
 {
-    
+
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $selfApp = SelfApp::where('user_id', auth()->id())->first();
         $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
-        $familyApp = FamilyApp::where('user_id', auth()->id())->first(); 
-        $education = Educations::where('user_id', auth()->id())->first(); 
-        $religion = Religion::where('user_id', auth()->id())->first();     
+        $familyApp = FamilyApp::where('user_id', auth()->id())->first();
+        $education = Educations::where('user_id', auth()->id())->first();
+        $religion = Religion::where('user_id', auth()->id())->first();
         return view('user.biodata', compact('profile', 'selfApp', 'physicalApp', 'familyApp', 'education', 'religion'));
     }
     public function storeProfile(Request $request)
@@ -77,7 +78,7 @@ class BiodataController extends Controller
         if ($request->hasFile('image')) {
             $image_file = $request->file('image');
             $image_extension = $image_file->extension();
-            $image_name = date('ymdhis').".".$image_extension;
+            $image_name = date('ymdhis') . "." . $image_extension;
             $image_file->move(public_path('image'), $image_name);
             $data['image'] = $image_name;
         } else {
@@ -95,7 +96,7 @@ class BiodataController extends Controller
             return redirect()->route('biodata')->with('success', 'Profil berhasil disimpan!');
         }
     }
-    
+
     public function editProfile(string $id)
     {
         $profile = Profile::where('user_id', auth()->id())->first();
@@ -131,11 +132,11 @@ class BiodataController extends Controller
             'married_status' => $request->input('married_status'),
             'ethnic' => $request->input('ethnic'),
         ];
-        
+
         if ($request->hasFile('image')) {
             $image_file = $request->file('image');
             $image_extension = $image_file->extension();
-            $image_name = date('ymdhis').".".$image_extension;
+            $image_name = date('ymdhis') . "." . $image_extension;
             $image_file->move(public_path('image'), $image_name);
             $data['image'] = $image_name;
         }
@@ -147,7 +148,8 @@ class BiodataController extends Controller
 
 
     // Gambaran Diri Controller
-    public function indexSelfApp(){
+    public function indexSelfApp()
+    {
         $selfApp = SelfApp::where('user_id', auth()->id())->first();
         if (!$selfApp) {
             $selfApp = new SelfApp(); // Membuat objek baru jika data tidak ditemukan
@@ -155,7 +157,8 @@ class BiodataController extends Controller
         return view('user.biodata', compact('selfApp'));
     }
 
-    public function storeSelfApp(Request $request){
+    public function storeSelfApp(Request $request)
+    {
         $request->validate([
             'motto' => 'required|string|max:255',
             'lifegoals' => 'required|string|max:255',
@@ -222,7 +225,7 @@ class BiodataController extends Controller
             'negativeTraits' => $request->input('negativeTraits'),
             'taarufReason' => $request->input('taarufReason'),
         ];
-        
+
         $selfApp->update($data);
 
         return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil diperbarui!');
@@ -230,7 +233,8 @@ class BiodataController extends Controller
 
     // Gambaran Fisik Controller
 
-    public function indexPhysicalApp(){
+    public function indexPhysicalApp()
+    {
         $physicalApp = PhysicalApp::where('user_id', auth()->id())->first();
         if (!$physicalApp) {
             $physicalApp = new PhysicalApp(); // Membuat objek baru jika data tidak ditemukan
@@ -238,7 +242,8 @@ class BiodataController extends Controller
         return view('user.biodata', compact('physicalApp'));
     }
 
-    public function storePhysicalApp(Request $request){
+    public function storePhysicalApp(Request $request)
+    {
         $request->validate([
             'skincolor' => 'required|string|max:50',
             'haircolor' => 'required|string|max:30',
@@ -278,7 +283,6 @@ class BiodataController extends Controller
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil disimpan!');
         }
-    
     }
     public function updatePhysicalApp(Request $request)
     {
@@ -307,13 +311,14 @@ class BiodataController extends Controller
             'uniqueTraits' => $request->input('uniqueTraits'),
             'disability' => $request->input('disability'),
         ];
-        
+
         $physicalApp->update($data);
 
         return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
     }
 
-    public function indexFamilyApp(){
+    public function indexFamilyApp()
+    {
         $familyApp = FamilyApp::where('user_id', auth()->id())->first();
         if (!$familyApp) {
             $familyApp = new FamilyApp(); // Membuat objek baru jika data tidak ditemukan
@@ -321,7 +326,8 @@ class BiodataController extends Controller
         return view('user.biodata', compact('familyApp'));
     }
 
-    public function storeFamilyApp(Request $request){
+    public function storeFamilyApp(Request $request)
+    {
         $request->validate([
             'fathers_name' => 'required|string|max:50',
             'fathers_job' => 'required|string|max:30',
@@ -386,15 +392,16 @@ class BiodataController extends Controller
             'young_siblings' => $request->input('young_siblings'),
             'backbone_family' => $request->input('backbone_family'),
         ];
-        
+
         $familyApp->update($data);
 
         return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
     }
-    
-    
-    
-    public function indexEducation(){
+
+
+
+    public function indexEducation()
+    {
         $education = Educations::where('user_id', auth()->id())->first();
         if (!$education) {
             $education = new Educations(); // Membuat objek baru jika data tidak ditemukan
@@ -402,7 +409,8 @@ class BiodataController extends Controller
         return view('user.biodata', compact('education'));
     }
 
-    public function storeEducation(Request $request){
+    public function storeEducation(Request $request)
+    {
         $request->validate([
             'last_education' => 'required|string|max:50',
             'elementarySchool' => 'required|string|max:50',
@@ -474,22 +482,24 @@ class BiodataController extends Controller
             'collegeS3' => $request->input('collegeS3'),
             'majorS3' => $request->input('majorS3'),
         ];
-        
+
         $education->update($data);
 
         return redirect()->route('biodata')->with('success', 'Data pendidikan berhasil diperbarui!');
     }
 
 
-    public function indexReligion(){
+    public function indexReligion()
+    {
         $religion = Religion::where('user_id', auth()->id())->first();
         if (!$religion) {
             $religion = new Religion(); // Membuat objek baru jika data tidak ditemukan
         }
         return view('user.biodata', compact('religion'));
     }
-    
-    public function storeReligion(Request $request){
+
+    public function storeReligion(Request $request)
+    {
         $request->validate([
             'quranMemory' => 'required|string|max:50',
             'level' => 'required|string|max:50',
@@ -509,7 +519,7 @@ class BiodataController extends Controller
             'answer5.required' => 'Jawaban pertanyaan 5 harus diisi.',
             'answer6.required' => 'Jawaban pertanyaan 6 harus diisi.',
         ]);
-    
+
         $data = [
             'user_id' => auth()->user()->id,
             'quranMemory' => $request->input('quranMemory'),
@@ -521,7 +531,7 @@ class BiodataController extends Controller
             'answer5' => $request->input('answer5'),
             'answer6' => $request->input('answer6'),
         ];
-    
+
         $religion = Religion::where('user_id', auth()->id())->first();
         if ($religion) {
             $religion->update($data);
@@ -533,7 +543,7 @@ class BiodataController extends Controller
             return redirect()->route('biodata')->with('success', 'Data ibadah berhasil disimpan!');
         }
     }
-    
+
     public function updateReligion(Request $request)
     {
         $request->validate([
@@ -546,9 +556,9 @@ class BiodataController extends Controller
             'answer5' => 'required|string',
             'answer6' => 'required|string',
         ]);
-    
+
         $religion = Religion::where('user_id', auth()->id())->first();
-    
+
         $data = [
             'user_id' => auth()->user()->id,
             'quranMemory' => $request->input('quranMemory'),
@@ -560,10 +570,32 @@ class BiodataController extends Controller
             'answer5' => $request->input('answer5'),
             'answer6' => $request->input('answer6'),
         ];
-        
+
         $religion->update($data);
-    
+
         return redirect()->route('biodata')->with('success', 'Data ibadah berhasil diperbarui!');
     }
-    
+    public function show($username)
+    {
+        // Lakukan join antara tabel-tabel yang dibutuhkan
+        $user = User::where('username', $username)
+            ->join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->join('educations', 'users.id', '=', 'educations.user_id')
+            ->join('religionstats', 'users.id', '=', 'religionstats.user_id')
+            ->join('self_apps', 'users.id', '=', 'self_apps.user_id')
+            ->join('family_apps', 'users.id', '=', 'family_apps.user_id')
+            ->join('physical_apps', 'users.id', '=', 'physical_apps.user_id')
+            ->select(
+                'users.*', // Memilih semua kolom dari tabel users
+                'profiles.*', // Memilih semua kolom dari tabel profiles
+                'educations.*', // Memilih semua kolom dari tabel educations
+                'religionstats.*', // Memilih semua kolom dari tabel religionstats
+                'self_apps.*', // Memilih semua kolom dari tabel self_apps
+                'family_apps.*', // Memilih semua kolom dari tabel family_apps
+                'physical_apps.*' // Memilih semua kolom dari tabel physical_apps
+            )
+            ->first();
+
+        return view('user.matching.show-profile', compact('user'));
+    }
 }

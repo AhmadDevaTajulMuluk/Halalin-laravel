@@ -24,16 +24,16 @@ class SearchController extends Controller
         }
         $profile = Profile::where('user_id', auth()->id())->first();
         $users = User::join('profiles', 'users.id', '=', 'profiles.user_id')
-                    ->where('users.id', '!=', auth()->id())
-                    ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
-                    ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
-                    ->get();
+            ->where('users.id', '!=', auth()->id())
+            ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
+            ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
+            ->paginate(6);
         foreach ($users as $user) {
             $selectedProfile = Profile::where('user_id', $user->id)->first();
             $education = Educations::where('user_id', $user->id)->first();
             $religion = Religion::where('user_id', $user->id)->first();
             $selfApps = SelfApp::where('user_id', $user->id)->first();
-            
+
             if ($selectedProfile) {
                 $user->fullname = $selectedProfile->fullname ?? null;
                 $user->birth_date = $selectedProfile->birth_date ?? null;
@@ -59,7 +59,7 @@ class SearchController extends Controller
 
         if (empty($searchType)) {
             return redirect()->route('search');
-        } else{
+        } else {
             if ($searchType == 'physical') {
                 $results = $this->searchByPhysicalCriteria($request);
             } elseif ($searchType == 'nonPhysical') {
@@ -92,7 +92,7 @@ class SearchController extends Controller
             'maxWeight' => 'required|numeric',
             'minHeight' => 'required|numeric',
             'maxHeight' => 'required|numeric',
-        ],[
+        ], [
             'skincolor.required' => 'Warna kulit harus diisi',
             'haircolor.required' => 'Warna rambut harus diisi',
             'minWeight.required' => 'Berat minimal harus diisi',
@@ -102,19 +102,20 @@ class SearchController extends Controller
         ]);
 
         $results = PhysicalApp::join('users', 'physical_apps.user_id', '=', 'users.id')
-                                ->join('profiles', 'physical_apps.user_id', '=', 'profiles.user_id')
-                                ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
-                                ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
-                                ->where('physical_apps.skincolor', $request->input('skincolor'))
-                                ->where('physical_apps.haircolor', $request->input('haircolor'))
-                                ->whereBetween('physical_apps.weight', [$request->input('minWeight'), $request->input('maxWeight')])
-                                ->whereBetween('physical_apps.height', [$request->input('minHeight'), $request->input('maxHeight')])
-                                ->get();
+            ->join('profiles', 'physical_apps.user_id', '=', 'profiles.user_id')
+            ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
+            ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
+            ->where('physical_apps.skincolor', $request->input('skincolor'))
+            ->where('physical_apps.haircolor', $request->input('haircolor'))
+            ->whereBetween('physical_apps.weight', [$request->input('minWeight'), $request->input('maxWeight')])
+            ->whereBetween('physical_apps.height', [$request->input('minHeight'), $request->input('maxHeight')])
+            ->paginate(6);
         return $results;
     }
 
     private function searchByNonPhysicalCriteria(Request $request)
     {
+        $profile = Profile::where('user_id', auth()->id())->first();
         $request->validate([
             'minAge' => 'required|numeric',
             'maxAge' => 'required|numeric',
@@ -122,7 +123,7 @@ class SearchController extends Controller
             'last_education' => 'required',
             'married_status' => 'required',
             'place_date' => 'required',
-        ],[
+        ], [
             'minAge.required' => 'Usia minimal harus diisi',
             'maxAge.required' => 'Usia maksimal harus diisi',
             'minHafalan.required' => 'Hafalan minimal harus diisi',
@@ -131,13 +132,19 @@ class SearchController extends Controller
             'place_date.required' => 'Tempat lahir harus diisi',
         ]);
 
-        $results = User::whereBetween('age', [$request->input('minAge'), $request->input('maxAge')])
-                        ->where('place_date', $request->input('place_date'))
-                        ->where('quranMemory', '>=', $request->input('minHafalan'))
-                        ->where('last_education', $request->input('last_education'))
-                        ->where('married_status', $request->input('married_status'))
-                        ->where('is_complete', '1')
-                        ->get();
+        $currentDate = date('Y-m-d');
+        $results = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->join('religionstats', 'users.id', '=', 'religionstats.user_id')
+            ->join('educations', 'users.id', '=', 'educations.user_id')
+            ->whereRaw("TIMESTAMPDIFF(YEAR, profiles.birth_date, '$currentDate') BETWEEN ? AND ?", [$request->input('minAge'), $request->input('maxAge')])
+            // ->where('profiles.place_date', $request->input('place_date'))
+            ->where('religionstats.quranMemory', '>=', $request->input('minHafalan'))
+            ->where('educations.last_education', $request->input('last_education'))
+            ->where('profiles.married_status', $request->input('married_status'))
+            ->where('users.is_complete', 1)
+            ->where('profiles.gender', '!=', $profile->gender) // Memastikan gender tidak sama dengan pengguna saat ini
+            ->select('users.*', 'profiles.*', 'religionstats.*', 'educations.*')
+            ->paginate(6);
         return $results;
     }
 

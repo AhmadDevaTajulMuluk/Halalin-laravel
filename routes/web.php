@@ -36,11 +36,11 @@ Route::get('/artikel-content', function () {
 
 
 
-Route::get('/login',[SessionController::class,'index'])->name('sesi');
-Route::post('/login',[SessionController::class,'login'])->name('login');
-Route::get('/logout',[SessionController::class,'logout'])->name('logout');
-Route::get('/register',[SessionController::class,'register'])->name('register');
-Route::post('/create',[SessionController::class,'create'])->name('create');
+Route::get('/login', [SessionController::class, 'index'])->name('sesi');
+Route::post('/login', [SessionController::class, 'login'])->name('login');
+Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
+Route::get('/register', [SessionController::class, 'register'])->name('register');
+Route::post('/create', [SessionController::class, 'create'])->name('create');
 
 Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
 Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
@@ -57,8 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
     Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
     Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
-    Route::get('/biodata', [BiodataController::class,'index'])->name('biodata');
-    Route::post('/biodata', [BiodataController::class,'storeProfile'])->name('profile.post');
+    Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
+    Route::post('/biodata', [BiodataController::class, 'storeProfile'])->name('profile.post');
     Route::put('/biodata', [BiodataController::class, 'updateProfile'])->name('profile.update');
 
     Route::get('/biodata/self-app', [BiodataController::class, 'indexSelfApp'])->name('biodata.selfapp');
@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::post('/search/partner', [SearchController::class, 'searchPartner'])->name('search.partner');
+    Route::get('/search/partner/showProfile/{username}', [BiodataController::class, 'show'])->name('profile.show');
 
     Route::get('/kuis', [KuisController::class, 'index']);
     Route::post('/kuis', [KuisController::class, 'store'])->name('kuis.store');

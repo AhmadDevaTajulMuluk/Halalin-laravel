@@ -703,6 +703,51 @@ button:hover {
     gap: 10px;
     margin: 20px 0;
 }
+
+.pagination {
+    display: flex;
+    padding: 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.pagination li {
+    display: inline-block;
+    /* margin-right: 5px; */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.pagination li a {
+    color: #333;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 10px;
+    margin: 0;
+}
+.pagination li.page-item {
+    padding: 2px 0px;
+}
+.pagination li.page-item.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    padding: 2px 10px;
+}
+.pagination li.page-item.disabled {
+    color: #ccc;
+    pointer-events: none;
+    padding: 2px 10px;
+}
+.d-sm-none {
+    display: none;
+}
+
 /* .artikel-container #navigator a {
 	background-color: #4b5c98;
 	color: white;
