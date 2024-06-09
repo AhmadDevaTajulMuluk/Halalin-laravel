@@ -30,7 +30,7 @@
 			<div id="header-container">
 				<h1 style="padding: 0; margin: 0">Pelatihan Pra-nikah</h1>
 				<div>
-					<a href="#" class="button" id="kumpul-btn">Kumpulkan</a>
+					{{-- <a href="#" class="button" id="kumpul-btn">Kumpulkan</a> --}}
 				</div>
 			</div>
 		</header>
@@ -71,8 +71,8 @@
 				<div class="wrapper-soal">
 					<form action="{{ route('kuis.store') }}" method="POST">
                         @csrf
-                        @foreach($soals as $soal)
-                            <div class="soal" id="soal">
+                        @foreach($soals as $index => $soal)
+                            <div class="soal" id="soal{{ $index }}" data-index="{{ $index }}">
                                 <div id="soal-container">
                                     <h1 id="judul-soal">{{ $soal->judul }}</h1>
                                     <p id="isi-soal" style="font-size: 18px">{{ $soal->isi }}</p>
@@ -90,7 +90,9 @@
                                 </div>
                             </div>
                         @endforeach
-                        <button type="submit" class="button" id="kumpul-btn">Kumpulkan</button>
+                        <button type="button" class="button" id="back-btn" style="display: none;">Back</button>
+                        <button type="button" class="button" id="next-btn">Next</button>
+                        <button type="submit" class="button" id="kumpul-btn" style="display: none;">Kumpulkan</button>
                     </form>
 				</div>
 			</div>
@@ -118,5 +120,49 @@
               });
             });
           </script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const soalElements = document.querySelectorAll('.soal');
+                    let currentSoalIndex = 0;
+
+                    function showSoal(index) {
+                        soalElements.forEach(function(soalElement, idx) {
+                            if (idx === index) {
+                                soalElement.style.display = 'block';
+                            } else {
+                                soalElement.style.display = 'none';
+                            }
+                        });
+
+                        if (index === 0) {
+                            document.getElementById('back-btn').style.display = 'none';
+                        } else {
+                            document.getElementById('back-btn').style.display = 'inline-block';
+                        }
+
+                        if (index === soalElements.length - 1) {
+                            document.getElementById('next-btn').style.display = 'none';
+                            document.getElementById('kumpul-btn').style.display = 'inline-block';
+                        } else {
+                            document.getElementById('next-btn').style.display = 'inline-block';
+                            document.getElementById('kumpul-btn').style.display = 'none';
+                        }
+                    }
+
+                    document.getElementById('next-btn').addEventListener('click', function() {
+                        currentSoalIndex++;
+                        showSoal(currentSoalIndex);
+                    });
+
+                    document.getElementById('back-btn').addEventListener('click', function() {
+                        currentSoalIndex--;
+                        showSoal(currentSoalIndex);
+                    });
+
+                    // Menampilkan soal pertama saat halaman dimuat
+                    showSoal(currentSoalIndex);
+                });
+            </script>
 	</body>
 </html>
