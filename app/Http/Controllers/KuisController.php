@@ -43,8 +43,7 @@ class KuisController extends Controller
             }
         }
     } else{
-        echo '<script>alert("Anda harus menjawab semua soal sebelum mengumpulkan.");</script>';
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Anda Belum Memilih Jawaban');
     }
         $totalSoal = Soal::count();
         $nilai = round(($jawabanBenar / $totalSoal) * 100, 1);
