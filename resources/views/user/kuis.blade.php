@@ -30,6 +30,11 @@
                   color: #fff;
                 }
               </style>
+              <script>
+                function showAlert(message) {
+                    alert(message);
+                }
+            </script>
 		<title>Pelatihan</title>
 	</head>
 	<body id="soal-page">

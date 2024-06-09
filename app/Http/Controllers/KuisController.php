@@ -30,6 +30,7 @@ class KuisController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->has('jawaban')) {
         $jawabanBenar = 0;
         $jawabanDiberikan = [];
         $jawabanDipilih = $request->jawaban;
@@ -41,7 +42,10 @@ class KuisController extends Controller
                 $jawabanBenar++;
             }
         }
-
+    } else{
+        echo '<script>alert("Anda harus menjawab semua soal sebelum mengumpulkan.");</script>';
+        return redirect()->back();
+    }
         $totalSoal = Soal::count();
         $nilai = round(($jawabanBenar / $totalSoal) * 100, 1);
         $jumlah_benar = $jawabanBenar;
