@@ -146,5 +146,3 @@ class UstadzController extends Controller
         return redirect()->route('ustadz.login');
     }
 }
-
-
