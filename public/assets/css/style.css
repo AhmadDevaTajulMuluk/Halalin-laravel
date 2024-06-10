@@ -2629,6 +2629,9 @@ aside#sidebar-pelatihan {
     margin-left: 10px;
     cursor: pointer;
 }
+.bab-container a {
+    font-size: 25px;
+}
 .bab-container li.list-done {
     list-style-image: url("../../assets/images/list-done.svg");
 }
