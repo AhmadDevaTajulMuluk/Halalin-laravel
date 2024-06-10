@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pelatihans', function (Blueprint $table) {
-            $table->string('kategori');
+            $table->boolean('is_complete')->default(false);
         });
     }
 
