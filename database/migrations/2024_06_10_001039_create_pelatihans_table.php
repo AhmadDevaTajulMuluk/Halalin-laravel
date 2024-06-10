@@ -11,12 +11,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pelatihans', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul');
-            $table->text('deskripsi');
-            $table->string('file_html');
-            $table->timestamps();
+        Schema::table('pelatihans', function (Blueprint $table) {
+            if (!Schema::hasColumn('pelatihans', 'id')) {
+                $table->id();
+            }
+            if (!Schema::hasColumn('pelatihans', 'judul')) {
+                $table->string('judul');
+            }
+            if (!Schema::hasColumn('pelatihans', 'deskripsi')) {
+                $table->text('deskripsi');
+            }
+            if (!Schema::hasColumn('pelatihans', 'file_html')) {
+                $table->string('file_html');
+            }
+            if (!Schema::hasColumns('pelatihans', ['created_at', 'updated_at'])) {
+                $table->timestamps();
+            }
         });
     }
 
