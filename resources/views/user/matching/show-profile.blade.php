@@ -20,9 +20,7 @@
                 <h1 class="mb-4">CV Lengkap</h1>
                 <div class="show-profile" id="show-card">                   
                     <h3>Profil</h3>
-                    <div class="show-img">
-                    <img src="{{ $user && $user->image ? asset('image/' . $user->image) : '/assets/images/defaultpic.png' }}" alt="user" />
-                    </div>
+                    
                     <p><b>Nama Lengkap:</b> {{ $user->fullname }}</p>
                     <p><b>Username:</b> {{ $user->username }}</p>
                     <p><b>Email:</b> {{ $user->email }}</p>
