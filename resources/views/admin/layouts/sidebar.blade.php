@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="/admin/articles" class="sidebar-link">
                 <i class="lni lni-agenda"></i>
                 <span>Artikel</span>
             </a>

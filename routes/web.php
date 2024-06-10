@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\ChatController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TaarufController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\KuisController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +61,14 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/edit/{admin_id}', [AdminController::class, 'edit'])->name('admin.edit');
     Route::post('/admin/update/{admin_id}', [AdminController::class, 'update'])->name('admin.update');
     Route::post('/admin/delete/{admin_id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+    Route::get('/admin/articles', [AdminArticleController::class, 'index'])->name('admin.articles.index');
+    Route::get('/admin/articles/create', [AdminArticleController::class, 'create'])->name('admin.articles.create');
+    Route::post('/admin/articles', [AdminArticleController::class, 'store'])->name('admin.articles.store');
+    Route::get('/admin/articles/{article}/edit', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
+    Route::put('/admin/articles/{article}', [AdminArticleController::class, 'update'])->name('admin.articles.update');
+    Route::delete('/admin/articles/{article}', [AdminArticleController::class, 'destroy'])->name('admin.articles.destroy');
+
 });
 
 Route::middleware(['auth'])->group(function () {

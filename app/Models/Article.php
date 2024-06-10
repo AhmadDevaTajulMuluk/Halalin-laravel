@@ -2,10 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'article_id';
+
+    protected $fillable = [
+        'title',
+        'writer',
+        'content',
+        'publish_date',
+        'reference',
+        'article_image',
+    ];
+
+    protected $casts = [
+        'publish_date' => 'datetime',
+    ];
+
+    // Alternatively, you can use $dates
+    // protected $dates = [
+    //     'publish_date',
+    // ];
 }
