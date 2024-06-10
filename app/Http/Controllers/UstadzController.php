@@ -40,102 +40,102 @@ class UstadzController extends Controller
         }
     }
 
-    public function showRegisterForm()
-    {
-        return view('ustadz.register');
-    }
+    // public function showRegisterForm()
+    // {
+    //     return view('ustadz.register');
+    // }
 
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:ustadz',
-            'password' => 'required|confirmed',
-            'phone' => 'required',
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'username' => 'required|unique:ustadz',
+    //         'password' => 'required|confirmed',
+    //         'phone' => 'required',
+    //     ]);
 
-        $ustadz = new Ustadz([
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'phone' => $request->phone,
-        ]);
-        $ustadz->save();
+    //     $ustadz = new Ustadz([
+    //         'name' => $request->name,
+    //         'username' => $request->username,
+    //         'password' => Hash::make($request->password),
+    //         'phone' => $request->phone,
+    //     ]);
+    //     $ustadz->save();
 
-        return redirect()->route('ustadz.login')->with('success', 'Registrasi berhasil, silahkan login!');
-    }
+    //     return redirect()->route('ustadz.login')->with('success', 'Registrasi berhasil, silahkan login!');
+    // }
 
     public function dashboard()
     {
         return view('ustadz.dashboard');
     }
 
-    public function index()
-    {
-        $ustadz = Ustadz::all();
-        return view('ustadz.index', compact('ustadzs'));
-    }
+    // public function index()
+    // {
+    //     $ustadz = Ustadz::all();
+    //     return view('ustadz.index', compact('ustadzs'));
+    // }
 
-    public function create()
-    {
-        return view('ustadz.create');
-    }
+    // public function create()
+    // {
+    //     return view('ustadz.create');
+    // }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:ustadz',
-            'password' => 'required|confirmed',
-            'phone' => 'required',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'username' => 'required|unique:ustadz',
+    //         'password' => 'required|confirmed',
+    //         'phone' => 'required',
+    //     ]);
 
-        $ustadz = new Ustadz([
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'phone' => $request->phone,
-        ]);
-        $ustadz->save();
+    //     $ustadz = new Ustadz([
+    //         'name' => $request->name,
+    //         'username' => $request->username,
+    //         'password' => Hash::make($request->password),
+    //         'phone' => $request->phone,
+    //     ]);
+    //     $ustadz->save();
 
-        return redirect()->route('ustadz.index')->with('success', 'Ustadz created successfully');
-    }
+    //     return redirect()->route('ustadz.index')->with('success', 'Ustadz created successfully');
+    // }
 
-    public function edit($ustadz_id)
-    {
-        $ustadz = Ustadz::find($ustadz_id);
-        return view('ustadz.edit', compact('ustadz'));
-    }
+    // public function edit($ustadz_id)
+    // {
+    //     $ustadz = Ustadz::find($ustadz_id);
+    //     return view('ustadz.edit', compact('ustadz'));
+    // }
 
-    public function update(Request $request, $ustadz_id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:ustadz,username,' . $ustadz_id,
-            'phone' => 'required',
-        ]);
+    // public function update(Request $request, $ustadz_id)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'username' => 'required|unique:ustadz,username,' . $ustadz_id,
+    //         'phone' => 'required',
+    //     ]);
 
-        $ustadz = Ustadz::find($ustadz_id);
-        $ustadz->name = $request->name;
-        $ustadz->username = $request->username;
-        $ustadz->phone = $request->phone;
+    //     $ustadz = Ustadz::find($ustadz_id);
+    //     $ustadz->name = $request->name;
+    //     $ustadz->username = $request->username;
+    //     $ustadz->phone = $request->phone;
 
-        if ($request->filled('password')) {
-            $ustadz->password = Hash::make($request->password);
-        }
+    //     if ($request->filled('password')) {
+    //         $ustadz->password = Hash::make($request->password);
+    //     }
 
-        $ustadz->save();
+    //     $ustadz->save();
 
-        return redirect()->route('ustadz.index')->with('success', 'Ustadz updated successfully');
-    }
+    //     return redirect()->route('ustadz.index')->with('success', 'Ustadz updated successfully');
+    // }
 
-    public function destroy($ustadz_id)
-    {
-        $ustadz = Ustadz::find($ustadz_id);
-        $ustadz->delete();
+    // public function destroy($ustadz_id)
+    // {
+    //     $ustadz = Ustadz::find($ustadz_id);
+    //     $ustadz->delete();
 
-        return redirect()->route('ustadz.index')->with('success', 'Ustadz deleted successfully');
-    }
+    //     return redirect()->route('ustadz.index')->with('success', 'Ustadz deleted successfully');
+    // }
 
     public function logout(Request $request)
     {
