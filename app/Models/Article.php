@@ -15,6 +15,7 @@ class Article extends Model
         'publish_date',
         'reference',
         'article_image',
+        'viewers',
     ];
 
     protected $casts = [
