@@ -28,7 +28,7 @@
                     </div>
                 @endif
 
-                <form class="form-login" action="{{ route('ustadz.login_action') }}" method="POST">     
+                <form class="form-login" action="{{ route('ustadz.login') }}" method="POST">     
                     @csrf                    
                     <div class="boxfield">
                         <svg class="svg-icon" viewBox="0 0 20 20">
@@ -60,12 +60,12 @@
                 </div>
                 <button type="submit" class="login-btn">Login</button>
                 </form>
-                <p class="hasil">
+                {{-- <p class="hasil">
                     Belum punya akun?
                     <a href="{{ route('ustadz.register') }}" style="text-decoration: none; color: inherit">
                         <strong>Daftar Sekarang</strong>
                     </a>
-                </p>
+                </p> --}}
             </div>
         </div>
     </div>

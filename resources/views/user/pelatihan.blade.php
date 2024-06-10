@@ -10,7 +10,7 @@
     <title>Pelatihan</title>
 	<style>
 		.complete {
-			color: green;
+			color: #848ce1;
 		}
 		.progress-bar {
             width: 100%;

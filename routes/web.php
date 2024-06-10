@@ -74,7 +74,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/admin/ustadz/store', [AdminController::class, 'storeUstadz'])->name('admin.ustadz.store');
     Route::get('/admin/ustadz/{ustadz_id}/edit', [AdminController::class, 'editUstadz'])->name('admin.ustadz.edit');
     Route::put('/admin/ustadz/{ustadz_id}', [AdminController::class, 'updateUstadz'])->name('admin.ustadz.update');
-    Route::delete('/admin/ustadz/{ustadz_id}', [AdminController::class, 'destroyUstadz'])->name('admin.ustadz.destroy');
+    Route::post('/admin/ustadz/{ustadz_id}', [AdminController::class, 'destroyUstadz'])->name('admin.ustadz.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -137,6 +137,8 @@ Route::middleware(['auth'])->group(function () {
 //     return view('ustadz.dashboard');
 // })->name('dashboard');
 
+Route::get('/ustadz/login', [UstadzController::class, 'showLoginForm'])->name('ustadz.login');
+Route::post('/ustadz/login', [UstadzController::class, 'login'])->name('ustadz.login.submit');
 
 Route::prefix('ustadz')->group(function () {
     Route::get('/ustadz/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
