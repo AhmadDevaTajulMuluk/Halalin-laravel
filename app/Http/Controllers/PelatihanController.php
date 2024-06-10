@@ -58,8 +58,13 @@ class PelatihanController extends Controller
             return redirect()->back()->with('error', 'Tidak bisa mengakses ke bab 3 jika bab 2 belum selesai');
         }
 
-        if ($pelatihanIni->nomor_bab == 2 && $user->pelatihan_completion != 2) {;
+        if ($pelatihanIni->nomor_bab == 2 && $user->pelatihan_completion < 2) {;
             $user->pelatihan_completion = 1;
+            $user->save();
+        }
+
+        if (($pelatihanIni->nomor_bab == 1 || $pelatihanIni->nomor_bab == 2) && $user->pelatihan_completion == 3) {;
+            $user->pelatihan_completion = 3;
             $user->save();
         }
 

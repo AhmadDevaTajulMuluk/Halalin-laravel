@@ -116,6 +116,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/search/partner/showProfile/{username}', [BiodataController::class, 'show'])->name('profile.show');
 
     Route::post('/request-taaruf/{id}', [RequestTaarufController::class, 'sendRequest'])->name('request_taaruf.send');
+    Route::put('/request-taaruf/approve', [RequestTaarufController::class, 'approve'])->name('request_taaruf.approve');
+
 
     Route::get('/chat', [ChatController::class, 'index'])->name('chat')->middleware('auth');
 
@@ -137,14 +139,14 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::prefix('ustadz')->group(function () {
-Route::get('/ustadz/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
-Route::post('/logout', [UstadzController::class, 'logout'])->name('ustadz.logout');
+    Route::get('/ustadz/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
+    Route::post('/logout', [UstadzController::class, 'logout'])->name('ustadz.logout');
 
-Route::get('/artikel-ustadz', function () {
-    return view('ustadz.artikel');
-})->name('artikel-ustadz');
+    Route::get('/artikel-ustadz', function () {
+        return view('ustadz.artikel');
+    })->name('artikel-ustadz');
 
-Route::get('/notif-ustadz', function () {
-    return view('ustadz.notif');
-});
+    Route::get('/notif-ustadz', function () {
+        return view('ustadz.notif');
+    });
 });

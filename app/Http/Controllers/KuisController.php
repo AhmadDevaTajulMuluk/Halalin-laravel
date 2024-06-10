@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kuis\Jawaban;
 use App\Models\Kuis\Soal;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KuisController extends Controller
@@ -30,26 +31,30 @@ class KuisController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->has('jawaban')) {
-        $jawabanBenar = 0;
-        $jawabanDiberikan = [];
-        $jawabanDipilih = $request->jawaban;
+        if ($request->has('jawaban')) {
+            $jawabanBenar = 0;
+            $jawabanDiberikan = [];
+            $jawabanDipilih = $request->jawaban;
 
-        foreach ($request->jawaban as $jawabanId) {
-            $jawaban = Jawaban::find($jawabanId);
-            $jawabanDiberikan[] = $jawaban; // Kumpulkan jawaban ke array
-            if ($jawaban && $jawaban->benar) {
-                $jawabanBenar++;
+            foreach ($request->jawaban as $jawabanId) {
+                $jawaban = Jawaban::find($jawabanId);
+                $jawabanDiberikan[] = $jawaban; // Kumpulkan jawaban ke array
+                if ($jawaban && $jawaban->benar) {
+                    $jawabanBenar++;
+                }
             }
+        } else {
+            return redirect()->back()->with('error', 'Anda Belum Memilih Jawaban');
         }
-    } else{
-        return redirect()->back()->with('error', 'Anda Belum Memilih Jawaban');
-    }
         $totalSoal = Soal::count();
         $nilai = round(($jawabanBenar / $totalSoal) * 100, 1);
         $jumlah_benar = $jawabanBenar;
         $jumlah_salah = $totalSoal - $jawabanBenar;
-
+        $user = User::where('id', auth()->id())->first();
+        if ($nilai > 70.0) {
+            $user->pelatihan_completion = 3;
+            $user->save();
+        }
         return view('user.hasil', compact('nilai', 'jawabanDiberikan', 'jumlah_benar', 'jumlah_salah', 'jawabanDipilih'));
     }
 

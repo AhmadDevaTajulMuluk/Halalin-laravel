@@ -29,6 +29,23 @@ class RequestTaarufController extends Controller
         // Tampilkan pesan sukses atau alihkan ke halaman lain
         return redirect()->route('dashboard')->with('success', 'Permintaan taaruf berhasil dikirim!');
     }
+
+    public function approve(Request $request)
+    {
+        $requestTaaruf = RequestTaaruf::findOrFail($request->request_taaruf_id);
+        $user = auth()->user();
+
+        if ($requestTaaruf->responser_id == $user->id) {
+            $requestTaaruf->is_approved = true;
+            $requestTaaruf->save();
+
+            return redirect()->route('chat')->with('success', 'Anda telah menyetujui undangan taaruf.');
+        }
+
+        return redirect()->route('chat')->with('error', 'Gagal menyetujui undangan taaruf.');
+    }
+
+
     public function fetchNotifications($userId)
     {
         // Ambil semua undangan taaruf yang belum disetujui dengan pengguna saat ini sebagai responser

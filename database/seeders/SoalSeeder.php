@@ -15,33 +15,53 @@ class SoalSeeder extends Seeder
     {
         $soals = [
             [
-                'judul' => 'Soal 1',
-                'isi' => 'Apa yang dimaksud dengan Laravel?',
+                'judul' => 'Pengenalan Dasar-Dasar Menikah',
+                'isi' => 'Apa yang dimaksud dengan pernikahan?',
                 'jawabans' => [
-                    ['teks' => 'Framework PHP', 'benar' => true],
-                    ['teks' => 'Bahasa Pemrograman', 'benar' => false],
-                    ['teks' => 'Database', 'benar' => false],
-                    ['teks' => 'Server', 'benar' => false],
+                    ['teks' => 'Ikatan sah antara dua individu yang diakui oleh agama dan negara', 'benar' => true],
+                    ['teks' => 'Hanya sekedar ikatan emosional', 'benar' => false],
+                    ['teks' => 'Hubungan persahabatan yang erat', 'benar' => false],
+                    ['teks' => 'Kesepakatan bisnis antara dua orang', 'benar' => false],
                 ],
             ],
             [
-                'judul' => 'Soal 2',
-                'isi' => 'Apa yang dimaksud dengan MVC?',
+                'judul' => 'Prinsip Dasar Menikah',
+                'isi' => 'Apa prinsip dasar yang sangat penting dalam pernikahan?',
                 'jawabans' => [
-                    ['teks' => 'Model View Controller', 'benar' => true],
-                    ['teks' => 'Model View Component', 'benar' => false],
-                    ['teks' => 'Main View Controller', 'benar' => false],
-                    ['teks' => 'Module View Controller', 'benar' => false],
+                    ['teks' => 'Komitmen', 'benar' => true],
+                    ['teks' => 'Kekayaan', 'benar' => false],
+                    ['teks' => 'Kepopuleran', 'benar' => false],
+                    ['teks' => 'Kecantikan', 'benar' => false],
                 ],
             ],
             [
-                'judul' => 'Soal 3',
-                'isi' => 'Apa yang dimaksud dengan taaruf?',
+                'judul' => 'Komunikasi dalam Pernikahan',
+                'isi' => 'Apa kunci utama dalam membangun pernikahan yang sehat dan bahagia?',
                 'jawabans' => [
-                    ['teks' => 'Gatau', 'benar' => false],
-                    ['teks' => 'Begitulah', 'benar' => false],
-                    ['teks' => 'Cari jodoh', 'benar' => true],
-                    ['teks' => 'blablalba', 'benar' => false],
+                    ['teks' => 'Komunikasi yang efektif', 'benar' => true],
+                    ['teks' => 'Mengabaikan masalah', 'benar' => false],
+                    ['teks' => 'Selalu menyalahkan pasangan', 'benar' => false],
+                    ['teks' => 'Hidup terpisah', 'benar' => false],
+                ],
+            ],
+            [
+                'judul' => 'Pengelolaan Keuangan',
+                'isi' => 'Apa yang harus dilakukan untuk mengelola keuangan dalam pernikahan?',
+                'jawabans' => [
+                    ['teks' => 'Membuat anggaran bersama', 'benar' => true],
+                    ['teks' => 'Menghabiskan uang tanpa rencana', 'benar' => false],
+                    ['teks' => 'Menutupi utang dari pasangan', 'benar' => false],
+                    ['teks' => 'Berinvestasi tanpa diskusi', 'benar' => false],
+                ],
+            ],
+            [
+                'judul' => 'Menjaga Keharmonisan Pernikahan',
+                'isi' => 'Bagaimana cara menjaga keseimbangan antara kehidupan pribadi dan hubungan suami-istri?',
+                'jawabans' => [
+                    ['teks' => 'Melakukan kegiatan bersama secara rutin', 'benar' => true],
+                    ['teks' => 'Mengabaikan pasangan', 'benar' => false],
+                    ['teks' => 'Bekerja tanpa henti', 'benar' => false],
+                    ['teks' => 'Menghindari komunikasi', 'benar' => false],
                 ],
             ],
         ];

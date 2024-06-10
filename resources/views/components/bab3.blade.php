@@ -48,6 +48,6 @@
             <li class="list-group-item">Soal: 3 soal</li>
             <li class="list-group-item">Kriteria Kelulusan: 100%</li>
         </ul>
-        <a href="/mulai-kuis" class="button">Mulai Mengerjakan</a>
+        <a href="/kuis" class="button">Mulai Mengerjakan</a>
     </div>
 </div>

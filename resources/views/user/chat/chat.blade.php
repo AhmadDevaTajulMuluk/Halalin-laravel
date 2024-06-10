@@ -12,10 +12,35 @@
 		rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<title>Chat</title>
+	<style>
+		#approvalModal {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: fit-content;
+			padding: 2rem 0;
+			z-index: 999;
+			display: none;
+			text-align: center;
+			transition: 5s ease;
+		}
+
+		.modal-content {
+			margin: 0 auto;
+			background-color: #fff;
+			padding: 1rem 2rem;
+			border-radius: 0.5rem;
+			width: 50%;
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+			transition: 5s ease;
+		}
+	</style>
 </head>
 <body id="page-chat">
     {{-- manggil navbar --}}
 	<x-navbar :profile="$profile"></x-navbar>
+	<!-- Modal -->
 	<main id="page-konsultasi">
 		<div class="konsultasi-chat">
 			<div class="container-leftchat">
@@ -64,10 +89,24 @@
 									<h2>Pemberitahuan</h2>
 									{{-- buat pemberitahuannya di ambil dari database request taarufs, jika
 									user ini adalah responser, tampilkan notif "anda mendapatkan undangan dari {{ requester }}" --}}
+									{{-- @dd($invitations) --}}
 									@foreach ($invitations as $invitation)
-										<div class="notify-item">
+										<div class="notify-item" onclick="showApprovalModal('{{ $invitation->id }}', '{{ $invitation->requester->username }}')">
 											<h4>Undangan Taaruf</h4>
-											<p>Anda mendapatkan undangan taaruf dari <b>{{ $invitation->fullname }}</b></p>
+											<p>Anda mendapatkan undangan taaruf dari {{ $invitation->requester->username }}</p>
+										</div>
+										<div id="approvalModal" style="display: none;">
+											<div class="modal-content">
+												<h4>Undangan Taaruf</h4>
+												<p id="modalText"></p>
+												<form id="approvalForm" method="POST" action="{{ route('request_taaruf.approve') }}">
+													@csrf
+													@method('PUT')
+													<input type="hidden" name="request_taaruf_id" id="request_taaruf_id">
+													<button class="button" type="submit">Setuju</button>
+													<button class="button" type="button" onclick="closeApprovalModal()">Batal</button>
+												</form>												
+											</div>
 										</div>
 									@endforeach
 								</div>
@@ -119,6 +158,16 @@
 				}
 			}
 		}
+		function showApprovalModal(requestTaarufId, requesterUsername) {
+			document.getElementById('modalText').innerText = `Apakah Anda ingin menerima taaruf dari ${requesterUsername}?`;
+			document.getElementById('request_taaruf_id').value = requestTaarufId;
+			document.getElementById('approvalModal').style.display = 'block';
+		}
+
+		function closeApprovalModal() {
+			document.getElementById('approvalModal').style.display = 'none';
+		}
+
 	</script>
 </body>
 </html>

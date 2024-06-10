@@ -43,6 +43,7 @@
 			</div>
 		</header>
 		<main id="page-soal">
+      
 			<div id="popup-overlay" class="popup-overlay"></div>
 			<div id="konfirmasi-popup" class="popup">
 				<div class="popup-content">
@@ -57,7 +58,7 @@
 					<button>Selesai dan Lihat Hasil</button>
 				</div>
 			</div>
-			<div class="box">
+			<div class="box" style="height: 100vh">
 				<div id="side-soal-container">
 					<aside class="side-soal">
 						<div class="number-soal">
@@ -77,7 +78,12 @@
 					</div>
 				</div>
 				<div class="wrapper-soal">
-					<form action="{{ route('kuis.store') }}" method="POST">
+          @if (session('error'))
+              <div id="siuuu" class="alert-danger" style="cursor: pointer; padding: 10px" onclick="document.getElementById('siuuu').style.display='none';">
+                  {{ session('error') }}
+              </div>
+          @endif
+					<form style="display: flex; flex-direction: column; gap: 1rem"  action="{{ route('kuis.store') }}" method="POST">
                         @csrf
                         @foreach($soals as $index => $soal)
                             <div class="soal" id="soal{{ $index }}" data-index="{{ $index }}">
@@ -98,9 +104,11 @@
                                 </div>
                             </div>
                         @endforeach
-                        <button type="button" class="button" id="back-btn" style="display: none;">Back</button>
-                        <button type="button" class="button" id="next-btn">Next</button>
-                        <button type="submit" class="button" id="kumpul-btn" style="display: none;">Kumpulkan</button>
+                        <div>
+                          <button type="button" class="button" id="back-btn" style="display: none;">Back</button>
+                          <button type="button" class="button" id="next-btn">Next</button>
+                          <button type="submit" class="button" id="kumpul-btn" style="display: none;">Kumpulkan</button>
+                        </div>
                     </form>
 				</div>
 			</div>
