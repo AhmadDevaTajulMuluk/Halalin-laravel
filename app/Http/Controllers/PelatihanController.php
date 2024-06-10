@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Models\Pelatihan;
+use App\Models\User;
 
 class PelatihanController extends Controller
 {
@@ -43,9 +44,35 @@ class PelatihanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $profile = Profile::where('user_id', auth()->id())->first();
+        $user = User::where('id', auth()->id())->first();
+        $pelatihans = Pelatihan::all();
+        $pelatihanIni = Pelatihan::where('nomor_bab', $id)->first();
+
+        $prevBab = Pelatihan::where('nomor_bab', '<', $id)->orderBy('nomor_bab', 'desc')->first();
+        $nextBab = Pelatihan::where('nomor_bab', '>', $id)->orderBy('nomor_bab', 'asc')->first();
+
+        if ($pelatihanIni->nomor_bab == 3 && $user->pelatihan_completion == 0) {
+            return redirect()->back()->with('error', 'Tidak bisa mengakses ke bab 3 jika bab 2 belum selesai');
+        }
+
+        if ($pelatihanIni->nomor_bab == 2 && $user->pelatihan_completion != 2) {;
+            $user->pelatihan_completion = 1;
+            $user->save();
+        }
+
+        if ($pelatihanIni->nomor_bab == 3 && $user->pelatihan_completion != 3) {;
+            $user->pelatihan_completion = 2;
+            $user->save();
+        }
+
+        $totalbab = $pelatihans->count();
+        $completedBab = $user->pelatihan_completion;;
+        $completionPercentage = $totalbab > 0 ? ($completedBab / $totalbab) * 100 : 0;
+
+        return view('user.pelatihan', compact('profile', 'user', 'pelatihans', 'pelatihanIni', 'prevBab', 'nextBab', 'completionPercentage'));
     }
 
     /**

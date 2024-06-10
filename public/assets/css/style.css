@@ -2753,7 +2753,6 @@ aside#sidebar-pelatihan {
     background-color: #f9f9f9;
     border-radius: 20px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
     transition: transform 0.3s ease;
 }
 

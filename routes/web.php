@@ -44,8 +44,8 @@ Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
 Route::get('/register', [SessionController::class, 'register'])->name('register');
 Route::post('/create', [SessionController::class, 'create'])->name('create');
 
-// Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
-// Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
+Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
+Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
 
 
 // Route::get('/admin/register', [adminController::class, 'register'])->name('register');
@@ -68,7 +68,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/articles/{article}/edit', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
     Route::put('/admin/articles/{article}', [AdminArticleController::class, 'update'])->name('admin.articles.update');
     Route::delete('/admin/articles/{article}', [AdminArticleController::class, 'destroy'])->name('admin.articles.destroy');
-
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -78,10 +77,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
     Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
-    Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan');
     Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
     Route::post('/biodata', [BiodataController::class, 'storeProfile'])->name('profile.post');
     Route::put('/biodata', [BiodataController::class, 'updateProfile'])->name('profile.update');
+
+    Route::get('/pelatihan/bab/{id}', [PelatihanController::class, 'show'])->name('pelatihan.show');
 
     Route::get('/biodata/self-app', [BiodataController::class, 'indexSelfApp'])->name('biodata.selfapp');
     Route::post('/biodata/self-app', [BiodataController::class, 'storeSelfApp'])->name('selfapp.post');

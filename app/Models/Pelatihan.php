@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Pelatihan extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = ['id'];
+    protected $primaryKey = 'id'; // Atur kunci utama sebagai 'id' saja
 
     protected $fillable = [
         'id',
-        'judul',
-        'deskripsi',
-        'file_html'
+        'is_complete',
+        'nomor_bab',
+        'kategori',
+        'created_at',
+        'updated_at'
     ];
 }

@@ -10,6 +10,7 @@
 
 <body id="page-search">
     {{-- @dd($profile) --}}
+    {{-- @dd($results) --}}
     <x-navbar :profile="$profile"></x-navbar>
     <main>
         <div class="container-search">
