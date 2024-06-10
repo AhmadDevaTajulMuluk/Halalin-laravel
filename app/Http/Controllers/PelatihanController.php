@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Models\Pelatihan;
 
 class PelatihanController extends Controller
 {
@@ -13,7 +14,8 @@ class PelatihanController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        return view('user.pelatihan', compact('profile'));
+        $pelatihans = Pelatihan::all();
+        return view('user.pelatihan', compact('profile', 'pelatihans'));
     }
 
     public function render()

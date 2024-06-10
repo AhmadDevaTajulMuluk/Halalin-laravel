@@ -29,16 +29,18 @@
 						<p class="percentage-text">0% selesai</p>
 					</div>
 					<div id="list-bab">
-						<div class="bab-container">
-							<div class="bab-dropdown" onclick="babDropdown('bab-1', 'dropdown-bab-1')">
-								<div id="dropdown-bab-1" class="fa fa-chevron-down"></div>
-								<h2>Bab 1</h2>
+						@foreach($pelatihans as $pelatihan)
+							<div class="bab-container">
+								<div class="bab-dropdown" onclick="babDropdown('bab-{{ $pelatihan->id }}', 'dropdown-bab-{{ $pelatihan->id }}')">
+									<div id="dropdown-bab-{{ $pelatihan->id }}" class="fa fa-chevron-down"></div>
+									<h2>{{ $pelatihan->judul }}</h2>
+								</div>
+								<ul id="bab-{{ $pelatihan->id }}" class="sub-bab-container">
+									<li onclick="goToPage({{ $loop->index }})">{{ $pelatihan->deskripsi }}</li>
+								</ul>
 							</div>
-							<ul id="bab-1" class="sub-bab-container">
-								<li id="sub-bab-1" onclick="goToPage(0)">Sub bab 1</li>
-								<li id="sub-bab-2" onclick="goToPage(1)">Sub bab 2</li>
-							</ul>
-						</div>
+						@endforeach
+					</div>
 				</aside>
 				<div
 					id="open-bab"
@@ -47,7 +49,9 @@
 					<i class="fa fa-bars" aria-hidden="true"></i>
 				</div>
 			</div>
-			<div id="content-pelatihan"></div>
+			<div id="content-pelatihan">
+				
+			</div>
 		</main>
 		<footer id="pelatihan-footer">
 			<div id="before" class="bab-choice fledir-row" onclick="prevPage()">
@@ -98,11 +102,10 @@
 			}
 			// Memuat file JSON menggunakan Fetch API
 			function fetchAPI() {
-				fetch("../essentials/data-pelatihan.json")
+				fetch("/essentials/data-pelatihan.json")
 					.then((response) => response.json())
 					.then((data) => {
 						if (current_page == 0) {
-							console.log("anjay");
 							document.getElementById("before").classList.add("hide-item");
 							document.getElementById("after").classList.remove("hide-item");
 						} else if (current_page == data.materi.bab1.length - 1) {
@@ -111,8 +114,6 @@
 						}
 						if (changePage) {
 							data.materi.bab1[page_before].status = "Selesai";
-							console.log(page_before);
-							console.log(data.materi.bab1[page_before].status);
 							changePage = false;
 						}
 						var countSelesai = 0;
@@ -121,16 +122,13 @@
 								var JudulBabSelesai = "sub-bab-" + data.materi.bab1[i].sub_bab;
 								document.getElementById(JudulBabSelesai).classList.add("list-done");
 								countSelesai++;
-								console.log("anjay");
 							}
 						}
-						console.log(countSelesai);
 						countSelesai = (countSelesai / data.materi.bab1.length) * 100;
-						document.getElementsByClassName("percentage-text")[0].innerHTML =
-							countSelesai + "% selesai";
+						document.getElementsByClassName("percentage-text")[0].innerHTML = countSelesai + "% selesai";
 						document.querySelector(".percentage-line-second").style.width = countSelesai + "%";
 						document.querySelector(".percentage-line-first").style.width = 100 - countSelesai + "%";
-						var judulFile = "../essentials/" + data.materi.bab1[current_page].file_html;
+						var judulFile = "/essentials/" + data.materi.bab1[current_page].file_html;
 						fetch(judulFile)
 							.then((response) => response.text())
 							.then((data) => {

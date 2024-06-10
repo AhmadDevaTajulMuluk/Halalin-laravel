@@ -348,9 +348,9 @@ function roomChat() {
 	window.location.href = "/sedang-taaruf";
 }
 
-document.getElementsByClassName("notify-item").addEventListener("click", lihatnotif);
-function lihatnotif() {
-	showPopup();
+const notifyItems = document.getElementsByClassName("notify-item");
+for (let item of notifyItems) {
+    item.addEventListener("click", lihatnotif);
 }
 var down = false;
 function showNotif(id) {
