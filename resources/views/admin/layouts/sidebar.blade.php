@@ -49,7 +49,7 @@
                     </a>
                     <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">User</a>
+                            <a href="/admin/users" class="sidebar-link">User</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="/admin/ustadz" class="sidebar-link">Ustadz</a>
