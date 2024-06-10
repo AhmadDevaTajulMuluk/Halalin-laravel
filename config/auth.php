@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'ustadz' => [
+        'driver' => 'session',
+        'provider' => 'ustadz',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'ustadz' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Ustadz::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

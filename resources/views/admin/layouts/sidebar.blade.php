@@ -52,7 +52,7 @@
                             <a href="#" class="sidebar-link">User</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Ustadz</a>
+                            <a href="/admin/ustadz" class="sidebar-link">Ustadz</a>
                         </li>
                     </ul>
                 </li>
