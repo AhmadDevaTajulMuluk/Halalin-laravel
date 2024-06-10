@@ -12,14 +12,13 @@ use App\Http\Controllers\TaarufController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\RequestTaarufController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 });
-
-Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 
 Route::get('/sedang-taaruf', [TaarufController::class, 'index'])->name('chat');
 
@@ -106,6 +105,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::post('/search/partner', [SearchController::class, 'searchPartner'])->name('search.partner');
     Route::get('/search/partner/showProfile/{username}', [BiodataController::class, 'show'])->name('profile.show');
+
+    Route::post('/request-taaruf/{id}', [RequestTaarufController::class, 'sendRequest'])->name('request_taaruf.send');
+
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat')->middleware('auth');
 
     Route::get('/kuis', [KuisController::class, 'index']);
     Route::post('/kuis', [KuisController::class, 'store'])->name('kuis.store');

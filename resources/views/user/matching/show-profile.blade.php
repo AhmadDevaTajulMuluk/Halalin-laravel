@@ -98,7 +98,10 @@
             </div>
             <div style="display: flex; justify-content: center; gap: 2rem; padding: 1rem;">
                 <a href="{{ route('search') }}" class="button">Kembali</a>
-                <a href="" class="button">Ajukan Taaruf</a>
+                <form action="{{ route('request_taaruf.send', $user->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="button">Ajukan Taaruf</button>
+                </form>
             </div>
         </div>
     </div>

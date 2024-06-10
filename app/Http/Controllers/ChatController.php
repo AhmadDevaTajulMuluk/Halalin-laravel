@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\RequestTaaruf;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -13,7 +15,15 @@ class ChatController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        return view('user.chat.chat', compact('profile'));
+        $userId = User::where('id', auth()->id())->first();
+        $invitations = RequestTaaruf::where('responser_id', $userId->id)
+            ->where('is_approved', false)
+            ->join('users', 'request_taarufs.requester_id', '=', 'users.id')
+            ->join('profiles', 'profiles.user_id', '=', 'users.id')
+            ->select('request_taarufs.*', 'profiles.*')
+            ->get();
+
+        return view('user.chat.chat', compact('profile', 'invitations'));
     }
 
     public function render()

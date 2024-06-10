@@ -578,6 +578,7 @@ class BiodataController extends Controller
     public function show($username)
     {
         // Lakukan join antara tabel-tabel yang dibutuhkan
+        $userRequester = User::where('id', auth()->id())->first();;
         $user = User::where('username', $username)
             ->join('profiles', 'users.id', '=', 'profiles.user_id')
             ->join('educations', 'users.id', '=', 'educations.user_id')
@@ -596,6 +597,6 @@ class BiodataController extends Controller
             )
             ->first();
 
-        return view('user.matching.show-profile', compact('user'));
+        return view('user.matching.show-profile', compact('user', 'userRequester'));
     }
 }

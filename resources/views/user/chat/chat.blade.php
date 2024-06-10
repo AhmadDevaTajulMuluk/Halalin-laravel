@@ -62,18 +62,14 @@
 							<div class="notify-box" id="boxnotif" style="opacity: 0">
 								<div class="bg-notif">
 									<h2>Pemberitahuan</h2>
-									<div class="notify-item" onclick="lihatnotif()">
-										<h4>Undangan Taaruf</h4>
-										<p>Anda mendapatkan undangan taaruf dari (nama)</p>
-									</div>
-									<div class="notify-item" onclick="roomChat()">
-										<h4>Taaruf diterima</h4>
-										<p>(nama) menerima ajakan taaruf dari anda</p>
-									</div>
-									<div class="notify-item">
-										<h4>Undangan Taaruf</h4>
-										<p>Anda mendapatkan undangan taaruf dari (nama)</p>
-									</div>
+									{{-- buat pemberitahuannya di ambil dari database request taarufs, jika
+									user ini adalah responser, tampilkan notif "anda mendapatkan undangan dari {{ requester }}" --}}
+									@foreach ($invitations as $invitation)
+										<div class="notify-item">
+											<h4>Undangan Taaruf</h4>
+											<p>Anda mendapatkan undangan taaruf dari <b>{{ $invitation->fullname }}</b></p>
+										</div>
+									@endforeach
 								</div>
 							</div>
 							<div class="icon-notif">
