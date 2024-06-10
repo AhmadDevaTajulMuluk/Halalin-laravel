@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('pelatihans', function (Blueprint $table) {
             $table->boolean('is_complete')->default(false);
+            $table->string('nomor_bab');
+            $table->string('kategori');
         });
     }
 
