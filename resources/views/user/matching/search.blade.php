@@ -107,6 +107,7 @@
                 <button id="button-search" type="submit">Search</button>
             </form>
         </div>
+        <div class="container-search">
         <div style="display: flex; flex-direction: column; align-items: center">
             <h2 style="margin: 2rem 0 0 0">Hasil Pencarian</h2>
             <p style="margin: 1rem 0 0 0">Tekan item untuk melihat selengkapnya.</p>
@@ -197,7 +198,10 @@
                     @endif
                 </div>
             </div>
+            
         </div>
+    </div>
+    <br>
     </main>
     <x-footer></x-footer>
     <script>

@@ -14,7 +14,7 @@
     <x-navbar :profile="$profile"></x-navbar>
     <main class="header-content-article">
         <button onclick="window.history.back()" class="back-button">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i> Kembali
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </button>
         <div class="title">
             <h1 class="h1-article">{{ $article->title }}</h1>

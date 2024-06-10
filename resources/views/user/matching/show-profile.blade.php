@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Pengguna</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 </head>
 
 <body>
@@ -16,14 +20,14 @@
             <div class="card-header">
                 Profil Pengguna: {{ $user->username }}
             </div>
+            <br>
+            <button onclick="window.history.back()" class="back-button">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
             <div class="card-body">
                 <h1 class="mb-4">CV Lengkap</h1>
                 <div class="show-profile" id="show-card">                   
                     <h3>Profil</h3>
-                    
-                    <p><b>Nama Lengkap:</b> {{ $user->fullname }}</p>
-                    <p><b>Username:</b> {{ $user->username }}</p>
-                    <p><b>Email:</b> {{ $user->email }}</p>
                     <p><b>Jenis Kelamin:</b> {{ $user->gender }}</p>
                     <p><b>Nomor Telepon:</b> {{ $user->phone_number }}</p>
                     <p><b>Tempat, Tanggal Lahir:</b> {{ $user->place_date }}, {{ \Carbon\Carbon::parse($user->birth_date)->locale('id')->translatedFormat('d F Y') }}</p>
@@ -91,11 +95,10 @@
                     <p><b>Bagaimana Anda mengatasi konflik antara kebutuhan untuk memenuhi tuntutan dunia modern dengan menjalankan ajaran agama dalam kehidupan sehari-hari?:</b> <br> {{ $user->answer5 }}</p>
                     <p><b>Bagaimana Anda memandang pentingnya kesetiaan dalam pernikahan dalam Islam, terutama dalam konteks modern yang penuh dengan godaan dan tantangan?:</b> <br> {{ $user->answer6 }}</p>
                 </div>
-
             </div>
-            <div style="display: flex; justify-content: center; gap: 1rem; padding: 2rem 0">
-                <a href="{{ route('search') }}" class="btn btn-primary">Kembali</a>
-                <a href="" class="btn btn-primary">Ajukan Taaruf</a>
+            <div style="display: flex; justify-content: center; gap: 2rem; padding: 1rem;">
+                <a href="{{ route('search') }}" class="button">Kembali</a>
+                <a href="" class="button">Ajukan Taaruf</a>
             </div>
         </div>
     </div>

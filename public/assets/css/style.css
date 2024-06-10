@@ -640,6 +640,48 @@ button:hover {
 /*REGISTER*/
 
 /* Article Pages */
+.search-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    padding: 1rem;
+    margin-block: 10px;
+    margin-bottom: 0px;
+    margin-inline: 50px;
+    gap: 0.5rem;
+}
+
+.search-container input[type="text"] {
+    display: flex;
+    margin-bottom: 0;
+}
+
+.search-input {
+    padding: 20px;
+    align-self: center;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    width: 70%;
+    transition: border-color 0.3s;
+}
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4b5c98;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #001b3f;
+}
 #page-artikel {
     background-color: white;
 }
@@ -650,6 +692,14 @@ button:hover {
     width: 90%;
     margin: auto;
     gap: 5px;
+}
+.containner-artikel{
+    max-width: 95%;
+    margin: 30px auto 0;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .artikel-container .artikel-box {
     border-radius: 15px;
@@ -734,9 +784,9 @@ button:hover {
     padding: 2px 0px;
 }
 .pagination li.page-item.active {
-    background-color: #007bff;
+    background-color: #4b5c98;
     color: #fff;
-    border-color: #007bff;
+    border-color: #4b5c98;
     padding: 2px 10px;
 }
 .pagination li.page-item.disabled {
@@ -1869,10 +1919,10 @@ button:hover {
 }
 
 .container-search {
-    max-width: 800px;
-    margin: 20px auto 0;
+    max-width: 95%;
+    margin: 30px auto 0;
     padding: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -1934,9 +1984,9 @@ input[type="text"] {
 
 .card {
     flex: 0 0 350px; /* Lebar dinamis untuk tiga card dalam satu baris */
-    margin: 10px;
-    margin-right: 60px;
-    background-color: #f9f9f9;
+    margin: 20px;
+    gap: 30px;
+    background: linear-gradient(97deg, #eeebeb 2.97%, #f5ecd5 120.26%);
     border-radius: 20px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;

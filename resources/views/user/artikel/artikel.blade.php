@@ -13,29 +13,36 @@
     {{-- manggil navbar --}}
     <x-navbar :profile="$profile"></x-navbar>
     <main id="page-artikel" style="background-color: white">
-        <div class="artikel-container">
-            <h2>Artikel Populer</h2>
-            <div class="artikel-box">
-                @if ($articles->isEmpty())
-                    <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
-                        <p>Belum ada artikel yang tersedia.</p>
-                    </div>
-                @else
-                    @foreach ($articles as $article)
-                        <article class="isi-artikel">
-                            <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
-                            <div class="content-artikel">
-                                <h3>{{ $article->title }}</h3>
-                                <p>{{ Str::limit($article->content, 150) }}</p>
-                                <a href="{{ route('artikel.show', $article->article_id) }}"
-                                    class="button">Selengkapnya</a>
-                            </div>
-                        </article>
-                    @endforeach
-                @endif
+        <div class="container-artikel">
+            <div class="search-container">
+                <input type="text" placeholder="Cari artikel..." class="search-input">
+                <button class="search-button">Cari</button>
             </div>
-            <div id="navigator">
-                {{ $articles->links() }}
+        
+            <div class="artikel-container">
+                
+                <div class="artikel-box">
+                    @if ($articles->isEmpty())
+                        <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                            <p>Belum ada artikel yang tersedia.</p>
+                        </div>
+                    @else
+                        @foreach ($articles as $article)
+                            <article class="isi-artikel">
+                                <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
+                                <div class="content-artikel">
+                                    <h3>{{ $article->title }}</h3>
+                                    <p>{{ Str::limit($article->content, 150) }}</p>
+                                    <a href="{{ route('artikel.show', $article->article_id) }}"
+                                        class="button">Selengkapnya</a>
+                                </div>
+                            </article>
+                        @endforeach
+                    @endif
+                </div>
+                <div id="navigator">
+                    {{ $articles->links() }}
+                </div>
             </div>
         </div>
     </main>
