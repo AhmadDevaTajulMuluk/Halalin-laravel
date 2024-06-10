@@ -72,7 +72,7 @@ class PelatihanController extends Controller
         $completedBab = $user->pelatihan_completion;;
         $completionPercentage = $totalbab > 0 ? ($completedBab / $totalbab) * 100 : 0;
 
-        return view('user.pelatihan', compact('profile', 'pelatihans', 'pelatihanIni', 'prevBab', 'nextBab', 'completionPercentage'));
+        return view('user.pelatihan', compact('profile', 'user', 'pelatihans', 'pelatihanIni', 'prevBab', 'nextBab', 'completionPercentage'));
     }
 
     /**

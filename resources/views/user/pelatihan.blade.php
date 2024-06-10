@@ -50,12 +50,15 @@
                         <p class="percentage-text">{{ number_format($completionPercentage, 2) }}% selesai</p>
                     </div>
                     <div id="list-bab">
+						@php
+							$completion = $user->pelatihan_completion;
+						@endphp
 						@foreach ($pelatihans as $pelatihan)
 							<div class="bab-container">
 								<div>
 									@php
 										$isActive = Request::is('pelatihan/bab/' . $pelatihan->nomor_bab) ? 'active' : '';
-										$isComplete = $pelatihan->is_complete ? 'complete' : '';
+										$isComplete = $completion >= $pelatihan->nomor_bab ? 'complete' : '';
 									@endphp
 									@if ($pelatihan->kategori == 'kuis')
 										<a href="{{ route('pelatihan.show', $pelatihan->nomor_bab) }}" class="{{ $isActive }} {{ $isComplete }}">Kuis</a>

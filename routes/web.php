@@ -44,8 +44,8 @@ Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
 Route::get('/register', [SessionController::class, 'register'])->name('register');
 Route::post('/create', [SessionController::class, 'create'])->name('create');
 
-// Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
-// Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
+Route::get('/admin/register', [adminController::class, 'register'])->name('admin.register');
+Route::post('/admin/register', [adminController::class, 'register_action'])->name('register.action');
 
 
 // Route::get('/admin/register', [adminController::class, 'register'])->name('register');
