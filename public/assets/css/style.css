@@ -2482,6 +2482,7 @@ input[type="text"] {
 
 /* Pelatihan */
 body#pelatihan {
+    margin: 0;
     max-height: calc(100% - 138px);
 }
 main#main-pelatihan {
