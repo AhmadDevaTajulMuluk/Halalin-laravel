@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
     Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+    Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
     Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
     Route::post('/biodata', [BiodataController::class, 'storeProfile'])->name('profile.post');
     Route::put('/biodata', [BiodataController::class, 'updateProfile'])->name('profile.update');
