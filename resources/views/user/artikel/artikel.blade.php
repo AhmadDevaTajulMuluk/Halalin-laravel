@@ -17,6 +17,11 @@
             <div>
                 <form action="{{ route('artikel.search') }}" method="GET" class="search-container">
                     <input type="text" name="search" placeholder="Cari artikel..." class="search-input" value="{{ request('search') }}">
+                    <select class="filter-search">
+                        <option value="" disabled selected>Filter By</option>
+                        <option value="populer">Populer</option>
+                        <option value="none">none</option>
+                    </select>
                     <button type="submit" class="search-button">Cari</button>
                 </form>
             </div>
