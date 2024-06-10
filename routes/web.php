@@ -74,7 +74,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/admin/ustadz/store', [AdminController::class, 'storeUstadz'])->name('admin.ustadz.store');
     Route::get('/admin/ustadz/{ustadz_id}/edit', [AdminController::class, 'editUstadz'])->name('admin.ustadz.edit');
     Route::put('/admin/ustadz/{ustadz_id}', [AdminController::class, 'updateUstadz'])->name('admin.ustadz.update');
-    Route::delete('/admin/ustadz/{ustadz_id}', [AdminController::class, 'destroyUstadz'])->name('admin.ustadz.destroy');
+    Route::post('/admin/ustadz/{ustadz_id}', [AdminController::class, 'destroyUstadz'])->name('admin.ustadz.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

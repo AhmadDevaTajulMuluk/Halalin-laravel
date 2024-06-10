@@ -1,8 +1,12 @@
 @extends('layouts.admin')
 
+@section('title','Daftar Ustadz')
+
+@section('header', 'Daftar Ustadz')
+
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Daftar Ustadz</h2>
+    {{-- <h2 class="text-center mb-4">Daftar Ustadz</h2> --}}
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -27,11 +31,10 @@
                     <td>{{ $ustadz->username }}</td>
                     <td>{{ $ustadz->phone }}</td>
                     <td>
-                        <a href="{{ route('admin.ustadz.edit', ['ustadz_id' => $ustadz->ustadz_id]) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.ustadz.destroy', ['ustadz_id' => $ustadz->ustadz_id]) }}" method="POST">
+                        <a href="{{ route('admin.ustadz.edit', $ustadz->ustadz_id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('admin.ustadz.destroy', $ustadz->ustadz_id) }}" method="POST" class="d-inline">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
                     </td>
                 </tr>
