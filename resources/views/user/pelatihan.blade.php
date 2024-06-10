@@ -48,7 +48,7 @@
             </div>
         </div>
         <div id="content-pelatihan">
-			
+			<x-bab></x-bab>
         </div>
     </main>
     <footer id="pelatihan-footer">
@@ -64,7 +64,7 @@
             <div class="fa fa-chevron-right"></div>
         </div>
     </footer>
-    <script>
+    {{-- <script>
         fetchAPI();
         var current_page = 0;
         var page_before;
@@ -138,7 +138,7 @@
                 })
                 .catch((error) => console.error("Error loading JSON:", error));
         }
-    </script>
+    </script> --}}
 </body>
 <script type="text/javascript" src="../../assets/js/script.js"></script>
 
