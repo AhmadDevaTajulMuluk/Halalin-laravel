@@ -133,7 +133,6 @@
                                             style="text-decoration: none; color: inherit;">
                                             <div style="margin : 1rem">                                            
                                                 <div class="card-img">
-                                                    <img src="{{ $user && $user->image ? asset('image/' . $user->image) : asset('assets/images/defaultpic.png') }}" alt="user" />           
                                             </div>
                                                 <h2>{{ $user->username }}</h2>
                                                 @php
@@ -142,7 +141,6 @@
                                                     $age = $birthdate->diff($today)->y;
                                                 @endphp
                                                 <hr>
-                                                <p><b>Nama Lengkap:</b> {{ $user->fullname }}</p>
                                                 <p><b>Umur:</b> {{ $age }}</p>
                                                 <p><b>Tempat Lahir:</b> {{ $user->place_date }}</p>
                                                 <p><b>Pendidikan:</b> {{ $user->last_education }}</p>
@@ -178,7 +176,6 @@
                                             $today = new DateTime('today');
                                             $age = $birthdate->diff($today)->y;
                                         @endphp
-                                        <p>Nama Panjang: {{ $result->fullname }}</p>
                                         <p>Umur: {{ $age }}</p>
                                         <p>Tempat Lahir: {{ $result->place_date }}</p>
                                         <p>Pendidikan: {{ $result->last_education }}</p>
