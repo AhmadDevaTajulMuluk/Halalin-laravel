@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\Models\Admin;
+use App\Models\Ustadz;
 
 class AdminController extends Controller
 {
@@ -136,5 +137,66 @@ class AdminController extends Controller
         $admin = Admin::findOrFail($admin_id);
         $admin->delete();
         return redirect()->route('admin.dashboard-admin')->with('success', 'Admin deleted successfully');
+    }
+
+    public function showUstadz()
+    {
+        $ustadz = Ustadz::all();
+        return view('admin.tb_ustadz', compact('ustadz'));
+    }
+
+    public function createUstadz()
+    {
+        return view('admin.create_ustadz');
+    }
+
+    public function storeUstadz(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:ustadz',
+            'password' => 'required|confirmed',
+            'phone' => 'required',
+        ]);
+
+        Ustadz::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+            'phone' => $request->phone,
+        ]);
+
+        return redirect()->route('admin.ustadz')->with('success', 'Ustadz created successfully');
+    }
+
+    public function editUstadz($ustadz_id)
+    {
+        $ustadz = Ustadz::findOrFail($ustadz_id);
+        return view('admin.edit_ustadz', compact('ustadz'));
+    }
+
+    public function updateUstadz(Request $request, $ustadz_id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:ustadz,username,' . $ustadz_id,
+            'phone' => 'required',
+        ]);
+
+        $ustadz = Ustadz::findOrFail($ustadz_id);
+        $ustadz->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'password' => $request->filled('password') ? bcrypt($request->password) : $ustadz->password,
+        ]);
+
+        return redirect()->route('admin.ustadz')->with('success', 'Ustadz updated successfully');
+    }
+
+    public function destroyUstadz($ustadz_id)
+    {
+        Ustadz::findOrFail($ustadz_id)->delete();
+        return redirect()->route('admin.ustadz')->with('success', 'Ustadz deleted successfully');
     }
 }

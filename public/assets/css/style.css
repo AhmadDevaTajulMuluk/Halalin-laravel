@@ -668,6 +668,11 @@ button:hover {
     width: 70%;
     transition: border-color 0.3s;
 }
+.filter-search {
+    margin-bottom: 0;
+    width: 10%;
+    text-align: center;
+}
 .search-button {
     padding: 10px 20px;
     font-size: 16px;

@@ -24,6 +24,7 @@ class ArtikelController extends Controller
         $profile = Profile::where('user_id', auth()->id())->first();
         return view('components.navbar', compact('profile'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -51,6 +52,19 @@ class ArtikelController extends Controller
         $article = DB::table('articles')->where('article_id', $id)->first();
 
         return view('user.artikel.content', compact('article'), compact('profile'));
+    }
+    public function search(Request $request)
+    {
+        $profile = Profile::where('user_id', auth()->id())->first();
+        $searchQuery = $request->input('search');
+        
+        if ($searchQuery) {
+            $articles = Article::where('title', 'LIKE', "%{$searchQuery}%")->paginate(5);
+        } else {
+            $articles = Article::paginate(5);
+        }
+
+        return view('user.artikel.artikel', compact('profile', 'articles'));
     }
 
     /**

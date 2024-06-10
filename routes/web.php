@@ -11,6 +11,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TaarufController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\KuisController;
+use App\Http\Controllers\UstadzController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RequestTaarufController;
 use App\Http\Middleware\AuthenticateAdmin;
@@ -67,6 +68,13 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/articles/{article}/edit', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
     Route::put('/admin/articles/{article}', [AdminArticleController::class, 'update'])->name('admin.articles.update');
     Route::delete('/admin/articles/{article}', [AdminArticleController::class, 'destroy'])->name('admin.articles.destroy');
+
+    Route::get('/admin/ustadz', [AdminController::class, 'showUstadz'])->name('admin.ustadz');
+    Route::get('/admin/ustadz/create', [AdminController::class, 'createUstadz'])->name('admin.ustadz.create');
+    Route::post('/admin/ustadz/store', [AdminController::class, 'storeUstadz'])->name('admin.ustadz.store');
+    Route::get('/admin/ustadz/{ustadz_id}/edit', [AdminController::class, 'editUstadz'])->name('admin.ustadz.edit');
+    Route::put('/admin/ustadz/{ustadz_id}', [AdminController::class, 'updateUstadz'])->name('admin.ustadz.update');
+    Route::delete('/admin/ustadz/{ustadz_id}', [AdminController::class, 'destroyUstadz'])->name('admin.ustadz.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -76,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
     Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+    Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
     Route::get('/biodata', [BiodataController::class, 'index'])->name('biodata');
     Route::post('/biodata', [BiodataController::class, 'storeProfile'])->name('profile.post');
     Route::put('/biodata', [BiodataController::class, 'updateProfile'])->name('profile.update');
@@ -122,9 +131,14 @@ Route::middleware(['auth'])->group(function () {
 //     return view('user.matching.search');
 // });
 
-Route::get('/ustadz', function () {
-    return view('ustadz.dashboard');
-})->name('dashboard');
+// Route::get('/ustadz', function () {
+//     return view('ustadz.dashboard');
+// })->name('dashboard');
+
+
+Route::prefix('ustadz')->group(function () {
+Route::get('/ustadz/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
+Route::post('/logout', [UstadzController::class, 'logout'])->name('ustadz.logout');
 
 Route::get('/artikel-ustadz', function () {
     return view('ustadz.artikel');
@@ -132,4 +146,5 @@ Route::get('/artikel-ustadz', function () {
 
 Route::get('/notif-ustadz', function () {
     return view('ustadz.notif');
+});
 });
