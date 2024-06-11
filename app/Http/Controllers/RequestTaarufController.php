@@ -15,7 +15,19 @@ class RequestTaarufController extends Controller
         $requesterId = User::where('id', auth()->id())->first();
         $responserId = User::where('id', $id)->first();
 
-        // Ambil data user yang mengajukan taaruf
+        // Cek apakah sudah ada permintaan taaruf sebelumnya antara kedua user tersebut
+        $existingRequest = RequestTaaruf::where(function ($query) use ($requesterId, $responserId) {
+            $query->where('requester_id', $requesterId->id)
+                ->where('responser_id', $responserId->id);
+        })->orWhere(function ($query) use ($requesterId, $responserId) {
+            $query->where('requester_id', $responserId->id)
+                ->where('responser_id', $requesterId->id);
+        })->first();
+
+        if ($existingRequest) {
+            // Jika sudah ada, tampilkan pesan error atau lakukan tindakan lain yang sesuai
+            return redirect()->route('dashboard')->with('errorTaaruf', 'Permintaan taaruf sudah pernah diajukan sebelumnya!');
+        }
 
         // Buat request taaruf baru
         $requestTaaruf = new RequestTaaruf([
@@ -30,6 +42,7 @@ class RequestTaarufController extends Controller
         // Tampilkan pesan sukses atau alihkan ke halaman lain
         return redirect()->route('dashboard')->with('successTaaruf', 'Permintaan taaruf berhasil dikirim!');
     }
+
 
     public function approve(Request $request)
     {

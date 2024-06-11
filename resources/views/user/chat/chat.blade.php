@@ -172,7 +172,27 @@
 		function closeApprovalModal() {
 			document.getElementById('approvalModal').style.display = 'none';
 		}
+		document.addEventListener("DOMContentLoaded", function () {
+    const chatItems = document.querySelectorAll('.chat-item');
+    chatItems.forEach(item => {
+        item.addEventListener('click', function() {
+            updateRoomChat(this);
+        });
+    });
+});
 
+function updateRoomChat(chatItem) {
+    const userName = chatItem.querySelector('.chat-info h4').textContent;
+    const userStatus = chatItem.querySelector('.chat-info p').textContent;
+    const roomChatContainer = document.querySelector('.roomchat-container .isi');
+    roomChatContainer.innerHTML = `
+        <h3>Chat dengan ${userName}</h3>
+        <p>Status: ${userStatus}</p>
+        <div class="bubblechat-container">
+            <!-- Chat bubbles will be added here -->
+        </div>
+    `;
+}
 	</script>
 </body>
 </html>
