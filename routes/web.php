@@ -83,9 +83,9 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // });
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
     Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
