@@ -10,7 +10,7 @@
     <title>Pelatihan</title>
 	<style>
 		.complete {
-			color: #848ce1;
+			color: #9b9ebb;
 		}
 		.progress-bar {
             width: 100%;
@@ -21,7 +21,7 @@
 
         .progress-bar-inner {
             height: 20px;
-            background-color: #4b53c9;
+            background-color: #4b5c98;
             width: 0;
             transition: width 0.5s;
         }
@@ -96,7 +96,7 @@
 			@endif
 		</div>
 		<div class="bab-title fledir-row">
-			<h2 style="font-weight: 700;">Bab {{ $pelatihanIni->nomor_bab }}</h2>
+			<h2 style="font-weight: 700; color: #4b5c98;">Bab {{ $pelatihanIni->nomor_bab }}</h2>
 		</div>
 		<div id="after" class="bab-choice fledir-row">
 			@if ($nextBab)

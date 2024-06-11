@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @auth('admin')
     <div class="wrapper">
         @include('admin.layouts.sidebar')
@@ -65,5 +66,12 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
     <script src="{{ asset('admin/assets/js/script.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+				setTimeout(function() {
+					$('.alert').fadeOut('fast');
+				}, 2000); // 3000 ms = 3 detik
+			});
+    </script>
 </body>
 </html>
