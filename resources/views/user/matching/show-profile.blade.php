@@ -8,12 +8,67 @@
     <link rel="icon" type="image/jpg" href="../../assets/images/halalin-icon.png">
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
+    <link rel="stylesheet" href="cd">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
     
+        .modal-content {
+            background-color: #fff;
+            border-radius: 5px;
+            width: 300px;
+            margin: 20% auto;
+            padding: 20px;
+        }
+    
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+    
+        .modal-title {
+            font-size: 18px;
+        }
+    
+        .modal-body {
+            margin-bottom: 20px;
+        }
+    
+        .modal-footer {
+            text-align: right;
+        }
+    
+        .btn {
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+        }
+    
+        .btn-primary {
+            background-color: #007bff;
+        }
+    
+        .btn-secondary {
+            background-color: #6c757d;
+            margin-right: 10px;
+        }
+    </style>    
 </head>
 
 <body>
@@ -100,13 +155,54 @@
             </div>
             <div style="display: flex; justify-content: center; gap: 2rem; padding: 1rem;">
                 <a href="{{ route('search') }}" class="button">Kembali</a>
-                <form action="{{ route('request_taaruf.send', $user->id) }}" method="POST">
+                <form id="requestForm" action="{{ route('request_taaruf.send', $user->id) }}" method="POST">
                     @csrf
-                    <button type="submit" class="button">Ajukan Taaruf</button>
-                </form>
+                    <button type="button" class="button" id="confirmBtn">Ajukan Taaruf</button>
+                </form>                
             </div>
         </div>
     </div>
+    <div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Pengajuan Taaruf</h5>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin mengajukan taaruf?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="confirmSubmit">Ya, Ajukan Taaruf</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var confirmBtn = document.getElementById('confirmBtn');
+        var confirmSubmit = document.getElementById('confirmSubmit');
+        var requestForm = document.getElementById('requestForm');
+        var confirmModal = document.getElementById('confirmModal');
+
+        confirmBtn.addEventListener('click', function() {
+            confirmModal.style.display = 'block';
+        });
+
+        confirmSubmit.addEventListener('click', function() {
+            requestForm.submit();
+        });
+
+        var closeModalButtons = document.querySelectorAll('[data-dismiss="modal"]');
+        closeModalButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                confirmModal.style.display = 'none';
+            });
+        });
+    });
+</script>
+
+
 
 </html>

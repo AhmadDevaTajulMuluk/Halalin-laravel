@@ -47,6 +47,8 @@
     <div id="profile-popup" class="profile-popup">
       <div class="profile-popup-content">
           <span class="close" onclick="toggleProfilePopup()">&times;</span>
+          <p style="padding-top: 0; margin-top: 0; font-weight: 800">{{ $profile->fullname }}</p>
+          <hr>
           <a href="/biodata">Lihat Profil</a>
           <a href="/logout">Logout</a>
       </div>
@@ -84,6 +86,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    margin-left: 1rem;
 }
 
 .close:hover,

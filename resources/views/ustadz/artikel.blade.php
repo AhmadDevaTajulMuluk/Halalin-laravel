@@ -1,110 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpg" href="../../assets/images/halalin-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <title>Artikel</title>
-  </head>
-  <body>
+</head>
+
+<body>
     {{-- manggil navbar --}}
     <x-navbarustadz></x-navbarustadz>
     <main id="page-artikel" style="background-color: white">
-      <div class="artikel-container">
-        <h2>Artikel Populer</h2>
-        <div class="artikel-box">
-          <article class="isi-artikel">
-            <img
-              src="../../assets/images/manfaatpernikahan.jpg"
-              alt="Artikel"
-            />
-            <div class="content-artikel">
-              <h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-              <p>
-                Pernikahan dalam Islam memiliki peran yang sangat penting dalam
-                membentuk kehidupan berkeluarga yang harmonis dan memberikan
-                berbagai manfaat bagi individu, keluarga, dan masyarakat secara
-                keseluruhan. Dalam ajaran Islam, pernikahan dianggap sebagai
-                salah satu ibadah yang dianjurkan, dengan tujuan untuk mencapai
-                keberkahan, kestabilan, dan keseimbangan dalam hidup. Dalam
-                penjelasan berikut, akan diuraikan secara rinci tiga manfaat
-                pernikahan dalam Islam yang meliputi membentuk keluarga yang
-                stabil, mendapatkan keberkahan, dan melengkapi diri serta
-                mencapai keseimbangan.
-              </p>
-              <a href="/artikel-content" class="button"
-                >Selengkapnya</a
-              >
+        <div class="container-artikel">
+            <div>
+                <form action="{{ route('artikel.search') }}" method="GET" class="search-container">
+                    <input type="text" name="search" placeholder="Cari artikel..." class="search-input"
+                        value="{{ request('search') }}" style="border-radius: 10px; padding-left: 20px;">
+                    <select name="filter" class="filter-search" style="border-radius: 10px; font-size: 14px;">
+                        <option value="" disabled {{ request('filter') == '' ? 'selected' : '' }}>Filter By
+                        </option>
+                        <option value="populer" {{ request('filter') == 'populer' ? 'selected' : '' }}>Populer</option>
+                        <option value="none" {{ request('filter') == 'none' ? 'selected' : '' }}>None</option>
+                    </select>
+                    <button type="submit" class="search-button" style="border-radius: 10px;">Cari</button>
+                </form>
             </div>
-          </article>
-          <article class="isi-artikel">
-            <img src="../../assets/images/gambar-artikel1.png" alt="Artikel" />
-            <div class="content-artikel">
-              <h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-              <p>
-                Dalam Islam, hidup berpasangan merupakan fitrah kehidupan ang
-                dianjurkan. Tidak heran bila menyebut pernikahan sebagai
-                sunnatullah dan sunnaturrasul yang bernilai ibadah. Dalam Islam,
-                hidup berpasangan merupakan fitrah kehidupan ang dianjurkan.
-                Tidak heran bila menyebut pernikahan sebagai sunnatullah dan
-                sunnaturrasul yang bernilai ibadah.
-              </p>
-              <a href="/artikel-content" class="button"
-                >Selengkapnya</a
-              >
+
+            <div class="artikel-container">
+                <div class="artikel-box">
+                    @if ($articles->isEmpty())
+                        <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                            <p>Belum ada artikel yang tersedia.</p>
+                        </div>
+                    @else
+                        @foreach ($articles as $article)
+                            <article class="isi-artikel">
+                                <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
+                                <div class="content-artikel" style="width: 100%">
+                                    <h3>{{ $article->title }}</h3>
+                                    <p>{{ Str::limit($article->content, 150) }}</p>
+                                    <a href="{{ route('artikel.show', $article->article_id) }}"
+                                        class="button">Selengkapnya</a>
+                                </div>
+                            </article>
+                        @endforeach
+                    @endif
+                </div>
+                <div id="navigator">
+                    {{ $articles->appends(['search' => request('search'), 'filter' => request('filter')])->links() }}
+                </div>
             </div>
-          </article>
-          <article class="isi-artikel">
-            <img src="../../assets/images/gambar-artikel1.png" alt="Artikel" />
-            <div class="content-artikel">
-              <h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-              <p>
-                Dalam Islam, hidup berpasangan merupakan fitrah kehidupan ang
-                dianjurkan. Tidak heran bila menyebut pernikahan sebagai
-                sunnatullah dan sunnaturrasul yang bernilai ibadah.
-              </p>
-              <a href="/artikel-content" class="button"
-                >Selengkapnya</a
-              >
-            </div>
-          </article>
-          <article class="isi-artikel">
-            <img src="../../assets/images/gambar-artikel1.png" alt="Artikel" />
-            <div class="content-artikel">
-              <h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-              <p>
-                Dalam Islam, hidup berpasangan merupakan fitrah kehidupan ang
-                dianjurkan. Tidak heran bila menyebut pernikahan sebagai
-                sunnatullah dan sunnaturrasul yang bernilai ibadah.
-              </p>
-              <a href="/artikel-content" class="button">Selengkapnya</a>
-            </div>
-          </article>
-          <article class="isi-artikel">
-            <img src="../../assets/images/gambar-artikel1.png" alt="Artikel" />
-            <div class="content-artikel">
-              <h3>Tiga Manfaat Pernikahan dalam Islam, Apa Saja?</h3>
-              <p>
-                Dalam Islam, hidup berpasangan merupakan fitrah kehidupan ang
-                dianjurkan. Tidak heran bila menyebut pernikahan sebagai
-                sunnatullah dan sunnaturrasul yang bernilai ibadah.
-              </p>
-              <a href="/artikel-content" class="button">Selengkapnya</a>
-            </div>
-          </article>
         </div>
-        <div id="navigator">
-          <a href="#" class="selected">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">></a>
-        </div>
-      </div>
     </main>
     <x-footer></x-footer>
-  </body>
-  <script type="text/javascript" src="../../assets/js/script.js"></script>
+</body>
+<script type="text/javascript" src="../../assets/js/script.js"></script>
+
 </html>

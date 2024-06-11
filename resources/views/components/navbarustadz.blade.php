@@ -12,10 +12,9 @@
             <p class="close-nav" onclick="toggleDropdown()">x</p>
             <div class="navbar-items">
                 <nav>
-                    <a id="beranda-navbar" href="/ustadz" class="{{ Request::is('ustadz') ? 'active' : '' }}">Beranda</a>
-                    <a id="artikel-navbar" href="/artikel-ustadz" class="{{ Request::is('artikel-ustadz') ? 'active' : '' }}">Artikel</a>
-                    <a id="chat-navbar" href="/chat" class="{{ Request::is('chat') ? 'active' : '' }}">Chat</a>
-                    <a id="notif-navbar" href="/notif-ustadz" class="{{ Request::is('notif-ustadz') ? 'active' : '' }}">Notifikasi</a>
+                    <a id="beranda-navbar" href="{{ route('ustadz.dashboard') }}" class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">Beranda</a>
+                    <a id="artikel-navbar" href="{{ route('ustadz.artikel') }}" class="{{ Request::segment(2) == 'artikel' ? 'active' : '' }}">Artikel</a>
+                    <a id="chat-navbar" href="/chat" class="{{ Request::segment(2) == 'chat' ? 'active' : '' }}">Chat</a>
                 </nav>
                 <a href="#" onclick="toggleProfilePopup()" title="Lihat Profil" class="user-container">
                     <div class="user-image">

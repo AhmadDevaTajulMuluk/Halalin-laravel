@@ -47,25 +47,16 @@
 				<div class="sidebar">
 					<h2>Daftar Chat</h2>
 					<!-- Search Input -->
-					<div class="search-container">
-						<input type="text" id="search-input" placeholder="Cari chat..." onkeyup="filterChats()" />
-					</div>
 					<div class="chat-list" id="chat-list">
-						<div class="chat-item">
-							<img src="../../assets/images/user.png" alt="user1" />
-							<div class="chat-info">
-								<h4>Grup Taaruf A</h4>
-								<p>Pesan terakhir...</p>
+						@foreach($relations as $relation)
+							<div class="chat-item">
+								<img src="{{ $relation->profilCalon->gender == 'laki-laki' ? asset('assets/images/user.png') : asset('assets/images/userFemale.png') }}" alt="user{{ $relation->maleuser_id }}" />
+								<div class="chat-info">
+									<h4>{{ $relation->profilCalon->fullname }}</h4> <!-- Menggunakan data dari profiles -->
+									<p>{{ $relation->start == 0 ? 'Menunggu Ustadz Memulai Percakapan' : 'Percakapan Sedang Berlangsung'  }}</p> <!-- Anda mungkin ingin menambahkan data pesan terakhir -->
+								</div>
 							</div>
-						</div>
-						<div class="chat-item">
-							<img src="../../assets/images/user.png" alt="user2" />
-							<div class="chat-info">
-								<h4>Grup Taaruf B</h4>
-								<p>Pesan terakhir...</p>
-							</div>
-						</div>
-						<!-- Tambahkan chat-item lainnya sesuai kebutuhan -->
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -109,6 +100,19 @@
 											</div>
 										</div>
 									@endforeach
+									@foreach ($histories as $history)
+										<div class="notify-item">
+											<h4>
+												@if($history->requester_id == $userId->id)
+													Taaruf Disetujui
+												@elseif($history->responser_id == $userId->id)
+													Anda Menerima Taaruf
+												@endif
+											</h4>
+											<p>Dengan {{ $history->fullname }}</p>
+										</div>
+									@endforeach
+
 								</div>
 							</div>
 							<div class="icon-notif">

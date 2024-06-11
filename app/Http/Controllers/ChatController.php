@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Relations;
 use App\Models\RequestTaaruf;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,15 +16,35 @@ class ChatController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        $userId = User::where('id', auth()->id())->first();
+        if (auth('ustadz')->check()) {
+            $userId = User::where('id', auth('ustadz')->id())->first();
+        } else {
+            $userId = User::where('id', auth()->id())->first();
+        }
         $invitations = RequestTaaruf::where('responser_id', $userId->id)
             ->where('is_approved', false)
             ->join('users', 'request_taarufs.requester_id', '=', 'users.id')
             ->join('profiles', 'profiles.user_id', '=', 'users.id')
             ->select('request_taarufs.*', 'profiles.*')
             ->get();
+        $histories = RequestTaaruf::where('responser_id', $userId->id)
+            ->where('is_approved', 1)
+            ->join('users', 'request_taarufs.requester_id', '=', 'users.id')
+            ->join('profiles', 'profiles.user_id', '=', 'users.id')
+            ->select('request_taarufs.*', 'profiles.*')
+            ->get();
+        $relations = Relations::where('maleuser_id', $userId->id)
+            ->orWhere('femaleuser_id', $userId->id)
+            ->get();
+        foreach ($relations as $relation) {
+            if ($relation->maleuser_id == $userId->id) {
+                $relation->profilCalon = Profile::where('user_id', $relation->femaleuser_id)->first();
+            } else {
+                $relation->profilCalon = Profile::where('user_id', $relation->maleuser_id)->first();
+            }
+        }
 
-        return view('user.chat.chat', compact('profile', 'invitations'));
+        return view('user.chat.chat', compact('profile', 'invitations', 'relations', 'histories'));
     }
 
     public function render()

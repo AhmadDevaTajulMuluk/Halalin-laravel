@@ -27,7 +27,7 @@ class RequestTaarufController extends Controller
         $requestTaaruf->save();
 
         // Tampilkan pesan sukses atau alihkan ke halaman lain
-        return redirect()->route('dashboard')->with('success', 'Permintaan taaruf berhasil dikirim!');
+        return redirect()->route('dashboard')->with('successTaaruf', 'Permintaan taaruf berhasil dikirim!');
     }
 
     public function approve(Request $request)

@@ -146,12 +146,10 @@ Route::get('/ustadz/login', [UstadzController::class, 'showLoginForm'])->name('u
 Route::post('/ustadz/login', [UstadzController::class, 'login'])->name('ustadz.login.submit');
 
 Route::prefix('ustadz')->group(function () {
-    Route::get('/ustadz/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
+    Route::get('/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
+    Route::get('/artikel', [UstadzController::class, 'artikel'])->name('ustadz.artikel')->middleware('auth:ustadz');
+    Route::get('/chat', [ChatController::class, 'index'])->name('ustadz.chat')->middleware('auth:ustadz');
     Route::post('/logout', [UstadzController::class, 'logout'])->name('ustadz.logout');
-
-    Route::get('/artikel-ustadz', function () {
-        return view('ustadz.artikel');
-    })->name('artikel-ustadz');
 
     Route::get('/notif-ustadz', function () {
         return view('ustadz.notif');

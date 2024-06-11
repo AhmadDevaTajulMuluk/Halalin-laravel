@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Profile;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -11,13 +14,13 @@ use App\Models\Ustadz;
 class UstadzController extends Controller
 {
     public function showLoginForm()
-{
-    if(Auth::guard('ustadz')->check()) {
-        return redirect()->route('ustadz.dashboard');
+    {
+        if (Auth::guard('ustadz')->check()) {
+            return redirect()->route('ustadz.dashboard');
+        }
+
+        return view('ustadz.login');
     }
-    
-    return view('ustadz.login');
-}
 
     public function login(Request $request)
     {
@@ -71,7 +74,23 @@ class UstadzController extends Controller
 
     public function dashboard()
     {
-        return view('ustadz.dashboard');
+        $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
+        $articles = Article::latest()->take(5)->get();
+        $testimoni = Testimoni::all();
+        return view('ustadz.dashboard', compact('ustadz', 'articles', 'testimoni'));
+    }
+
+    public function artikel()
+    {
+        $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
+        $articles = Article::paginate(5); // Menampilkan 10 artikel per halaman
+        return view('ustadz.artikel', compact('ustadz', 'articles'));
+    }
+
+    public function chat()
+    {
+        $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
+        return view('ustadz.chat', compact('ustadz'));
     }
 
     // public function index()
