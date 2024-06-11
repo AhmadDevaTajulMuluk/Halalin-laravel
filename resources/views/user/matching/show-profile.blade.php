@@ -28,7 +28,7 @@
     
         .modal-content {
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
             width: 300px;
             margin: 20% auto;
             padding: 20px;
@@ -36,7 +36,6 @@
     
         .modal-header {
             border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
             margin-bottom: 10px;
         }
     
@@ -55,17 +54,17 @@
         .btn {
             cursor: pointer;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 7px;
             border: none;
             color: #fff;
         }
     
         .btn-primary {
-            background-color: #007bff;
+            background-color: #4b5c98;
         }
     
         .btn-secondary {
-            background-color: #6c757d;
+            background-color: #787e83;
             margin-right: 10px;
         }
     </style>    
@@ -166,14 +165,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Pengajuan Taaruf</h5>
+                    <h5 style="text-align: center;" class="modal-title" id="confirmModalLabel">Konfirmasi Pengajuan Taaruf</h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="text-align: center;">
                     Apakah Anda yakin ingin mengajukan taaruf?
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="text-align: center;">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary" id="confirmSubmit">Ya, Ajukan Taaruf</button>
+                    <button type="submit" class="btn btn-primary" id="confirmSubmit">Ya</button>
                 </div>
             </div>
         </div>

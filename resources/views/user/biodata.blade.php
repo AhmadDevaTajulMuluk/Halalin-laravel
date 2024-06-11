@@ -250,8 +250,8 @@
 									<select class="pendidikanterakhir" name="last_education" required>
 										<option value="" disabled selected {{ !$education ? 'selected' : '' }}>--- Pilih Pendidikan Terakhir Anda ---</option>
 										<option value="SD" {{ old('last_education', $education ? $education->last_education : '') == 'SD' ? 'selected' : '' }}>SD</option>
-										<option value="SMP sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMP' ? 'selected' : '' }}>SMP sederajat</option>
-										<option value="SMA sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMA' ? 'selected' : '' }}>SMA sederajat</option>
+										<option value="SMP sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMP sederajat' ? 'selected' : '' }}>SMP sederajat</option>
+										<option value="SMA sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMA sederajat' ? 'selected' : '' }}>SMA sederajat</option>
 										<option value="Sarjana" {{ old('last_education', $education ? $education->last_education : '') == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
 										<option value="Magister" {{ old('last_education', $education ? $education->last_education : '') == 'Magister' ? 'selected' : '' }}>Magister</option>
 										<option value="Doktor" {{ old('last_education', $education ? $education->last_education : '') == 'Doktor' ? 'selected' : '' }}>Doktor</option>

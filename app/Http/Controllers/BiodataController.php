@@ -513,9 +513,9 @@ class BiodataController extends Controller
     public function storeReligion(Request $request)
     {
         $request->validate([
-            'quranMemory' => 'required|string|max:50|min:10',
-            'level' => 'required|string|max:50|min:10',
-            'answer1' => 'required|string|min:10',
+            'quranMemory' => 'required|string|max:50',
+            'level' => 'required|string|max:50|min:5',
+            'answer1' => 'required|string|min:3',
             'answer2' => 'required|string|min:10',
             'answer3' => 'required|string|min:10',
             'answer4' => 'required|string|min:10',
@@ -523,21 +523,20 @@ class BiodataController extends Controller
             'answer6' => 'required|string|min:10',
         ], [
             'quranMemory.required' => 'Hafalan quran harus diisi.',
-            'quranMemory.min' => 'Hafalan quran harus memiliki minimal 10 karakter.',
             'level.required' => 'Bacaan quran harus diisi.',
-            'level.min' => 'Bacaan quran harus memiliki minimal 10 karakter.',
-            'answer1.required' => 'Jawaban pertanyaan 1 harus diisi.',
-            'answer1.min' => 'Jawaban pertanyaan 1 harus memiliki minimal 10 karakter.',
-            'answer2.required' => 'Jawaban pertanyaan 2 harus diisi.',
-            'answer2.min' => 'Jawaban pertanyaan 2 harus memiliki minimal 10 karakter.',
-            'answer3.required' => 'Jawaban pertanyaan 3 harus diisi.',
-            'answer3.min' => 'Jawaban pertanyaan 3 harus memiliki minimal 10 karakter.',
-            'answer4.required' => 'Jawaban pertanyaan 4 harus diisi.',
-            'answer4.min' => 'Jawaban pertanyaan 4 harus memiliki minimal 10 karakter.',
-            'answer5.required' => 'Jawaban pertanyaan 5 harus diisi.',
-            'answer5.min' => 'Jawaban pertanyaan 5 harus memiliki minimal 10 karakter.',
-            'answer6.required' => 'Jawaban pertanyaan 6 harus diisi.',
-            'answer6.min' => 'Jawaban pertanyaan 6 harus memiliki minimal 10 karakter.',
+            'level.min' => 'Bacaan quran minimal 5 karakter.',
+            'answer1.required' => 'Kajian ustad yang diikuti harus diisi.',
+            'answer1.min' => 'Kajian ustad yang diikuti minimal 3 karakter.',
+            'answer2.required' => 'Jawaban pemahaman anda harus diisi.',
+            'answer2.min' => 'Jawaban pemahaman anda minimal 10 karakter.',
+            'answer3.required' => 'Jawaban tentang proses pencarian pasangan harus diisi.',
+            'answer3.min' => 'Jawaban tentang proses pencarian pasangan minimal 10 karakter.',
+            'answer4.required' => 'Jawaban konsep mahar  harus diisi.',
+            'answer4.min' => 'Jawaban konsep mahar harus memiliki minimal 10 karakter.',
+            'answer5.required' => 'Jawaban solusi mengatasi konflik harus diisi.',
+            'answer5.min' => 'Jawaban solusi mengatasi konflik minimal 10 karakter.',
+            'answer6.required' => 'Jawaban tentang keetiaan harus diisi.',
+            'answer6.min' => 'Jawaban tentang keetiaan minimal 10 karakter.',
         ]);
 
         $data = [
