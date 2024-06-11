@@ -89,6 +89,7 @@
 										<div id="approvalModal" style="display: none;">
 											<div class="modal-content">
 												<h4>Undangan Taaruf</h4>
+												<p><a href="{{ route('profile.show', ['username' => $result->username]) }}">Lihat Profil</a></p>
 												<p id="modalText"></p>
 												<form id="approvalForm" method="POST" action="{{ route('request_taaruf.approve') }}">
 													@csrf

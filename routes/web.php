@@ -125,6 +125,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/chat', [ChatController::class, 'index'])->name('chat')->middleware('auth');
+    Route::get('/profile/{username}', [BiodataController::class, 'show'])->name('profile.view');
 
     Route::get('/kuis', [KuisController::class, 'index']);
     Route::post('/kuis', [KuisController::class, 'store'])->name('kuis.store');
