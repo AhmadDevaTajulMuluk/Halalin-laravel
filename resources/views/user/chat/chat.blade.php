@@ -91,9 +91,9 @@
 									user ini adalah responser, tampilkan notif "anda mendapatkan undangan dari {{ requester }}" --}}
 									{{-- @dd($invitations) --}}
 									@foreach ($invitations as $invitation)
-										<div class="notify-item" onclick="showApprovalModal('{{ $invitation->id }}', '{{ $invitation->requester->username }}')">
+										<div class="notify-item" onclick="showApprovalModal('{{ $invitation->id }}', '{{ $invitation->requester->profile->fullname }}')">
 											<h4>Undangan Taaruf</h4>
-											<p>Anda mendapatkan undangan taaruf dari {{ $invitation->requester->username }}</p>
+											<p>Anda mendapatkan undangan taaruf dari {{ $invitation->requester->profile->fullname }}</p>
 										</div>
 										<div id="approvalModal" style="display: none;">
 											<div class="modal-content">
@@ -158,8 +158,8 @@
 				}
 			}
 		}
-		function showApprovalModal(requestTaarufId, requesterUsername) {
-			document.getElementById('modalText').innerText = `Apakah Anda ingin menerima taaruf dari ${requesterUsername}?`;
+		function showApprovalModal(requestTaarufId, requesterFullname) {
+			document.getElementById('modalText').innerText = `Apakah Anda ingin menerima taaruf dari  ${requesterFullname}?`;
 			document.getElementById('request_taaruf_id').value = requestTaarufId;
 			document.getElementById('approvalModal').style.display = 'block';
 		}

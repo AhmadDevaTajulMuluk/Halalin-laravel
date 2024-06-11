@@ -49,10 +49,12 @@ class RequestTaarufController extends Controller
     public function fetchNotifications($userId)
     {
         // Ambil semua undangan taaruf yang belum disetujui dengan pengguna saat ini sebagai responser
-        $invitations = RequestTaaruf::where('responser_id', $userId)
+        $user = auth()->user();
+        $invitations = RequestTaaruf::where('responser_id', $user->id)
             ->where('is_approved', false)
+            ->with('requester.profile')
             ->get();
 
-        return $invitations;
+            return view('chat', compact('user', 'invitations'));
     }
 }
