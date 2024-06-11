@@ -48,8 +48,8 @@
 			<div id="konfirmasi-popup" class="popup">
 				<div class="popup-content">
 					<p>Apakah Anda yakin ingin mengumpulkan?</p>
-					<button id="yes-btn">Ya</button>
-					<button style="background-color: #a0a0a0">Tidak</button>
+					<button id="yes-btn" onclick="submitForm()">Ya</button>
+					<button onclick="closePopup()" style="background-color: #a0a0a0">Tidak</button>
 				</div>
 			</div>
 			<div id="done-popup" class="popup">
@@ -83,7 +83,8 @@
                   {{ session('error') }}
               </div>
           @endif
-					<form style="display: flex; flex-direction: column; gap: 1rem"  action="{{ route('kuis.store') }}" method="POST">
+          <div class="card-soal">
+            <form id="form-kuis" style="display: flex; flex-direction: column; gap: 1rem"  action="{{ route('kuis.store') }}" method="POST" onsubmit="return false;">
                         @csrf
                         @foreach($soals as $index => $soal)
                             <div class="soal" id="soal{{ $index }}" data-index="{{ $index }}">
@@ -107,9 +108,11 @@
                         <div>
                           <button type="button" class="button" id="back-btn" style="display: none;">Back</button>
                           <button type="button" class="button" id="next-btn">Next</button>
-                          <button type="submit" class="button" id="kumpul-btn" style="display: none;">Kumpulkan</button>
+                          <button type="submit" class="button" id="kumpul-btn" style="display: none;" onclick="konfirmasiKumpulkan()">Kumpulkan</button>
                         </div>
-                    </form>
+              </form>
+          </div>
+					
 				</div>
 			</div>
 		</main>

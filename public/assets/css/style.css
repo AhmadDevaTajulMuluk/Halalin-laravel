@@ -1074,12 +1074,24 @@ button:hover {
     flex: 1;
     padding: 5px 30px 20px 30px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     margin: 5px;
     color: #4b4b4b;
     background-color: #fff;
     font-size: 16px;
     min-width: 100%;
+}
+
+.card-soal {
+	flex: 1;
+	padding: 5px 30px 20px 30px;
+	border-radius: 5px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin: 5px;
+	color: #4b4b4b;
+	background-color: #fff;
+	font-size: 16px;
+	min-width: 100%;
 }
 .choice-container {
     display: flex;
