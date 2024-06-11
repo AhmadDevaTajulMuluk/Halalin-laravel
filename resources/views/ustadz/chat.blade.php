@@ -39,7 +39,7 @@
 </head>
 <body id="page-chat">
     {{-- manggil navbar --}}
-	<x-navbar :profile="$profile"></x-navbar>
+	<x-navbarustadz></x-navbarustadz>
 	<!-- Modal -->
 	<main id="page-konsultasi">
 		<div class="konsultasi-chat">
@@ -50,9 +50,8 @@
 					<div class="chat-list" id="chat-list">
 						@foreach($relations as $relation)
 							<div class="chat-item">
-								<img src="{{ $relation->profilCalon->gender == 'laki-laki' ? asset('assets/images/user.png') : asset('assets/images/userFemale.png') }}" alt="user{{ $relation->maleuser_id }}" />
 								<div class="chat-info">
-									<h4>{{ $relation->profilCalon->fullname }}</h4> <!-- Menggunakan data dari profiles -->
+									<h4>{{ $relation->maleUser->fullname }} dan {{ $relation->femaleUser->fullname }}</h4>
 									<p>{{ $relation->start == 0 ? 'Menunggu Ustadz Memulai Percakapan' : 'Percakapan Sedang Berlangsung'  }}</p> <!-- Anda mungkin ingin menambahkan data pesan terakhir -->
 								</div>
 							</div>
@@ -81,39 +80,32 @@
 									{{-- buat pemberitahuannya di ambil dari database request taarufs, jika
 									user ini adalah responser, tampilkan notif "anda mendapatkan undangan dari {{ requester }}" --}}
 									{{-- @dd($invitations) --}}
-									@foreach ($invitations as $invitation)
-										<div class="notify-item" onclick="showApprovalModal('{{ $invitation->id }}', '{{ $invitation->requester->profile->fullname }}')">
-											<h4>Undangan Taaruf</h4>
-											<p>Anda mendapatkan undangan taaruf dari {{ $invitation->requester->profile->fullname }}</p>
+									@foreach ($pickableRelations as $pickableRelation)
+										<div class="notify-item" onclick="showApprovalModal('{{ $pickableRelation->hubungan_id }}', '{{ $pickableRelation->maleUser->fullname . ' dan ' . $pickableRelation->femaleUser->fullname }}')">
+											<h4>Dampingi Taaruf</h4>
+											<p>Apakah anda ingin mendampingi taaruf:</p>
+                                            <p>{{ $pickableRelation->maleUser->fullname }} dan {{ $pickableRelation->femaleUser->fullname }}</p>
 										</div>
 										<div id="approvalModal" style="display: none;">
 											<div class="modal-content">
-												<h4>Undangan Taaruf</h4>
-												<p><a href="{{ route('profile.show', ['username' => $result->username]) }}">Lihat Profil</a></p>
+												<h4>Dampingi Taaruf</h4>
 												<p id="modalText"></p>
-												<form id="approvalForm" method="POST" action="{{ route('request_taaruf.approve') }}">
+												<form id="approvalForm" method="POST" action="{{ route('request_taaruf.dampingi') }}">
 													@csrf
 													@method('PUT')
-													<input type="hidden" name="request_taaruf_id" id="request_taaruf_id">
+													<input type="hidden" name="pickable_relation_id" id="pickable_relation_id">
 													<button class="button" type="submit">Setuju</button>
 													<button class="button" type="button" onclick="closeApprovalModal()">Batal</button>
 												</form>												
 											</div>
 										</div>
 									@endforeach
-									@foreach ($histories as $history)
-										<div class="notify-item">
-											<h4>
-												@if($history->requester_id == $userId->id)
-													Taaruf Disetujui
-												@elseif($history->responser_id == $userId->id)
-													Anda Menerima Taaruf
-												@endif
-											</h4>
-											<p>Dengan {{ $history->fullname }}</p>
-										</div>
-									@endforeach
-
+                                    @foreach ($relations as $relation)
+                                        <div class="notify-item">
+                                            <h4>Berhasil Mendampingi Taaruf</h4>
+                                            <p>{{ $relation->maleUser->fullname }} dan {{ $relation->femaleUser->fullname }}</p>
+                                        </div>
+                                    @endforeach
 								</div>
 							</div>
 							<div class="icon-notif">
@@ -126,9 +118,9 @@
 				<div class="roomchat">
 					<div class="roomchat-container">
 						<div class="isi">
-							<h3>Anda sedang tidak menjalani proses ta’aruf</h3>
-							<p>Mulai cari pasangan dan mulai percakapan untuk mengenal calon pasangan lebih jauh</p>
-							<p>(Percakapan ini akan didampingi oleh ustadz)</p>
+							<h3>Anda sedang tidak mendampingi proses ta’aruf</h3>
+							<p>Mulai dampingi pasangan yang sedang ingin taaruf.</p>
+							<p>(Percakapan ini akan didampingi oleh Anda)</p>
 						</div>
 					</div>
 				</div>
@@ -165,7 +157,7 @@
 		}
 		function showApprovalModal(requestTaarufId, requesterFullname) {
 			document.getElementById('modalText').innerText = `Apakah Anda ingin menerima taaruf dari  ${requesterFullname}?`;
-			document.getElementById('request_taaruf_id').value = requestTaarufId;
+			document.getElementById('pickable_relation_id').value = requestTaarufId;
 			document.getElementById('approvalModal').style.display = 'block';
 		}
 

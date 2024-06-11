@@ -14,7 +14,7 @@
                 <nav>
                     <a id="beranda-navbar" href="{{ route('ustadz.dashboard') }}" class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">Beranda</a>
                     <a id="artikel-navbar" href="{{ route('ustadz.artikel') }}" class="{{ Request::segment(2) == 'artikel' ? 'active' : '' }}">Artikel</a>
-                    <a id="chat-navbar" href="/chat" class="{{ Request::segment(2) == 'chat' ? 'active' : '' }}">Chat</a>
+                    <a id="chat-navbar" href="{{ route('ustadz.chat') }}" class="{{ Request::segment(2) == 'chat' ? 'active' : '' }}">Chat</a>
                 </nav>
                 <a href="#" onclick="toggleProfilePopup()" title="Lihat Profil" class="user-container">
                     <div class="user-image">
