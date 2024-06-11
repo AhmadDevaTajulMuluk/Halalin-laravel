@@ -17,10 +17,10 @@
             <div>
                 <form action="{{ route('artikel.search') }}" method="GET" class="search-container">
                     <input type="text" name="search" placeholder="Cari artikel..." class="search-input" value="{{ request('search') }}">
-                    <select class="filter-search">
-                        <option value="" disabled selected>Filter By</option>
-                        <option value="populer">Populer</option>
-                        <option value="none">none</option>
+                    <select name="filter" class="filter-search">
+                        <option value="" disabled {{ request('filter') == '' ? 'selected' : '' }}>Filter By</option>
+                        <option value="populer" {{ request('filter') == 'populer' ? 'selected' : '' }}>Populer</option>
+                        <option value="none" {{ request('filter') == 'none' ? 'selected' : '' }}>None</option>
                     </select>
                     <button type="submit" class="search-button">Cari</button>
                 </form>
@@ -36,7 +36,7 @@
                         @foreach ($articles as $article)
                             <article class="isi-artikel">
                                 <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
-                                <div class="content-artikel">
+                                <div class="content-artikel" style="width: 100%">
                                     <h3>{{ $article->title }}</h3>
                                     <p>{{ Str::limit($article->content, 150) }}</p>
                                     <a href="{{ route('artikel.show', $article->article_id) }}" class="button">Selengkapnya</a>
@@ -46,7 +46,7 @@
                     @endif
                 </div>
                 <div id="navigator">
-                    {{ $articles->appends(['search' => request('search')])->links() }}
+                    {{ $articles->appends(['search' => request('search'), 'filter' => request('filter')])->links() }}
                 </div>
             </div>
         </div>

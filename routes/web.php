@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\ChatController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\KuisController;
 use App\Http\Controllers\UstadzController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RequestTaarufController;
+use App\Http\Controllers\UserController as ControllersUserController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +79,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/ustadz/{ustadz_id}/edit', [AdminController::class, 'editUstadz'])->name('admin.ustadz.edit');
     Route::put('/admin/ustadz/{ustadz_id}', [AdminController::class, 'updateUstadz'])->name('admin.ustadz.update');
     Route::post('/admin/ustadz/{ustadz_id}', [AdminController::class, 'destroyUstadz'])->name('admin.ustadz.destroy');
+
+    Route::get('/admin/users', [ControllersUserController::class, 'index'])->name('admin.users.index');
+    Route::delete('/admin/users/{user_id}', [ControllersUserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -11,9 +11,13 @@ use App\Models\Ustadz;
 class UstadzController extends Controller
 {
     public function showLoginForm()
-    {
-        return view('ustadz.login');
+{
+    if(Auth::guard('ustadz')->check()) {
+        return redirect()->route('ustadz.dashboard');
     }
+    
+    return view('ustadz.login');
+}
 
     public function login(Request $request)
     {

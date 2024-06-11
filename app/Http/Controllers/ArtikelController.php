@@ -47,22 +47,31 @@ class ArtikelController extends Controller
      */
     public function show($id)
     {
-        // $article = Article::findOrFail($id);
         $profile = Profile::where('user_id', auth()->id())->first();
         $article = DB::table('articles')->where('article_id', $id)->first();
 
-        return view('user.artikel.content', compact('article'), compact('profile'));
+        // Increment viewers
+        DB::table('articles')->where('article_id', $id)->increment('viewers');
+
+        return view('user.artikel.content', compact('article', 'profile'));
     }
     public function search(Request $request)
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $searchQuery = $request->input('search');
-        
+        $filter = $request->input('filter');
+
+        $query = Article::query();
+
         if ($searchQuery) {
-            $articles = Article::where('title', 'LIKE', "%{$searchQuery}%")->paginate(5);
-        } else {
-            $articles = Article::paginate(5);
+            $query->where('title', 'LIKE', "%{$searchQuery}%");
         }
+
+        if ($filter == 'populer') {
+            $query->orderByRaw('RANK() OVER (ORDER BY viewers DESC)');
+        }
+
+        $articles = $query->paginate(5);
 
         return view('user.artikel.artikel', compact('profile', 'articles'));
     }
