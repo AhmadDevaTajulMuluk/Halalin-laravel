@@ -75,25 +75,31 @@
 				<h2 id="title-dasboard" style="margin: 0; font-size: 42px">Layanan Kami</h2>
 				<div class="items-container">
 					<div class="item-box-layanan">
-						<div class="layanan-text">
-							<h3>Buat CV</h3>
-							<hr />
-							<p>Buat CV ta’aruf anda agar mendapatkan pasangan yang cocok.</p>
-						</div>
+						<a href="{{ route('biodata') }}" class="layanan-text">
+							<div class=>
+								<h3>Buat CV</h3>
+								<hr />
+								<p>Buat CV ta’aruf anda agar mendapatkan pasangan yang cocok.</p>
+							</div>
+						</a>
 					</div>
 					<div class="item-box-layanan">
-						<div class="layanan-text">
-							<h3>Lihat Artikel</h3>
-							<hr />
-							<p>Lihat artikel terkait dengan pernikahan.</p>
-						</div>
+						<a href="{{ route('artikel') }}" class="layanan-text">
+							<div>
+								<h3>Lihat Artikel</h3>
+								<hr />
+								<p>Lihat artikel terkait dengan pernikahan.</p>
+							</div>
+						</a>
 					</div>
 					<div class="item-box-layanan" >
-						<div class="layanan-text">
-							<h3>Cari Pasangan</h3>
-							<hr />
-							<p>Mencari pasangan dengan searching and matching.</p>
-						</div>
+						<a href="{{ route('search') }}" class="layanan-text">
+							<div>
+								<h3>Cari Pasangan</h3>
+								<hr />
+								<p>Mencari pasangan dengan searching and matching.</p>
+							</div>
+						</a>
 					</div>
 					<div class="item-box-layanan">
 						<div class="layanan-text">

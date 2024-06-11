@@ -16,13 +16,13 @@
         <div class="container-artikel">
             <div>
                 <form action="{{ route('artikel.search') }}" method="GET" class="search-container">
-                    <input type="text" name="search" placeholder="Cari artikel..." class="search-input" value="{{ request('search') }}">
-                    <select name="filter" class="filter-search">
+                    <input type="text" name="search" placeholder="Cari artikel..." class="search-input" value="{{ request('search') }}" style="border-radius: 10px; padding-left: 20px;">
+                    <select name="filter" class="filter-search" style="border-radius: 10px; font-size: 14px;">
                         <option value="" disabled {{ request('filter') == '' ? 'selected' : '' }}>Filter By</option>
                         <option value="populer" {{ request('filter') == 'populer' ? 'selected' : '' }}>Populer</option>
                         <option value="none" {{ request('filter') == 'none' ? 'selected' : '' }}>None</option>
                     </select>
-                    <button type="submit" class="search-button">Cari</button>
+                    <button type="submit" class="search-button" style="border-radius: 10px;">Cari</button>
                 </form>
             </div>
         
