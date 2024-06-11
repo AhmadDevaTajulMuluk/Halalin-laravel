@@ -8,19 +8,18 @@
     <link rel="icon" type="image/jpg" href="../../assets/images/halalin-icon.png">
   </head>
   <body>
-
-    @if (session('success'))
-    <div class="alert alert-success">
-    {{ session('success') }}
-    </div>
-    @endif
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      @if (session('success'))
+      <div class="alert alert-success">
+      {{ session('success') }}
+      </div>
+      @endif
     <div id="login">
       <div class="login-container">
         <div class="wrapper">
           <img src="../../assets/images/halalin-logo.png" />
           <h1>Masuk ke akunmu</h1>
-          <div class="field">
+          <div class="field" >
               
               @if (session('error'))
               <div class="alert alert-danger">
@@ -43,6 +42,7 @@
                 placeholder="username"
                 value="{{ Session::get('username') }}"
               />
+              
             </div>
             <div class="boxfield">
               <svg class="svg-icon" viewBox="0 0 20 20">
@@ -54,6 +54,7 @@
                 type="password"
                 class="pass-input"
                 name="password"
+                id="password"
                 placeholder="password"
               />
             </div>
@@ -81,5 +82,16 @@
       </div>
     </div>
     <script type="text/javascript" src="../../assets/js/script.js"></script>
+    <script>
+      $(document).ready(function() {
+        setTimeout(function() {
+          $('.alert-success').fadeOut('fast');
+        }, 3000); // Fade out after 3 seconds for success alerts
+
+        setTimeout(function() {
+          $('.alert-danger').fadeOut('fast');
+        }, 60000); // Fade out after 1 minute for danger alerts
+      });
+    </script>
   </body>
 </html>

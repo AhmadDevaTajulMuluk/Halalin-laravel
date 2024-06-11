@@ -1569,17 +1569,7 @@ button:hover {
 }
 
 /*BIODATA*/
-.alert-success {
-    position: fixed;
-    left: 25%;
-    width: 50%;
-    padding: 10px; 
-    background-color: #d4edd7; 
-    border-radius: 50px;
-    color: #15572b; 
-    border-color: #d2ecd0; 
-    text-align: center; 
-}
+
 #biodata {
     display: flex;
     align-items: center;
@@ -2787,15 +2777,18 @@ aside#sidebar-pelatihan {
     background-color: #f2dede;
     border-color: #ebccd1;
 }
-/*Error message*/
-
-/*Successs message*/
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+.alert-success {
+    position: fixed;
+    top: 2%;
+    width: 100%;
+    padding: 10px; 
+    background-color: #d4edd7; 
+    border-radius: 50px;
+    color: #15572b; 
+    border-color: #b6d8b3; 
+    text-align: center; 
 }
+/*Error message*/
 
 /*Successs message*/
 
