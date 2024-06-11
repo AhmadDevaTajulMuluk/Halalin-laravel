@@ -416,6 +416,13 @@ article img {
     gap: 25px;
 }
 
+@media screen and (max-width: 868px) {
+    .wrapper {
+        width: 90%;
+    }
+    
+}
+
 .wrapper img {
     width: auto;
     margin-right: 20px;
