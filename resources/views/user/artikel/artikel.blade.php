@@ -35,11 +35,17 @@
                     @else
                         @foreach ($articles as $article)
                             <article class="isi-artikel">
-                                <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
+                                <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" class="article-image"/>
                                 <div class="content-artikel" style="width: 100%">
                                     <h3>{{ $article->title }}</h3>
                                     <p>{{ Str::limit($article->content, 150) }}</p>
+                                    <div class="article-detail">
+                                        <div class="view-article">
+                                            <img src="../../assets/images/view-icon.png" alt="" class="view-icon">
+                                            <p>{{ $article->viewers }}</p>
+                                        </div>
                                     <a href="{{ route('artikel.show', $article->article_id) }}" class="button">Selengkapnya</a>
+                                    </div>
                                 </div>
                             </article>
                         @endforeach

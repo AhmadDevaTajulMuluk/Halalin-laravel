@@ -697,6 +697,27 @@ button:hover {
 #page-artikel {
     background-color: white;
 }
+.article-detail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.view-article {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    font-family: Nunito;
+    font-weight: 600;
+}
+.view-icon {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: auto;
+    height: 20px;
+}
 .artikel-container {
     display: flex;
     text-align: justify;
@@ -719,7 +740,7 @@ button:hover {
     height: auto;
     gap: 25px;
 }
-.isi-artikel img {
+.article-image {
     border-radius: 15px 0 0 15px;
     width: 25%;
     height: 250px;
