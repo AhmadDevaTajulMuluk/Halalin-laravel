@@ -30,7 +30,16 @@ class ArticleController extends Controller
             'article_image' => 'nullable|image',
         ]);
 
-        $article = new Article($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('article_image')) {
+            $image_file = $request->file('article_image');
+            $image_name = time() . '.' . $image_file->getClientOriginalExtension();
+            $image_file->move(public_path('image'), $image_name);
+            $data['article_image'] = $image_name;
+        }
+
+        $article = new Article($data);
         $article->save();
 
         return redirect()->route('admin.articles.index')->with('success', 'Article created successfully');
@@ -54,7 +63,16 @@ class ArticleController extends Controller
         ]);
 
         $article = Article::findOrFail($article_id);
-        $article->update($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('article_image')) {
+            $image_file = $request->file('article_image');
+            $image_name = time() . '.' . $image_file->getClientOriginalExtension();
+            $image_file->move(public_path('image'), $image_name);
+            $data['article_image'] = $image_name;
+        }
+
+        $article->update($data);
 
         return redirect()->route('admin.articles.index')->with('success', 'Article updated successfully');
     }

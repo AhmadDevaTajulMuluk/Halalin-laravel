@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="image">
-            <img src="{{ asset('image/' . $article->article_image) }}" />
+            <img src="{{ asset('image/' . $article->article_image) }}" alt="Gambar Artikel" />
         </div>
         <article class="article-content">
             {!! nl2br(e($article->content)) !!}
