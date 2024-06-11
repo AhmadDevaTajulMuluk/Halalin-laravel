@@ -1545,6 +1545,17 @@ button:hover {
 }
 
 /*BIODATA*/
+.alert-success {
+    position: fixed;
+    left: 25%;
+    width: 50%;
+    padding: 10px; 
+    background-color: #d4edd7; 
+    border-radius: 50px;
+    color: #15572b; 
+    border-color: #d2ecd0; 
+    text-align: center; 
+}
 #biodata {
     display: flex;
     align-items: center;
@@ -2762,11 +2773,6 @@ aside#sidebar-pelatihan {
     border-radius: 4px;
 }
 
-.alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
 /*Successs message*/
 
 /*Show Search*/

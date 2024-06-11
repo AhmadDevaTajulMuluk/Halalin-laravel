@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<script src="/assets/js/script.js"></script>
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<header>
 			<div id="header-container">
 				<a href="/dashboard" style="display: flex; flex-direction: row; gap: 1rem;">
@@ -21,7 +21,11 @@
 				</a>
 			</div>
 		</header>
-
+		@if(session('success'))
+			<div class="alert alert-success">
+				{{ session('success') }}
+			</div>
+		@endif
 		<div id="biodata">
 			<div class="container-bio">
 				<div class="wrapper-bio">
@@ -445,6 +449,23 @@
 		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 	
 		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const forms = document.querySelectorAll('form');
+				forms.forEach(form => {
+					form.addEventListener('submit', function(event) {
+						let valid = true;
+						form.querySelectorAll('[required]').forEach(input => {
+							if (!input.value.trim()) {
+								alert(input.name + ' harus di isi');
+								valid = false;
+							}
+						});
+						if (!valid) {
+							event.preventDefault(); // Menghentikan pengiriman form
+						}
+					});
+				});
+			});
 			let profilepic = document.querySelector('#profilepic');
 			let inputFoto = document.querySelector('#input-foto');
 
@@ -475,13 +496,18 @@
 			simpanButton.forEach(function(btn) {
 				btn.addEventListener("click", function() {
 					let konfirmasi = confirm("Apakah yakin semua sudah benar dan ingin disimpan?");
-					if (konfirmasi) {
-						alert("Data telah disimpan.");
-					} else {
-						alert("Data batal disimpan");
-					}
 				});
 
+			});
+			document.addEventListener('DOMContentLoaded', function() {
+				@if($errors->any())
+					alert('{{$errors->first()}}');
+				@endif
+			});
+			$(document).ready(function() {
+				setTimeout(function() {
+					$('.alert').fadeOut('fast');
+				}, 3000); // 3000 ms = 3 detik
 			});
 		</script>
 	</body>

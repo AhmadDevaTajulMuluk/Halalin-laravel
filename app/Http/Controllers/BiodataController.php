@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use App\Models\Biodata\Educations;
 use App\Models\Biodata\FamilyApp;
 use App\Models\Biodata\PhysicalApp;
@@ -89,11 +90,13 @@ class BiodataController extends Controller
         if ($profile) {
             $profile->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Profil berhasil diperbarui!');
+            Session::flash('success', 'Profil berhasil diperbarui!');
+        return redirect()->route('biodata');
         } else {
             Profile::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Profil berhasil disimpan!');
+            Session::flash('success', 'Profil berhasil disimpan!');
+            return redirect()->route('biodata');
         }
     }
 
@@ -141,9 +144,9 @@ class BiodataController extends Controller
             $data['image'] = $image_name;
         }
         $profile->update($data);
-
-
-        return redirect()->route('biodata')->with('success', 'Profil berhasil diperbarui!');
+        
+        Session::flash('success', 'Profil berhasil diperbarui!');
+    return redirect()->route('biodata');
     }
 
 
@@ -192,11 +195,13 @@ class BiodataController extends Controller
         if ($selfApp) {
             $selfApp->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil diperbarui!');
+            Session::flash('success', 'Gambaran diri berhasil diperbarui!');
+            return redirect()->route('biodata');
         } else {
             SelfApp::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil disimpan!');
+            Session::flash('success', 'Gambaran diri berhasil disimpan!');
+            return redirect()->route('biodata');
         }
     }
 
@@ -227,8 +232,8 @@ class BiodataController extends Controller
         ];
 
         $selfApp->update($data);
-
-        return redirect()->route('biodata')->with('success', 'Gambaran diri berhasil diperbarui!');
+        Session::flash('success', 'Gambaran diri berhasil diperbarui!');
+        return redirect()->route('biodata');
     }
 
     // Gambaran Fisik Controller
@@ -277,11 +282,13 @@ class BiodataController extends Controller
         if ($physicalApp) {
             $physicalApp->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+            Session::flash('success', 'Gambaran fisik berhasil diperbarui!');
+            return redirect()->route('biodata');
         } else {
             PhysicalApp::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil disimpan!');
+            Session::flash('success', 'Gambaran fisik berhasil disimpan!');
+            return redirect()->route('biodata');
         }
     }
     public function updatePhysicalApp(Request $request)
@@ -313,8 +320,8 @@ class BiodataController extends Controller
         ];
 
         $physicalApp->update($data);
-
-        return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+        Session::flash('success', 'Gambaran fisik berhasil diperbarui!');
+        return redirect()->route('biodata');
     }
 
     public function indexFamilyApp()
@@ -360,11 +367,13 @@ class BiodataController extends Controller
         if ($familyApp) {
             $familyApp->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Gambaran keluarga berhasil diperbarui!');
+            Session::flash('success', 'Gambaran keluarga berhasil diperbarui!');
+            return redirect()->route('biodata');
         } else {
             FamilyApp::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Gambaran keluarga berhasil disimpan!');
+            Session::flash('success', 'Gambaran keluarga berhasil disimpan!');
+            return redirect()->route('biodata');
         }
     }
 
@@ -394,8 +403,8 @@ class BiodataController extends Controller
         ];
 
         $familyApp->update($data);
-
-        return redirect()->route('biodata')->with('success', 'Gambaran fisik berhasil diperbarui!');
+        Session::flash('success', 'Gambaran keluarga berhasil diperbarui!');
+        return redirect()->route('biodata');
     }
 
 
@@ -444,11 +453,13 @@ class BiodataController extends Controller
         if ($education) {
             $education->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Data pendidikan berhasil diperbarui!');
+            Session::flash('success', 'Data pendidikan berhasil diperbarui!');
+            return redirect()->route('biodata');
         } else {
             Educations::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Data pendidikan keluarga berhasil disimpan!');
+            Session::flash('success', 'Data pendidikan berhasil disimpan!');
+            return redirect()->route('biodata');
         }
     }
 
@@ -485,7 +496,8 @@ class BiodataController extends Controller
 
         $education->update($data);
 
-        return redirect()->route('biodata')->with('success', 'Data pendidikan berhasil diperbarui!');
+        Session::flash('success', 'Data pendidikan berhasil diperbarui!');
+        return redirect()->route('biodata');
     }
 
 
@@ -544,11 +556,13 @@ class BiodataController extends Controller
         if ($religion) {
             $religion->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Data ibadah berhasil diperbarui!');
+            Session::flash('success', 'Data ibadah berhasil diperbarui!');
+            return redirect()->route('biodata');
         } else {
             Religion::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            return redirect()->route('biodata')->with('success', 'Data ibadah berhasil disimpan!');
+            Session::flash('success', 'Data ibadah berhasil disimpan!');
+            return redirect()->route('biodata');
         }
     }
 
@@ -581,7 +595,8 @@ class BiodataController extends Controller
 
         $religion->update($data);
 
-        return redirect()->route('biodata')->with('success', 'Data ibadah berhasil diperbarui!');
+        Session::flash('success', 'Data ibadah berhasil diperbarui!');
+        return redirect()->route('biodata');
     }
     public function show($username)
     {
