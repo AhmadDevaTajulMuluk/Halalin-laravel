@@ -1082,7 +1082,7 @@ button:hover {
     border-color: #4b5c98;
 }
 .number-box.answered {
-    background-color: #a7adc4; /* Warna hijau sebagai contoh */
+    background-color: #9b9ebb; /* Warna hijau sebagai contoh */
     color: #fff;
   }
 .wrapper-soal {
@@ -2699,7 +2699,8 @@ aside#sidebar-pelatihan {
     text-align: justify;
 }
 #content-pelatihan h1, #content-pelatihan h2, #content-pelatihan h3 {
-    margin: 10px 0; /* Ensure consistent margins for headings */
+    margin: 10px 0; 
+    color: #4b5c98;
 }
 #content-pelatihan p {
     margin: 10px 0; /* Ensure consistent margins for paragraphs */
@@ -2783,7 +2784,7 @@ aside#sidebar-pelatihan {
     width: 100%;
     padding: 10px; 
     background-color: #d4edd7; 
-    border-radius: 50px;
+    border-radius: 10px;
     color: #15572b; 
     border-color: #b6d8b3; 
     text-align: center; 
