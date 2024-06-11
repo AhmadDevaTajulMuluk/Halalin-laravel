@@ -167,19 +167,19 @@
 								</div>
 								<div class="haldisukai">
 									<p>Hal yang disukai</p>
-									<input type="text" class="haldisukai-input" placeholder="Jelaskan hal yang disukai anda" name="favThings" value="{{ old('favThings', $selfApp ? $selfApp->favThings : '') }}" required />
+									<input type="text" placeholder="Jelaskan hal yang disukai anda" name="favThings" value="{{ old('favThings', $selfApp ? $selfApp->favThings : '') }}" required />
 								</div>
 								<div class="sifatpositif">
 									<p>Sifat positif</p>
-									<input type="text" class="sifatpositif-input" placeholder="Jelaskan sifat positif anda" name="positiveTraits" value="{{ old('positiveTraits', $selfApp ? $selfApp->positiveTraits : '') }}" required />
+									<input type="text"  placeholder="Jelaskan sifat positif anda" name="positiveTraits" value="{{ old('positiveTraits', $selfApp ? $selfApp->positiveTraits : '') }}" required />
 								</div>
 								<div class="sifatnegatif">
 									<p>Sifat negatif</p>
-									<input type="text" class="sifatnegatif-input" placeholder="Jelaskan sifat negatif anda" name="negativeTraits" value="{{ old('negativeTraits', $selfApp ? $selfApp->negativeTraits : '') }}" required />
+									<input type="text" placeholder="Jelaskan sifat negatif anda" name="negativeTraits" value="{{ old('negativeTraits', $selfApp ? $selfApp->negativeTraits : '') }}" required />
 								</div>
 								<div class="alasan">
 									<p>Alasan taaruf</p>
-									<input type="text" class="alasan-input" placeholder="Jelaskan alasan anda taaruf" name="taarufReason" value="{{ old('taarufReason', $selfApp ? $selfApp->taarufReason : '') }}" required />
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" placeholder="Jelaskan alasan anda taaruf" name="taarufReason" required>{{ old('taarufReason', $selfApp ? $selfApp->taarufReason : '') }}</textarea>
 								</div>
 							</div>
 							<div class="divbutton">
@@ -326,23 +326,28 @@
 								</div>
 								<div class="pertanyaan1">
 									<p>Apa pemahaman Anda tentang akhirat dan persiapannya dalam ajaran Islam?</p>
-									<input type="text" class="pertanyaan1-input" placeholder="Jelaskan pendapat anda" name="answer2" value="{{ old('answer2', $religion ? $religion->answer2 : '') }}" required/>
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" 
+									placeholder="Jelaskan pendapat anda" name="answer2" required>{{ old('answer2', $religion ? $religion->answer2 : '') }}</textarea>
 								</div>
 								<div class="pertanyaan2">
 									<p>Apa yang Anda ketahui tentang proses pencarian pasangan hidup (taaruf) dalam Islam dan bagaimana Anda mempersiapkan diri untuk itu?</p>
-									<input type="text" class="pertanyaan2-input" placeholder="Jelaskan pendapat anda" name="answer3" value="{{ old('answer3', $religion ? $religion->answer3 : '') }}" required/>
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" 
+									placeholder="Jelaskan pendapat anda" name="answer3" required>{{ old('answer3', $religion ? $religion->answer3 : '') }}</textarea>
 								</div>
 								<div class="pertanyaan3">
 									<p>Bagaimana Anda memahami konsep mahar (maskawin) dalam Islam dan bagaimana Anda menentukan nilai atau jenis mahar yang sesuai?</p>
-									<input type="text" class="pertanyaan3-input" placeholder="Jelaskan pendapat anda" name="answer4" value="{{ old('answer4', $religion ? $religion->answer4 : '') }}" required/>
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" 
+									placeholder="Jelaskan pendapat anda" name="answer4" required>{{ old('answer4', $religion ? $religion->answer4 : '') }}</textarea>
 								</div>
 								<div class="pertanyaan4">
 									<p>Bagaimana Anda mengatasi konflik antara kebutuhan untuk memenuhi tuntutan dunia modern dengan menjalankan ajaran agama dalam kehidupan sehari-hari?</p>
-									<input type="text" class="pertanyaan4-input" placeholder="Jelaskan pendapat anda" name="answer5" value="{{ old('answer5', $religion ? $religion->answer5 : '') }}" required/>
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" 
+									placeholder="Jelaskan pendapat anda" name="answer5" required>{{ old('answer5', $religion ? $religion->answer5 : '') }}</textarea>
 								</div>
 								<div class="pertanyaan5">
 									<p>Bagaimana Anda memandang pentingnya kesetiaan dalam pernikahan dalam Islam, terutama dalam konteks modern yang penuh dengan godaan dan tantangan?</p>
-									<input type="text" class="pertanyaan5-input" placeholder="Jelaskan pendapat anda" name="answer6" value="{{ old('answer6', $religion ? $religion->answer6 : '') }}" required/>
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" 
+									placeholder="Jelaskan pendapat anda" name="answer6" required>{{ old('answer6', $religion ? $religion->answer6 : '') }}</textarea>
 								</div>
 							</div>
 							<div class="divbutton">
