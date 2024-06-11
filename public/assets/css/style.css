@@ -1060,7 +1060,10 @@ button:hover {
     color: #fff;
     border-color: #4b5c98;
 }
-
+.number-box.answered {
+    background-color: #a7adc4; /* Warna hijau sebagai contoh */
+    color: #fff;
+  }
 .wrapper-soal {
     display: flex;
     flex-direction: column;

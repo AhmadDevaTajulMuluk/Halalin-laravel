@@ -45,10 +45,10 @@
               </div>
               <div class="keterangan">
                   @if($nilai >= 70)
-                      <p style="font-size: 15px">Skor anda memenuhi kriteria, anda telah menyelesaikan pelatihan ini. Selamat!!!</p>
+                      <p style="font-size: 15px; text-align: center;">Skor anda memenuhi kriteria, anda telah menyelesaikan pelatihan ini. Selamat!!!</p><br>
                       <a class="button"  id="menuPelatihan" href="/pelatihan/bab/3">Menu Pelatihan</a>
                   @else
-                      <p style="font-size: 15px">Maaf, skor anda tidak memenuhi kriteria untuk melanjutkan ke pelatihan berikutnya.</p>
+                      <p style="font-size: 15px; text-align: center;">Maaf, skor anda tidak memenuhi kriteria untuk melanjutkan ke pelatihan berikutnya.</p><br>
                       <a class="button" id="menuPelatihan" href="/pelatihan/bab/3">Kembali ke Soal</a>
                   @endif
               </div>

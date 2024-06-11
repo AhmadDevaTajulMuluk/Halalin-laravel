@@ -105,10 +105,10 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div>
-                          <button type="button" class="button" id="back-btn" style="display: none;">Back</button>
-                          <button type="button" class="button" id="next-btn">Next</button>
-                          <button type="submit" class="button" id="kumpul-btn" style="display: none;" onclick="konfirmasiKumpulkan()">Kumpulkan</button>
+                        <div style="position: relative; width: 100%;">
+                          <button type="button" class="button" id="back-btn" style="position: absolute; left: 0; display: none;">Back</button>
+                          <button type="button" class="button" id="next-btn" style="position: absolute; right: 0;">Next</button>
+                          <button type="submit" class="button" id="kumpul-btn" style="position: absolute; right: 0; display: none;" onclick="konfirmasiKumpulkan()">Kumpulkan</button>
                         </div>
               </form>
           </div>
@@ -141,6 +141,33 @@
           </script>
 
             <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.choice').forEach(function(choiceElement) {
+                  choiceElement.addEventListener('click', function() {
+                    // Unselect other choices in the same container
+                    const choiceContainer = choiceElement.closest('.choice-container');
+                    choiceContainer.querySelectorAll('.choice').forEach(function(el) {
+                      el.classList.remove('selected');
+                    });
+                    
+                    // Select this choice
+                    choiceElement.classList.add('selected');
+                    
+                    // Check the hidden radio input
+                    const radioInput = choiceElement.querySelector('input[type="radio"]');
+                    if (radioInput) {
+                      radioInput.checked = true;
+                    }
+
+                    // Menandai nomor soal sebagai terjawab
+                    const soalIndex = choiceElement.closest('.soal').getAttribute('data-index');
+                    const numberBox = document.querySelector(`.number-box[data-index="${soalIndex}"]`);
+                    if (numberBox) {
+                      numberBox.classList.add('answered');
+                    }
+                  });
+                });
+              });
                document.addEventListener('DOMContentLoaded', function() {
                     const soalElements = document.querySelectorAll('.soal');
                     const numberBoxElements = document.querySelectorAll('.number-box');
