@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminTestimoni;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ArtikelController;
@@ -71,6 +72,13 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/admin/articles/{article}/edit', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
     Route::put('/admin/articles/{article}', [AdminArticleController::class, 'update'])->name('admin.articles.update');
     Route::delete('/admin/articles/{article}', [AdminArticleController::class, 'destroy'])->name('admin.articles.destroy');
+
+    Route::get('/admin/testimoni', [AdminTestimoni::class, 'index'])->name('admin.testimoni.index');
+    Route::get('/admin/testimoni/create', [AdminTestimoni::class, 'create'])->name('admin.testimoni.create');
+    Route::post('/admin/testimoni', [AdminTestimoni::class, 'store'])->name('admin.testimoni.store');
+    Route::get('/admin/testimoni/{testimoni}/edit', [AdminTestimoni::class, 'edit'])->name('admin.testimoni.edit');
+    Route::put('/admin/testimoni/{testimoni}', [AdminTestimoni::class, 'update'])->name('admin.testimoni.update');
+    Route::delete('/admin/testimoni/{testimoni}', [AdminTestimoni::class, 'destroy'])->name('admin.testimoni.destroy');
 
     Route::get('/admin/ustadz', [AdminController::class, 'showUstadz'])->name('admin.ustadz');
     Route::get('/admin/ustadz/create', [AdminController::class, 'createUstadz'])->name('admin.ustadz.create');

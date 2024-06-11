@@ -20,6 +20,12 @@
                 <span>Artikel</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a href="/admin/testimoni" class="sidebar-link">
+                <i class="lni lni-smile"></i>
+                <span>Testimoni</span>
+            </a>
+        </li>
         {{-- <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                 data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
