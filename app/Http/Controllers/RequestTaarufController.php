@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Relations;
 use Illuminate\Http\Request;
 use App\Models\RequestTaaruf;
 use App\Models\User;
@@ -45,6 +46,16 @@ class RequestTaarufController extends Controller
         return redirect()->route('chat')->with('error', 'Gagal menyetujui undangan taaruf.');
     }
 
+    public function dampingi(Request $request)
+    {
+        $relation = Relations::findOrFail($request->pickable_relation_id);
+        $ustadz = auth('ustadz')->user();
+        $relation->ustadz_id = $ustadz->ustadz_id;
+        $relation->start = true;
+        $relation->save();
+        return redirect()->route('ustadz.chat')->with('success', 'Anda telah menolak undangan taaruf.');
+    }
+
 
     public function fetchNotifications($userId)
     {
@@ -55,6 +66,6 @@ class RequestTaarufController extends Controller
             ->with('requester.profile')
             ->get();
 
-            return view('chat', compact('user', 'invitations'));
+        return view('chat', compact('user', 'invitations'));
     }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\UstadzController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ChatUstadzController;
 use App\Http\Controllers\RequestTaarufController;
 use App\Http\Controllers\UserController as ControllersUserController;
 use App\Http\Middleware\AuthenticateAdmin;
@@ -148,7 +149,8 @@ Route::post('/ustadz/login', [UstadzController::class, 'login'])->name('ustadz.l
 Route::prefix('ustadz')->group(function () {
     Route::get('/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
     Route::get('/artikel', [UstadzController::class, 'artikel'])->name('ustadz.artikel')->middleware('auth:ustadz');
-    Route::get('/chat', [ChatController::class, 'index'])->name('ustadz.chat')->middleware('auth:ustadz');
+    Route::get('/chat', [ChatUstadzController::class, 'index'])->name('ustadz.chat')->middleware('auth:ustadz');
+    Route::put('/request-taaruf/dampingi', [RequestTaarufController::class, 'dampingi'])->name('request_taaruf.dampingi');
     Route::post('/logout', [UstadzController::class, 'logout'])->name('ustadz.logout');
 
     Route::get('/notif-ustadz', function () {

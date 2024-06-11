@@ -16,11 +16,7 @@ class ChatController extends Controller
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
-        if (auth('ustadz')->check()) {
-            $userId = User::where('id', auth('ustadz')->id())->first();
-        } else {
-            $userId = User::where('id', auth()->id())->first();
-        }
+        $userId = User::where('id', auth()->id())->first();
         $invitations = RequestTaaruf::where('responser_id', $userId->id)
             ->where('is_approved', false)
             ->join('users', 'request_taarufs.requester_id', '=', 'users.id')
@@ -44,7 +40,7 @@ class ChatController extends Controller
             }
         }
 
-        return view('user.chat.chat', compact('profile', 'invitations', 'relations', 'histories'));
+        return view('user.chat.chat', compact('profile', 'invitations', 'relations', 'histories', 'userId'));
     }
 
     public function render()
