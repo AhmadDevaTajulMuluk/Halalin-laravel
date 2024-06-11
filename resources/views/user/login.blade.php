@@ -67,14 +67,15 @@
               style="text-decoration: none; color: inherit"
               ><strong>Daftar Sekarang</strong></a
             >
-          </p>
-          <p class="hasil">
+            <br>
+          <br>
             Apakah anda ustadz?
             <a
               href="/ustadz/login"
               style="text-decoration: none; color: inherit"
-              ><strong>Login Sebagai Ustadz</strong></a
-            >
+              ><strong>Login Sebagai Ustadz</strong>
+            </a>
+            
           </p>
         </div>
       </div>

@@ -39,16 +39,8 @@
               />
             </div>
             <div class="boxfield">
-              <svg              
-                viewBox="0 0 24 24"
-                fill="white"
-                stroke="black"
-                stroke-width="2"
-              >
-                <path
-                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                ></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
+              <svg viewBox="-1 -2 12 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
               </svg>
               <input type="email" class="email-input" placeholder="Email" name="email" value="{{ Session::get('email') }}" />
             </div>
@@ -65,6 +57,7 @@
                 name="password"
                 value="{{ Session::get('password') }}"
               />
+              <i class="fa fa-eye" id="togglePassword" onclick="togglePasswordVisibility()"></i>
             </div>
             <div class="boxfield">
               <svg class="svg-icon" viewBox="0 0 20 20">

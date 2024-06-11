@@ -12,11 +12,12 @@ class ArtikelController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $articles = Article::paginate(5); // Menampilkan 10 artikel per halaman
-        return view('user.artikel.artikel', compact('profile'), compact('articles'));
+        return view('user.artikel.artikel', compact('profile', 'articles'));
     }
 
     public function render()

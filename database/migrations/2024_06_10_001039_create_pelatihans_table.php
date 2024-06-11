@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('pelatihans', function (Blueprint $table) {
+        Schema::create('pelatihans', function (Blueprint $table) {
             if (!Schema::hasColumn('pelatihans', 'id')) {
                 $table->id();
             }

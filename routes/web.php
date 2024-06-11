@@ -40,8 +40,6 @@ Route::get('/artikel-content', function () {
 //     return view('user.pelatihan');
 // })->name('pelatihan');
 
-
-
 Route::get('/login', [SessionController::class, 'index'])->name('sesi');
 Route::post('/login', [SessionController::class, 'login'])->name('login');
 Route::get('/logout', [SessionController::class, 'logout'])->name('logout');
