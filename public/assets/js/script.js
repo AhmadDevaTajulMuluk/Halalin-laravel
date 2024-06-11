@@ -300,25 +300,30 @@ function login() {
 // }
 
 // document.getElementById("kumpul-btn").addEventListener("click", kumpulkan);
-// function kumpulkan() {
-// 	showPopup();
-// }
+function konfirmasiKumpulkan() {
+	showPopup();
+}
 
-// function showPopup() {
-// 	var popup = document.getElementById("konfirmasi-popup");
-// 	var overlay = document.getElementById("popup-overlay");
+function showPopup() {
+	var popup = document.getElementById("konfirmasi-popup");
+	var overlay = document.getElementById("popup-overlay");
 
-// 	popup.classList.add("show");
-// 	overlay.classList.add("show");
-// }
+	popup.classList.add("show");
+	overlay.classList.add("show");
+}
 
-// function closePopup() {
-// 	var popup = document.getElementById("konfirmasi-popup");
-// 	var overlay = document.getElementById("popup-overlay");
+function closePopup() {
+	var popup = document.getElementById("konfirmasi-popup");
+	var overlay = document.getElementById("popup-overlay");
 
-// 	popup.classList.remove("show");
-// 	overlay.classList.remove("show");
-// }
+	popup.classList.remove("show");
+	overlay.classList.remove("show");
+}
+
+function submitForm() {
+	document.getElementById('form-kuis').submit();
+	showDonePopup();
+}
 
 // document.getElementById("yes-btn").addEventListener("click", function () {
 // 	showDonePopup();
@@ -338,6 +343,12 @@ function login() {
 // 	setTimeout(function () {
 // 		window.location.href = "/hasil-kuis";
 // 	}, 500);
+// }
+
+// function konfirmasiKumpulkan() {
+// 	if (confirm('Apakah Anda yakin ingin mengumpulkan jawaban?')) {
+// 		document.getElementById('form-kuis').submit();
+// 	}
 // }
 
 function kePelatihan() {
