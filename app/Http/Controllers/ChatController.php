@@ -26,11 +26,16 @@ class ChatController extends Controller
             ->select('request_taarufs.*', 'profiles.*')
             ->get();
         $histories = RequestTaaruf::where('responser_id', $userId->id)
+            ->orWhere('requester_id', $userId->id)
             ->where('is_approved', 1)
             ->join('users', 'request_taarufs.requester_id', '=', 'users.id')
             ->join('profiles', 'profiles.user_id', '=', 'users.id')
             ->select('request_taarufs.*', 'profiles.*')
             ->get();
+        foreach ($histories as $history) {
+            $history->responser = Profile::where('user_id', $history->responser_id)->first();
+            $history->requester = Profile::where('user_id', $history->requester_id)->first();
+        }
         $relations = Relations::where('maleuser_id', $userId->id)
             ->orWhere('femaleuser_id', $userId->id)
             ->get();
@@ -78,7 +83,7 @@ class ChatController extends Controller
         $relation->ustadz = Ustadz::where('ustadz_id', $relation->ustadz_id)->first();
         if (auth('web')->check()) {
             if (auth('web')->id() != $relation->maleuser_id && auth()->id() != $relation->femaleuser_id) {
-                return redirect()->back()->with('error', 'Anda tidak diizinkan mengakses chat ini.');
+                return redirect()->route('dashboard')->with('error', 'Anda tidak diizinkan mengakses chat ini.');
             }
         } else if (auth('ustadz')->check()) {
             if ($relation->ustadz_id != auth('ustadz')->id()) {

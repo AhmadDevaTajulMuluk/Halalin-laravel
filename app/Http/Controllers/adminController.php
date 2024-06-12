@@ -179,8 +179,12 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:ustadz,username,' . $ustadz_id,
+            'username' => [
+            'required',
+                Rule::unique('ustadz')->ignore($ustadz_id, 'ustadz_id'),
+            ],
             'phone' => 'required',
+            'password' => 'nullable|confirmed',
         ]);
 
         $ustadz = Ustadz::findOrFail($ustadz_id);
