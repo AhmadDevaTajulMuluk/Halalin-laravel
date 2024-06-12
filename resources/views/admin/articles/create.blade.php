@@ -2,7 +2,7 @@
 
 @section('title', 'Create Article')
 
-@section('header', 'Create Article')
+@section('header', 'Tambah Article')
 
 @section('content')
 <div class="container">
@@ -34,7 +34,7 @@
                     <label for="article_image" class="form-label">Article Image</label>
                     <input type="file" class="form-control" id="article_image" name="article_image">
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary custom-btn">Simpan</button>
             </form>
         </div>
     </div>

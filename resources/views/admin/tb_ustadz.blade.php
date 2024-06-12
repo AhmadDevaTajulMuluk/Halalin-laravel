@@ -12,7 +12,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <a href="{{ route('admin.ustadz.create') }}" class="btn btn-primary mb-3">Tambah Ustadz</a>
+    <a href="{{ route('admin.ustadz.create') }}" class="btn btn-primary mb-3 custom-btn">Tambah Ustadz</a>
     <table class="table table-bordered">
         <thead>
             <tr>

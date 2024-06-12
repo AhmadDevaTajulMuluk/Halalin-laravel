@@ -14,7 +14,12 @@
                 <nav>
                     <a id="beranda-navbar" href="{{ route('ustadz.dashboard') }}" class="{{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">Beranda</a>
                     <a id="artikel-navbar" href="{{ route('ustadz.artikel') }}" class="{{ Request::segment(2) == 'artikel' ? 'active' : '' }}">Artikel</a>
-                    <a id="chat-navbar" href="{{ route('ustadz.chat') }}" class="{{ Request::segment(2) == 'chat' ? 'active' : '' }}">Chat</a>
+                    <a id="chat-navbar" href="{{ route('ustadz.chat') }}" class="{{ Request::segment(2) == 'chat' ? 'active' : '' }}">
+                        Chat
+                        @if(App\Models\RequestTaaruf::where('responser_id', auth('ustadz')->id())->where('is_approved', false)->where('is_read', false)->count() > 0)
+                            <span class="notification-dot"></span>
+                        @endif
+                    </a>
                 </nav>
                 <a href="#" onclick="toggleProfilePopup()" title="Lihat Profil" class="user-container">
                     <div class="user-image">
@@ -94,6 +99,15 @@
 
 .profile-popup-content a:hover {
     color: #4b5c98;
+}
+
+.notification-dot {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
 }
 </style>
 <script>
