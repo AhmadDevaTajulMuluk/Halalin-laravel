@@ -124,7 +124,7 @@
 					@else
 						@foreach($testimoni as $testimonial)
 							<div class="item-box" id="testimoni">
-								<img src="{{ $testimonial->image ? asset('image/' . $testimonial->image) : asset('assets/images/user.png') }}" alt="group" />
+								<img src="{{ $testimonial->image ? asset('images/testimoni/' . $testimonial->image) : asset('assets/images/user.png') }}" alt="Testimoni" />
 								<div class="testimonial">
 									<p class="testimonial-author">{{ $testimonial->author }}</p>
 									<p class="testimonial-content">"{{ $testimonial->content }}"</p>
