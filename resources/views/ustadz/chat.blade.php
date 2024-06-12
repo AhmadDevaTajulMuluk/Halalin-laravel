@@ -39,7 +39,7 @@
 </head>
 <body id="page-chat">
     {{-- manggil navbar --}}
-	<x-navbarustadz></x-navbarustadz>
+	<x-navbarustadz :ustadz="$ustadz"></x-navbarustadz>
 	<!-- Modal -->
 	<main id="page-konsultasi">
 		<div class="konsultasi-chat">

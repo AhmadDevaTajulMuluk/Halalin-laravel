@@ -27,7 +27,13 @@ class ChatUstadzController extends Controller
             $relation->maleUser = Profile::where('user_id', $relation->maleuser_id)->first();
             $relation->femaleUser = Profile::where('user_id', $relation->femaleuser_id)->first();
         }
-        return view('ustadz.chat', compact('pickableRelations', 'requestTaaruf', 'relations'));
+        return view('ustadz.chat', compact('pickableRelations', 'requestTaaruf', 'relations', 'ustadz'));
+    }
+
+    public function render()
+    {
+        $ustadz = Ustadz::where('ustadz_id', auth()->id())->first();
+        return view('components.navbarustadz', compact('ustadz'));
     }
 
     /**
