@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="header-chat">
-            <div class="headerchat-container">
+            <div class="headerchat-container" style="display: flex; justify-content: flex-end; background-color: white;">
                 <div class="header-left">
                     <img src="../../assets/images/user.png" alt="group" />
                     <div class="group-name">
@@ -16,7 +16,7 @@
         <div class="roomchat">
             <div class="bubblechat-container">
                 @foreach ($chats as $chat)
-                    <div class="bubble-chat>
+                    <div class="bubble-chat">
                         <div class="text">
                             <div>{{ $chat->send_by == 'ustadz' ? 'Ustadz ' : '' }}
                                 {{ $chat->send_by == 'ustadz' ? $relation->ustadz->name : '' }}

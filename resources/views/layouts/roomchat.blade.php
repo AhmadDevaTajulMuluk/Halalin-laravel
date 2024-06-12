@@ -6,6 +6,10 @@
     <title>Room Chat</title>
     <!-- Letakkan semua link stylesheet dan script di sini -->
     <link rel="stylesheet" href="../../assets/css/style.css"> <!-- Contoh untuk memuat file CSS dari direktori public -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     {{-- <style>
         /* Kontainer utama chat */
         .chat-container {
@@ -116,7 +120,10 @@
 <body>
     <div id="app">
         <!-- Header -->
-        <header class="header-chat">
+        <header class="header-chat" >
+            <button onclick="window.history.back()" class="back-button">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
             <h1>Room Chat</h1>
             <!-- Mungkin Anda ingin menambahkan beberapa elemen header lainnya -->
         </header>
