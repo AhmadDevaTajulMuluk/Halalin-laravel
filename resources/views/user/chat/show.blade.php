@@ -16,7 +16,7 @@
         <div class="roomchat">
             <div class="bubblechat-container">
                 @foreach ($chats as $chat)
-                    <div class="bubble-chat {{ $chat->send_by == auth()->user()->username ? 'user' : '' }}">
+                    <div class="bubble-chat>
                         <div class="text">
                             <div>{{ $chat->send_by == 'ustadz' ? 'Ustadz ' : '' }}
                                 {{ $chat->send_by == 'ustadz' ? $relation->ustadz->name : '' }}
