@@ -91,7 +91,7 @@ class BiodataController extends Controller
             $profile->update($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
             Session::flash('success', 'Profil berhasil diperbarui!');
-        return redirect()->route('biodata');
+            return redirect()->route('biodata');
         } else {
             Profile::create($data);
             DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
@@ -144,9 +144,9 @@ class BiodataController extends Controller
             $data['image'] = $image_name;
         }
         $profile->update($data);
-        
+
         Session::flash('success', 'Profil berhasil diperbarui!');
-    return redirect()->route('biodata');
+        return redirect()->route('biodata');
     }
 
 
@@ -622,4 +622,3 @@ class BiodataController extends Controller
         return view('user.matching.show-profile', compact('user', 'userRequester'));
     }
 }
-

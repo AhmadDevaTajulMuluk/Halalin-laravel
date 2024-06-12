@@ -11,6 +11,7 @@
 .chat-container {
     display: flex;
     flex-direction: column;
+    height: 80vh;
     max-height: 80vh;
     overflow-y: auto;
     width: 80%;
@@ -28,12 +29,12 @@
 
 .chat-header-container {
     padding: 3rem 0;
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 .chat-footer-container {
     padding: 0.5rem 0;
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 .chat-header {
