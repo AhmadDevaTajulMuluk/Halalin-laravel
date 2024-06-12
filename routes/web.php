@@ -20,6 +20,7 @@ use App\Http\Controllers\RequestTaarufController;
 use App\Http\Controllers\UserController as ControllersUserController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\ChatRoom;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -166,6 +167,10 @@ Route::prefix('ustadz')->group(function () {
         return view('ustadz.notif');
     });
 });
+// Route::get('/chat/{relation}', ChatRoom::class)->name('chat.show');
 
+// Route::get('/chat/show/{id}', [ChatController::class, 'show'])->name('chat.show');
+// Route::post('/chat/send/{id}', [ChatController::class, 'send'])->name('chat.send');
 Route::get('/chat/show/{id}', [ChatController::class, 'show'])->name('chat.show');
 Route::post('/chat/send/{id}', [ChatController::class, 'send'])->name('chat.send');
+Route::get('/get-latest-chats/{relationId}', [ChatController::class, 'getLatestChats'])->name('get.latest.chats');
