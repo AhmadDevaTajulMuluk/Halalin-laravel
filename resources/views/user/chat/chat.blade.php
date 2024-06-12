@@ -16,7 +16,7 @@
 		#approvalModal {
 			position: fixed;
 			top: 0;
-			left: 0;
+			left: 0; 
 			width: 100%;
 			height: fit-content;
 			padding: 2rem 0;

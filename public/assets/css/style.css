@@ -2224,7 +2224,7 @@ input[type="text"] {
 }
 .headerchat-container {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     width: 95%;
     justify-content: space-between;
 }
@@ -2233,15 +2233,17 @@ input[type="text"] {
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+    padding-bottom: 10px;
 }
 .roomchat-name {
     color: #4b5c98;
     font-weight: bold;
     font-size: 20px;
 }
+
 .header-left img {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border-radius: 50px;
 }
 .header-right {
@@ -2249,7 +2251,10 @@ input[type="text"] {
     align-items: center;
     justify-content: flex-end;
 }
-
+.group-name{
+    display: flex;
+    flex-direction: column;
+}
 .icon-notif {
     display: flex;
     justify-content: flex-end;
@@ -2287,6 +2292,7 @@ input[type="text"] {
     font-size: 14px;
 }
 .footer-chat {
+    position: absolute;
     display: flex;
     background-color: #fff4f6;
     align-items: center;
@@ -2527,7 +2533,7 @@ input[type="text"] {
         text-align: center;
     }
     .footer-chat {
-        padding: 0.5rem;
+        padding: 16px 40px;
         padding-inline: 1rem;
         height: 15vh;
     }
