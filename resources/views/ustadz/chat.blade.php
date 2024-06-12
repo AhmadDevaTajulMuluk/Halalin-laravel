@@ -51,11 +51,14 @@
 						@foreach($relations as $relation)
 							<div class="chat-item">
 								<div class="chat-info">
-									<h4>{{ $relation->maleUser->fullname }} dan {{ $relation->femaleUser->fullname }}</h4>
-									<p>{{ $relation->start == 0 ? 'Menunggu Ustadz Memulai Percakapan' : 'Percakapan Sedang Berlangsung'  }}</p> <!-- Anda mungkin ingin menambahkan data pesan terakhir -->
+									<a href="{{ route('chat.show', $relation->hubungan_id) }}">
+										<h4>{{ $relation->maleUser->fullname }} dan {{ $relation->femaleUser->fullname }}</h4>
+										<p>{{ $relation->start == 0 ? 'Menunggu Ustadz Memulai Percakapan' : 'Percakapan Sedang Berlangsung'  }}</p>
+									</a>
 								</div>
 							</div>
 						@endforeach
+
 					</div>
 				</div>
 			</div>

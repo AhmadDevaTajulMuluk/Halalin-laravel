@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Profile;
 use App\Models\Relations;
 use App\Models\RequestTaaruf;
 use App\Models\User;
+use App\Models\Ustadz;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -70,7 +72,50 @@ class ChatController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $relation = Relations::where('hubungan_id', $id)->first();
+        $relation->maleUser = Profile::where('user_id', $relation->maleuser_id)->first();
+        $relation->femaleUser = Profile::where('user_id', $relation->femaleuser_id)->first();
+        $relation->ustadz = Ustadz::where('ustadz_id', $relation->ustadz_id)->first();
+        if (auth('web')->check()) {
+            if (auth('web')->id() != $relation->maleuser_id && auth()->id() != $relation->femaleuser_id) {
+                return redirect()->back()->with('error', 'Anda tidak diizinkan mengakses chat ini.');
+            }
+        } else if (auth('ustadz')->check()) {
+            if ($relation->ustadz_id != auth('ustadz')->id()) {
+                return redirect()->back()->with('error', 'Anda tidak diizinkan mengakses chat ini.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengakses chat ini.');
+        }
+        if (auth('web')->id() == $relation->maleuser_id || auth('web')->id() == $relation->femaleuser_id) {
+            $sender = User::where('id', auth()->id())->first();
+            $sender = $sender->username;
+        } else if (auth('ustadz')->check()) {
+            $sender = "ustadz";
+        }
+        $user = User::where('id', auth()->id())->first();
+        $chats = Chat::where('hubungan_id', $id)->get();
+        return view('user.chat.show', compact('relation', 'chats', 'sender', 'user'));
+    }
+
+    public function send(Request $request, $id)
+    {
+        // Validasi data yang dikirim dari form
+        $request->validate([
+            'send_by' => 'required',
+            'message' => 'required',
+        ]);
+
+        // Simpan pesan ke database
+        Chat::create([
+            'hubungan_id' => $id,
+            'send_by' => $request->send_by,
+            'messages' => $request->message,
+            'send_at' => now(), // Atau gunakan waktu yang sesuai dengan aplikasi Anda
+        ]);
+
+        // Redirect kembali ke halaman chat atau lakukan aksi lain sesuai kebutuhan aplikasi Anda
+        return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
     }
 
     /**

@@ -52,8 +52,10 @@
 							<div class="chat-item">
 								<img src="{{ $relation->profilCalon->gender == 'laki-laki' ? asset('assets/images/user.png') : asset('assets/images/userFemale.png') }}" alt="user{{ $relation->maleuser_id }}" />
 								<div class="chat-info">
-									<h4>{{ $relation->profilCalon->fullname }}</h4> <!-- Menggunakan data dari profiles -->
-									<p>{{ $relation->start == 0 ? 'Menunggu Ustadz Memulai Percakapan' : 'Percakapan Sedang Berlangsung'  }}</p> <!-- Anda mungkin ingin menambahkan data pesan terakhir -->
+									<a href="{{ route('chat.show', $relation->hubungan_id) }}">
+										<h4>{{ $relation->profilCalon->fullname }}</h4> <!-- Menggunakan data dari profiles -->
+										<p>{{ $relation->start == 0 ? 'Menunggu Ustadz Memulai Percakapan' : 'Percakapan Sedang Berlangsung'  }}</p> <!-- Anda mungkin ingin menambahkan data pesan terakhir -->
+									</a>
 								</div>
 							</div>
 						@endforeach

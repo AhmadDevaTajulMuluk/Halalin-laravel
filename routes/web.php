@@ -166,3 +166,6 @@ Route::prefix('ustadz')->group(function () {
         return view('ustadz.notif');
     });
 });
+
+Route::get('/chat/show/{id}', [ChatController::class, 'show'])->name('chat.show');
+Route::post('/chat/send/{id}', [ChatController::class, 'send'])->name('chat.send');
