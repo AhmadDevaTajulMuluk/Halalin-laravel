@@ -1,5 +1,4 @@
 <!-- resources/views/livewire/chat-room.blade.php -->
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 <div>
     <div class="header-chat" wire:poll>
         <div class="headerchat-container">
@@ -15,7 +14,7 @@
     <div class="roomchat">
         <div class="bubblechat-container">
             @foreach ($chats as $chat)
-                <div class="bubble-chat {{ $chat->send_by == auth()->user()->username ? 'user' : '' }}">
+            <div class="bubble-chat {{ ($chat->send_by == 'ustadz' && auth('ustadz')->check()) ? 'user' : '' }} {{ $chat->send_by == auth()->user()->username ? 'user' : '' }}">
                     <div class="text">
                         <div>{{ $chat->send_by == 'ustadz' ? 'Ustadz ' : '' }}
                             {{ $chat->send_by == 'ustadz' ? $ustadz->name : '' }}
@@ -45,6 +44,27 @@
         </div>
     </div>
 </div>
+<script>
+    // Fungsi untuk menyegarkan halaman setiap 2 detik
+    function refreshPage() {
+        // Simpan posisi scroll di localStorage
+        localStorage.setItem("scrollPosition", document.documentElement.scrollTop || document.body.scrollTop);
+        setTimeout(function() {
+            location.reload();
+        }, 2000); // 2000 milidetik = 2 detik
+    }
+
+    // Fungsi untuk mengatur posisi scroll setelah halaman dimuat
+    function setScrollPosition() {
+        var scrollPosition = localStorage.getItem("scrollPosition");
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+        } else {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    }
+</script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 {{-- <script>
     // Fungsi untuk memperbarui chat secara periodik
     function getLatestChats(relationId) {

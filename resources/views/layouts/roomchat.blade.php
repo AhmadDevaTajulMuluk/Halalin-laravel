@@ -12,7 +12,7 @@
         <header class="header-chat">
             <h1>Room Chat</h1>
         </header>
-        <main class="page-konsultasi">
+        <main class="page-konsultasi" wire:poll>
             @yield('content')
         </main>
     </div>
