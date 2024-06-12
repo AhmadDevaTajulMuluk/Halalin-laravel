@@ -6,6 +6,7 @@
     <title>Room Chat</title>
     <!-- Letakkan semua link stylesheet dan script di sini -->
     <link rel="stylesheet" href="../../assets/css/style.css"> <!-- Contoh untuk memuat file CSS dari direktori public -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
