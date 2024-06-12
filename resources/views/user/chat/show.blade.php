@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="roomchat">
-            <div class="bubblechat-container">
+            <div wire:poll class="bubblechat-container">
                 @foreach ($chats as $chat)
                     <div class="bubble-chat {{ (auth('web')->check() && $chat->send_by == $user->username) || (auth('ustadz')->check() && $chat->send_by == 'ustadz') ? 'user' : '' }}">
                         <div class="text">
@@ -23,6 +23,7 @@
                                 {{ $chat->send_by != 'ustadz' ? $chat->send_by : '' }}
                                 @if (auth('web')->check())
                                     {{ $chat->send_by == $user->username ? '(Anda)' : '' }}
+                                    <time style="color:#a0a0a0" class="text-xs opacity-30">{{ $chat->created_at->diffForHumans() }}</time>
                                 @elseif (auth('ustadz')->check())
                                     {{ $chat->send_by == 'ustadz' ? '(Anda)' : '' }}
                                 @endif
