@@ -12,9 +12,9 @@
         </div>
     </div>
     <div class="roomchat">
-        <div class="bubblechat-container">
+        <div class="bubblechat-container" wire:poll>
             @foreach ($chats as $chat)
-            <div class="bubble-chat {{ ($chat->send_by == 'ustadz' && auth('ustadz')->check()) ? 'user' : '' }} {{ auth('web')->check() && $chat->send_by == auth()->user()->username ? 'user' : '' }}">
+            <div class="bubble-chat {{ ($chat->send_by == 'ustadz' && auth('ustadz')->check()) ? 'user' : '' }} {{ auth('web')->check() && $chat->send_by == auth()->user()->username ? 'user' : '' }}" wire:poll>
                     <div class="text">
                         <div>{{ $chat->send_by == 'ustadz' ? 'Ustadz ' : '' }}
                             {{ $chat->send_by == 'ustadz' ? $ustadz->name : '' }}

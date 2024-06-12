@@ -22,9 +22,9 @@ class ChatRoom extends Component
         'message' => 'required|string|max:255',
     ];
 
-    public function mount($relation)
+    public function mount($chats)
     {
-        $this->relation = $relation;
+        $this->chats = $chats;
         if (auth('ustadz')->check()) {
             $this->sender = auth('ustadz')->user()->username;
             $this->user = auth('ustadz')->user();
@@ -32,7 +32,7 @@ class ChatRoom extends Component
             $this->sender = Auth::user()->username;
             $this->user = Auth::user();
         }
-        $this->loadChats();
+        $this->loadRelation();
     }
 
     public function send()
