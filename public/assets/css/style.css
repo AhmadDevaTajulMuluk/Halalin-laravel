@@ -2295,6 +2295,11 @@ input[type="text"] {
     padding: 1rem;
     padding-inline: 2.5rem;
 }
+.group-name{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
 .inputbox {
     width: 100%;
     border-radius: 50px;
