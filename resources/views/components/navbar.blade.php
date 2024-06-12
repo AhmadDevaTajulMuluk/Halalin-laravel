@@ -47,6 +47,8 @@
           <span class="close" onclick="toggleProfilePopup()">&times;</span>
           @if ($profile && $profile->fullname)
             <p style="padding-top: 0; margin-top: 0; font-weight: 800">{{ $profile->fullname }}</p>
+          @else
+            <p style="padding-top: 0; margin-top: 0; font-weight: 800">{{ Auth::user('web')->username }}</p>
           @endif
           <hr>
           <a href="/biodata">Lihat Profil</a>
