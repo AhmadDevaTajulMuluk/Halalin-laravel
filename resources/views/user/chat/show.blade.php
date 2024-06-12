@@ -34,15 +34,15 @@
             </div>
         </div>
         <div class="footerchat">
+            <div style="margin: 16px 20px;">
             <form action="{{ route('chat.send', $relation->hubungan_id) }}" method="POST" class="inputbox">
-                
                     @csrf
                     <input type="text" name="message" placeholder="Ketik pesan..." required>
                     <div class="icon-kirim">
                         <button type="submit">kirim</button>
                     </div>
-                
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 @endsection
