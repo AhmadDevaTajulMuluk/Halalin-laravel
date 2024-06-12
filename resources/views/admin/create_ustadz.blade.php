@@ -1,8 +1,9 @@
 @extends('layouts.admin')
 
+@section('header', 'Tambah Ustadz')
+
 @section('content')
 <div class="container mt-5">
-    <h2 class="mb-4">Tambah Ustadz</h2>
     <form action="{{ route('admin.ustadz.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -25,7 +26,7 @@
             <label for="phone">Telepon:</label>
             <input type="text" class="form-control" id="phone" name="phone" required>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary mt-3 custom-btn">Simpan</button>
     </form>
 </div>
 @endsection

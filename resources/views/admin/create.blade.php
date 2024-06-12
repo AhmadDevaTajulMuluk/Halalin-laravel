@@ -1,4 +1,35 @@
-<!DOCTYPE html>
+@extends('layouts.admin')
+
+@section('title', 'create.admin')
+
+@section('header', 'Tambah Admin')
+    
+@section('content')
+<div class="main p-3">
+    <div class="container">
+        <form action="{{ route('admin.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary custom-btn">Simpan</button>
+        </form>
+    </div>
+</div>
+</div>
+
+    
+@endsection
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,30 +45,7 @@
     @auth('admin')
     <div class="wrapper">
         @include('admin.layouts.sidebar')
-        <div class="main p-3">
-            <div class="container">
-                <div class="text-center">
-                    <h1>Create Admin</h1>
-                </div>
-                <form action="{{ route('admin.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </form>
-            </div>
-        </div>
-    </div>
+       
     @else
     <script type="text/javascript">
         window.location.href = "{{ route('admin.login') }}";
@@ -48,4 +56,4 @@
         crossorigin="anonymous"></script>
     <script src="{{ asset('admin/assets/js/script.js') }}"></script>
 </body>
-</html>
+</html> --}}

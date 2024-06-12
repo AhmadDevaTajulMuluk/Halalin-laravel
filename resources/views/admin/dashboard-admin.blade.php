@@ -18,10 +18,10 @@
         <div class="main p-3">
             <div class="container">
                 <div class="text-center">
-                    <h1>Dashboard Admin</h1>
+                    <h1 style="color: #4b5c98">Dashboard Admin</h1>
                 </div>
                 <div class="d-flex justify-content-end mb-3">
-                    <a href="{{ route('admin.create') }}" class="btn btn-primary">Tambah Admin</a>
+                    <a href="{{ route('admin.create') }}" class="btn btn-primary custom-btn">Tambah Admin</a>
                 </div>
                 @if(session('success'))
                 <div class="alert alert-success">
