@@ -76,8 +76,14 @@ class RequestTaarufController extends Controller
         $user = auth()->user();
         $invitations = RequestTaaruf::where('responser_id', $user->id)
             ->where('is_approved', false)
+            ->where('is_read', false)
             ->with('requester.profile')
             ->get();
+
+        // Tandai notifikasi sebagai terbaca
+        RequestTaaruf::where('responser_id', $user->id)
+            ->where('is_approved', false)
+            ->update(['is_read' => true]);
 
         return view('chat', compact('user', 'invitations'));
     }

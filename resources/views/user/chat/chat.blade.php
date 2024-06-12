@@ -123,7 +123,11 @@
 							</div>
 							<div class="icon-notif">
 								<div class="fa fa-bell" style="color: #4b5c98; cursor: pointer; padding: 20rem 0"
-									onclick="showNotif('boxnotif')"></div>
+									onclick="showNotif('boxnotif')">
+									@if(App\Models\RequestTaaruf::where('responser_id', auth()->id())->where('is_approved', false)->where('is_read', false)->count() > 0)
+										<span class="notification-dot"></span>
+									@endif
+								</div>
 							</div>
 						</div>
 					</div>
@@ -131,7 +135,7 @@
 				<div class="roomchat">
 					<div class="roomchat-container">
 						<div class="isi">
-							<h3>Anda sedang tidak menjalani proses ta’aruf</h3>
+							<h3>Anda sedang tidak menjalani proses ta'aruf</h3>
 							<p>Mulai cari pasangan dan mulai percakapan untuk mengenal calon pasangan lebih jauh</p>
 							<a
 								href="{{ route('search') }}"
