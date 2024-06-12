@@ -45,7 +45,9 @@
                     <div class="inputbox">
                         <input type="text" name="message" placeholder="Ketik pesan..." required>
                         <div class="icon-kirim">
-                            <button class="button" type="submit">kirim</button>
+                            <button class="button" type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </div>
                     </div>
                 </form>
