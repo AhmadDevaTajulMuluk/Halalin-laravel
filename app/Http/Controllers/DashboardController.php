@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $profile = Profile::where('user_id', auth()->id())->first();
         $articles = Article::latest()->take(5)->get();
         $testimoni = Testimoni::all();
-        if (empty($profile)) {
+        if (!auth('web')->check()) {
             return view('index', compact('articles', 'testimoni'));
         }
         return view('user.dashboard', compact('profile', 'articles', 'testimoni'));

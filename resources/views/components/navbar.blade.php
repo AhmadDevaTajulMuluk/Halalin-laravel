@@ -32,8 +32,6 @@
                   <div class="user-name-container">
                     @if($profile && $profile->fullname)
                         <p class="profile-fullname">{{ $profile->fullname }}</p>
-                    @else
-                        <p class="profile-name">Silakan Login</p>
                     @endif  
                     <p>Lihat Profil</p>
                   </div>
