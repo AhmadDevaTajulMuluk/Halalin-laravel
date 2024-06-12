@@ -12,7 +12,11 @@
     <title>{{ $article->title }}</title>
 </head>
 <body id="page-content-article">
-    <x-navbar :profile="$profile"></x-navbar>
+    @if (auth('web')->check())
+        <x-navbar :profile="$profile"></x-navbar>
+    @else
+        <x-navbarustadz :ustadz="$ustadz"></x-navbarustadz>
+    @endif
     <main class="header-content-article">
         <button onclick="window.history.back()" class="back-button">
             <i class="fa fa-chevron-left" aria-hidden="true"></i>

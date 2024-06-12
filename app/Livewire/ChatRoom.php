@@ -25,18 +25,23 @@ class ChatRoom extends Component
     public function mount($relation)
     {
         $this->relation = $relation;
-        $this->sender = Auth::user()->username;
-        $this->user = Auth::user();
+        if (auth('ustadz')->check()) {
+            $this->sender = auth('ustadz')->user()->username;
+            $this->user = auth('ustadz')->user();
+        } else {
+            $this->sender = Auth::user()->username;
+            $this->user = Auth::user();
+        }
         $this->loadChats();
     }
 
     public function send()
     {
         $this->validate();
-
+        $sendBy = auth('ustadz')->check() ? 'ustadz' : auth()->user()->username;
         Chat::create([
             'hubungan_id' => $this->relation->hubungan_id,
-            'send_by' => $this->sender,
+            'send_by' => $sendBy,
             'messages' => $this->message,
         ]);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Profile;
+use App\Models\Ustadz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,15 +18,23 @@ class ArtikelController extends Controller
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $articles = Article::paginate(5); // Menampilkan 10 artikel per halaman
+        if (auth('ustadz')->check()) {
+            $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
+            return view('ustadz.artikel', compact('profile', 'articles'));
+        }
         return view('user.artikel.artikel', compact('profile', 'articles'));
     }
 
     public function render()
     {
+        if (auth('ustadz')->check()) {
+            $ustadz = Ustadz::where('user_id', auth()->id())->first();
+            return view('components.navbarustadz', compact('ustadz'));
+        }
         $profile = Profile::where('user_id', auth()->id())->first();
         return view('components.navbar', compact('profile'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +62,10 @@ class ArtikelController extends Controller
 
         // Increment viewers
         DB::table('articles')->where('article_id', $id)->increment('viewers');
-
+        if (auth('ustadz')->check()) {
+            $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
+            return view('user.artikel.content', compact('profile', 'article', 'ustadz'));
+        }
         return view('user.artikel.content', compact('article', 'profile'));
     }
     public function search(Request $request)
@@ -73,7 +85,10 @@ class ArtikelController extends Controller
         }
 
         $articles = $query->paginate(5);
-
+        if (auth('ustadz')->check()) {
+            $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
+            return view('ustadz.artikel', compact('profile', 'articles', 'ustadz'));
+        }
         return view('user.artikel.artikel', compact('profile', 'articles'));
     }
 
