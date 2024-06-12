@@ -44,26 +44,6 @@
         </div>
     </div>
 </div>
-<script>
-    // Fungsi untuk menyegarkan halaman setiap 2 detik
-    function refreshPage() {
-        // Simpan posisi scroll di localStorage
-        localStorage.setItem("scrollPosition", document.documentElement.scrollTop || document.body.scrollTop);
-        setTimeout(function() {
-            location.reload();
-        }, 2000); // 2000 milidetik = 2 detik
-    }
-
-    // Fungsi untuk mengatur posisi scroll setelah halaman dimuat
-    function setScrollPosition() {
-        var scrollPosition = localStorage.getItem("scrollPosition");
-        if (scrollPosition) {
-            window.scrollTo(0, scrollPosition);
-        } else {
-            window.scrollTo(0, document.body.scrollHeight);
-        }
-    }
-</script>
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 {{-- <script>
     // Fungsi untuk memperbarui chat secara periodik
