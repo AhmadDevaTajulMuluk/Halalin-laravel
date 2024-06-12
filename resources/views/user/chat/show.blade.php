@@ -35,11 +35,18 @@
         </div>
         <div class="footerchat">
             <div style="margin: 16px 20px;">
-            <form action="{{ route('chat.send', $relation->hubungan_id) }}" method="POST" class="inputbox">
-                    @csrf
-                    <input type="text" name="message" placeholder="Ketik pesan..." required>
-                    <div class="icon-kirim">
-                        <button type="submit">kirim</button>
+                <form action="{{ route('chat.send', $relation->hubungan_id) }}" method="POST">
+                        @csrf
+                        @if (auth('web')->check())
+                            <input type="text" name="send_by" value="{{ Auth::user()->username }}" hidden>
+                        @elseif (auth('ustadz')->check())
+                            <input type="text" name="send_by" value="ustadz" hidden>
+                        @endif  
+                    <div class="inputbox">
+                        <input type="text" name="message" placeholder="Ketik pesan..." required>
+                        <div class="icon-kirim">
+                            <button type="submit">kirim</button>
+                        </div>
                     </div>
                 </form>
             </div>
