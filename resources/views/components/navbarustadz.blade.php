@@ -21,7 +21,11 @@
                         <img src="../../assets/images/user.png" alt="user" style="border-radius: 50%" />
                     </div>
                     <div class="user-name-container">
-                        <p class="profile-name">Muhammad Fikri</p>
+                        @if($ustadz && $ustadz->name)
+                            <p>{{ $ustadz->name }}</p>
+                        @else
+                            <p>Silakan Login</p>
+                        @endif  
                         <p>Lihat Profil</p>
                     </div>
                 </a>
@@ -30,11 +34,15 @@
     </div>
 </header>
 <div id="profile-popup" class="profile-popup">
-      <div class="profile-popup-content">
-          <span class="close" onclick="toggleProfilePopup()">&times;</span>
-          <a href="/biodata">Lihat Profil</a>
+    <div class="profile-popup-content">
+        <span class="close" onclick="toggleProfilePopup()">&times;</span>
+        @if($ustadz && $ustadz->name)
+            <p style="padding-top: 0; margin-top: 0; font-weight: 800">{{ $ustadz->name }}</p>
+        @endif  
+        <hr>
+        <p>Lihat Profil</p>
           <a href="/logout">Logout</a>
-      </div>
+    </div>
   </div>
 <style>
 /* Styling untuk elemen yang sudah ada */

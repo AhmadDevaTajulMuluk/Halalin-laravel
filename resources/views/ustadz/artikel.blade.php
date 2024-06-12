@@ -11,7 +11,7 @@
 
 <body>
     {{-- manggil navbar --}}
-    <x-navbarustadz></x-navbarustadz>
+    <x-navbarustadz :ustadz="$ustadz"></x-navbarustadz>
     <main id="page-artikel" style="background-color: white">
         <div class="container-artikel">
             <div>

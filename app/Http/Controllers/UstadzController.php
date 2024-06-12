@@ -80,6 +80,12 @@ class UstadzController extends Controller
         return view('ustadz.dashboard', compact('ustadz', 'articles', 'testimoni'));
     }
 
+    public function render()
+    {
+        $ustadz = Ustadz::where('user_id', auth()->id())->first();
+        return view('components.navbarustadz', compact('ustadz'));
+    }
+
     public function artikel()
     {
         $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();

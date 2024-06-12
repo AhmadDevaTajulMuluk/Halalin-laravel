@@ -75,9 +75,13 @@
 				<div class="header-chat">
 					<div class="headerchat-container">
 						<div class="header-right" id="notification">
-							<div class="notify-box" id="boxnotif" style="opacity: 0">
+							<div class="notify-box" id="boxnotif" style="opacity: 0; display:none">
 								<div class="bg-notif">
-									<h2>Pemberitahuan</h2>
+									<div style="display: flex; flex-direction: row; column-gap: 6rem">
+										<h2>Pemberitahuan</h2>
+										<div class="fa fa-times" style="color: #4b5c98; cursor: pointer; padding: 0 0;"
+										onclick="showNotif('boxnotif')"></div>
+									</div>
 									{{-- buat pemberitahuannya di ambil dari database request taarufs, jika
 									user ini adalah responser, tampilkan notif "anda mendapatkan undangan dari {{ requester }}" --}}
 									{{-- @dd($invitations) --}}

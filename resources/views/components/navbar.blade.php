@@ -47,7 +47,9 @@
     <div id="profile-popup" class="profile-popup">
       <div class="profile-popup-content">
           <span class="close" onclick="toggleProfilePopup()">&times;</span>
-          <p style="padding-top: 0; margin-top: 0; font-weight: 600">{{ $profile->fullname }}</p>
+          @if ($profile && $profile->fullname)
+            <p style="padding-top: 0; margin-top: 0; font-weight: 800">{{ $profile->fullname }}</p>
+          @endif
           <hr>
           <a href="/biodata">Lihat Profil</a>
           <a href="/logout">Logout</a>

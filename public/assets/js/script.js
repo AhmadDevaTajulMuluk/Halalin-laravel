@@ -367,10 +367,12 @@ var down = false;
 function showNotif(id) {
 	var boxNotif = document.getElementById(id);
 	if (!down) {
+		boxNotif.style.display = "flex";
 		boxNotif.style.animation = "fadeInDown 0.3s";
 		boxNotif.style.opacity = 1;
 		down = true;
 	} else {
+		boxNotif.style.display = "none";
 		boxNotif.style.animation = "fadeInUp 0.3s";
 		boxNotif.style.opacity = 0;
 		down = false;

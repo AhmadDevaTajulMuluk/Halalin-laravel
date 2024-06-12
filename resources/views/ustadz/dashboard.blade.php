@@ -21,7 +21,7 @@
 				</p>
 			</div>
 		</div>
-		<x-navbarustadz></x-navbarustadz>
+		<x-navbarustadz :ustadz="$ustadz"></x-navbarustadz>
 		<main id="page-dashboard">
 			<article id="promotion-container">
 				<div id="promotion-text">
