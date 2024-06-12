@@ -15,11 +15,11 @@
 <body>
     <div id="app">
         <!-- Header -->
-        <header class="header-chat" >
+        <header class="header-chat">
             <button onclick="window.location.href='/chat'" class="back-button">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </button>
-            <h1>Room Chat</h1>
+            <h1 style="margin:10px">Room Chat</h1>
             <!-- Mungkin Anda ingin menambahkan beberapa elemen header lainnya -->
         </header>
         

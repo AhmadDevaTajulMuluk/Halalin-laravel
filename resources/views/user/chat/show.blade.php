@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="footerchat">
-            <div style="margin: 16px 20px;">
+            <div style="margin: 14px 20px;">
                 <form action="{{ route('chat.send', $relation->hubungan_id) }}" method="POST">
                         @csrf
                         @if (auth('web')->check())
