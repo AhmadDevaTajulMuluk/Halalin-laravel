@@ -36,7 +36,7 @@
                     <input type="file" class="form-control" id="article_image" name="article_image">
                     <small class="form-text text-muted">Leave blank if you don't want to change the image.</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary custom-btn">Update</button>
             </form>
         </div>
     </div>

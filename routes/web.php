@@ -20,6 +20,7 @@ use App\Http\Controllers\RequestTaarufController;
 use App\Http\Controllers\UserController as ControllersUserController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\ChatRoom;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -154,6 +155,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/ustadz/login', [UstadzController::class, 'showLoginForm'])->name('ustadz.login');
 Route::post('/ustadz/login', [UstadzController::class, 'login'])->name('ustadz.login.submit');
+Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show')->middleware('auth:ustadz');
 
 Route::prefix('ustadz')->group(function () {
     Route::get('/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');
@@ -161,11 +163,15 @@ Route::prefix('ustadz')->group(function () {
     Route::get('/chat', [ChatUstadzController::class, 'index'])->name('ustadz.chat')->middleware('auth:ustadz');
     Route::put('/request-taaruf/dampingi', [RequestTaarufController::class, 'dampingi'])->name('request_taaruf.dampingi');
     Route::post('/logout', [UstadzController::class, 'logout'])->name('ustadz.logout');
-
+    Route::get('/artikel/search', [ArtikelController::class, 'search'])->name('ustadz.artikel.search')->middleware('auth:ustadz');
     Route::get('/notif-ustadz', function () {
         return view('ustadz.notif');
     });
 });
+// Route::get('/chat/{relation}', ChatRoom::class)->name('chat.show');
 
+// Route::get('/chat/show/{id}', [ChatController::class, 'show'])->name('chat.show');
+// Route::post('/chat/send/{id}', [ChatController::class, 'send'])->name('chat.send');
 Route::get('/chat/show/{id}', [ChatController::class, 'show'])->name('chat.show');
 Route::post('/chat/send/{id}', [ChatController::class, 'send'])->name('chat.send');
+Route::get('/get-latest-chats/{relationId}', [ChatController::class, 'getLatestChats'])->name('get.latest.chats');

@@ -15,19 +15,17 @@
     <main id="page-artikel" style="background-color: white">
         <div class="container-artikel">
             <div>
-                <form action="{{ route('artikel.search') }}" method="GET" class="search-container">
-                    <input type="text" name="search" placeholder="Cari artikel..." class="search-input"
-                        value="{{ request('search') }}" style="border-radius: 10px; padding-left: 20px;">
+                <form action="{{ route('ustadz.artikel.search') }}" method="GET" class="search-container">
+                    <input type="text" name="search" placeholder="Cari artikel..." class="search-input" value="{{ request('search') }}" style="border-radius: 10px; padding-left: 20px;">
                     <select name="filter" class="filter-search" style="border-radius: 10px; font-size: 14px;">
-                        <option value="" disabled {{ request('filter') == '' ? 'selected' : '' }}>Filter By
-                        </option>
+                        <option value="" disabled {{ request('filter') == '' ? 'selected' : '' }}>Filter By</option>
                         <option value="populer" {{ request('filter') == 'populer' ? 'selected' : '' }}>Populer</option>
                         <option value="none" {{ request('filter') == 'none' ? 'selected' : '' }}>None</option>
                     </select>
                     <button type="submit" class="search-button" style="border-radius: 10px;">Cari</button>
                 </form>
             </div>
-
+         
             <div class="artikel-container">
                 <div class="artikel-box">
                     @if ($articles->isEmpty())
@@ -37,12 +35,20 @@
                     @else
                         @foreach ($articles as $article)
                             <article class="isi-artikel">
-                                <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" />
+                                <img src="{{ asset('image/' . $article->article_image) }}" alt="Artikel" class="article-image"/>
                                 <div class="content-artikel" style="width: 100%">
                                     <h3>{{ $article->title }}</h3>
-                                    <p>{{ Str::limit($article->content, 150) }}</p>
-                                    <a href="{{ route('artikel.show', $article->article_id) }}"
-                                        class="button">Selengkapnya</a>
+                                    <p>{{ Str::limit($article->content, 300) }}</p>
+                                    <div class="article-detail">
+                                        <div class="view-article">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="rgb(145, 145, 145)" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                            </svg>
+                                            <p style="color: rgb(145, 145, 145);">{{ $article->viewers }}</p>
+                                        </div>
+                                    <a href="{{ route('artikel.show', $article->article_id) }}" class="button">Selengkapnya</a>
+                                    </div>
                                 </div>
                             </article>
                         @endforeach

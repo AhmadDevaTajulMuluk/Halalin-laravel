@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
 use App\Models\Ustadz;
 
@@ -169,6 +170,42 @@ class AdminController extends Controller
         return redirect()->route('admin.ustadz')->with('success', 'Ustadz created successfully');
     }
 
+    // public function editUstadz($ustadz_id)
+    // {
+    //     $ustadz = Ustadz::findOrFail($ustadz_id);
+    //     return view('admin.edit_ustadz', compact('ustadz'));
+    // }
+
+    // public function updateUstadz(Request $request, $ustadz_id)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'username' => [
+    //             'required',
+    //             Rule::unique('ustadz')->ignore($ustadz_id, 'ustadz_id'),
+    //         ],
+    //         'phone' => 'required',
+    //         'password' => 'nullable|confirmed',
+    //     ]);
+
+    //     try {
+    //         $password = $request->filled('password') ? bcrypt($request->password) : Ustadz::findOrFail($ustadz_id)->password;
+
+    //         DB::statement('CALL UpdateUstadz(?, ?, ?, ?, ?)', [
+    //             $ustadz_id,
+    //             $request->name,
+    //             $request->username,
+    //             $request->phone,
+    //             $password
+    //         ]);
+
+    //         return redirect()->route('admin.ustadz')->with('success', 'Ustadz updated successfully');
+    //     } catch (\Exception $e) {
+    //         return redirect()->route('admin.edit_ustadz', ['ustadz_id' => $ustadz_id])
+    //             ->withErrors(['error' => 'Update failed: ' . $e->getMessage()]);
+    //     }
+    // }
+
     public function editUstadz($ustadz_id)
     {
         $ustadz = Ustadz::findOrFail($ustadz_id);
@@ -180,22 +217,31 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'username' => [
-            'required',
+                'required',
                 Rule::unique('ustadz')->ignore($ustadz_id, 'ustadz_id'),
             ],
             'phone' => 'required',
             'password' => 'nullable|confirmed',
         ]);
 
-        $ustadz = Ustadz::findOrFail($ustadz_id);
-        $ustadz->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'phone' => $request->phone,
-            'password' => $request->filled('password') ? bcrypt($request->password) : $ustadz->password,
-        ]);
+        DB::beginTransaction();
 
-        return redirect()->route('admin.ustadz')->with('success', 'Ustadz updated successfully');
+        try {
+            $ustadz = Ustadz::findOrFail($ustadz_id);
+            $ustadz->update([
+                'name' => $request->name,
+                'username' => $request->username,
+                'phone' => $request->phone,
+                'password' => $request->filled('password') ? bcrypt($request->password) : $ustadz->password,
+            ]);
+
+            DB::commit();
+            return redirect()->route('admin.ustadz')->with('success', 'Ustadz updated successfully');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('admin.edit_ustadz', ['ustadz_id' => $ustadz_id])
+                ->withErrors(['error' => 'Update failed: ' . $e->getMessage()]);
+        }
     }
 
     public function destroyUstadz($ustadz_id)

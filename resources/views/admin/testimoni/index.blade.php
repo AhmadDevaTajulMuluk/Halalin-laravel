@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('admin.testimoni.create') }}" class="btn btn-primary mb-3">Tambah Testimoni</a>
+            <a href="{{ route('admin.testimoni.create') }}" class="btn btn-primary mb-3 custom-btn">Tambah Testimoni</a>
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif

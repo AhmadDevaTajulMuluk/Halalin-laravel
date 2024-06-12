@@ -1,8 +1,18 @@
 @extends('layouts.admin')
 
+@section('header', 'Edit Ustadz')
+
 @section('content')
 <div class="container mt-5">
-    <h2 class="mb-4">Edit Ustadz</h2>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('admin.ustadz.update', $ustadz->ustadz_id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -26,7 +36,7 @@
             <label for="phone">Telepon:</label>
             <input type="text" class="form-control" id="phone" name="phone" value="{{ $ustadz->phone }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary mt-3 custom-btn">Simpan</button>
     </form>
 </div>
 @endsection
