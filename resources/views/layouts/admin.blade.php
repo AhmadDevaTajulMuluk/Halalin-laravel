@@ -14,7 +14,7 @@
         @include('admin.layouts.sidebar')
         <div class="main p-3">
             <div class="container">
-                <h1 class="text-center" style="color: #4b5c98">@yield('header')</h1>
+                <h1 class="text-center" style="color: #052958">@yield('header')</h1>
                 @yield('content')
             </div>
         </div>
