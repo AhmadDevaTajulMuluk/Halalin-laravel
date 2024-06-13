@@ -9,6 +9,7 @@ use App\Models\Biodata\SelfApp;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -23,11 +24,14 @@ class SearchController extends Controller
             return back()->with('error', 'Lengkapi profil Anda terlebih dahulu.');
         }
         $profile = Profile::where('user_id', auth()->id())->first();
+
         $users = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->select('users.*', 'profiles.*', DB::raw('calculate_age(profiles.birth_date) as age'))
             ->where('users.id', '!=', auth()->id())
             ->where('users.is_complete', 1) // Memeriksa apakah pengguna sudah lengkap mengisi
             ->where('profiles.gender', '!=', $profile->gender) // Memeriksa jenis kelamin tidak sama
             ->paginate(6);
+
         foreach ($users as $user) {
             $selectedProfile = Profile::where('user_id', $user->id)->first();
             $education = Educations::where('user_id', $user->id)->first();
@@ -38,6 +42,7 @@ class SearchController extends Controller
                 $user->fullname = $selectedProfile->fullname ?? null;
                 $user->birth_date = $selectedProfile->birth_date ?? null;
                 $user->place_date = $selectedProfile->place_date ?? null;
+                // age sudah tersedia di $user karena ditambahkan di select dengan calculate_age
             }
             if ($education) {
                 $user->last_education = $education->last_education ?? null;
@@ -50,8 +55,10 @@ class SearchController extends Controller
                 $user->reason = $selfApps->taarufReason ?? null;
             }
         }
-        return view('user.matching.search', compact('users'), compact('profile'));
+
+        return view('user.matching.search', compact('users', 'profile'));
     }
+
     public function searchPartner(Request $request)
     {
         $searchType = $request->input('searchType');

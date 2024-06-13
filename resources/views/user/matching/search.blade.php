@@ -138,13 +138,13 @@
                                                 <div class="card-img">
                                             </div>
                                                 <h2>{{ $user->username }}</h2>
-                                                @php
+                                                {{-- @php
                                                     $birthdate = new DateTime($user->birth_date);
                                                     $today = new DateTime('today');
                                                     $age = $birthdate->diff($today)->y;
-                                                @endphp
+                                                @endphp --}}
                                                 <hr>
-                                                <p><b>Umur:</b> {{ $age }}</p>
+                                                <p><b>Umur:</b> {{ $user->age }}</p>
                                                 <p><b>Tempat Lahir:</b> {{ $user->place_date }}</p>
                                                 <p><b>Pendidikan:</b> {{ $user->last_education }}</p>
                                                 <p><b>Hafalan:</b> {{ $user->quran }}</p>
