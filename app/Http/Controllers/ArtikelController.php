@@ -55,17 +55,36 @@ class ArtikelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $profile = Profile::where('user_id', auth()->id())->first();
         $article = DB::table('articles')->where('article_id', $id)->first();
+        $ipAddress = $request->ip();
 
-        // Increment viewers
-        DB::table('articles')->where('article_id', $id)->increment('viewers');
+        // Check if the IP has already viewed the article
+        $existingView = DB::table('article_views')
+            ->where('article_id', $id)
+            ->where('ip_address', $ipAddress)
+            ->first();
+
+        if (!$existingView) {
+            // Increment viewers if not already viewed from this IP
+            DB::table('articles')->where('article_id', $id)->increment('viewers');
+
+            // Store the view record
+            DB::table('article_views')->insert([
+                'article_id' => $id,
+                'ip_address' => $ipAddress,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
         if (auth('ustadz')->check()) {
             $ustadz = Ustadz::where('ustadz_id', auth('ustadz')->id())->first();
             return view('user.artikel.content', compact('profile', 'article', 'ustadz'));
         }
+
         return view('user.artikel.content', compact('article', 'profile'));
     }
     public function search(Request $request)
