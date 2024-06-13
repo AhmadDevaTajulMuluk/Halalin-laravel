@@ -34,6 +34,7 @@ class AdminTestimoni extends Controller
             'author' => 'required',
             'content' => 'required',
             'image' => 'nullable|image',
+            'rating' => 'required|numeric',
         ]);
 
         $data = $request->all();
@@ -77,20 +78,21 @@ class AdminTestimoni extends Controller
             'author' => 'required',
             'content' => 'required',
             'image' => 'nullable|image',
+            'rating' => 'required|numeric',
         ]);
 
         $testimoni = Testimoni::findOrFail($id);
         $data = $request->all();
-    
+
         if ($request->hasFile('image')) {
             $image_file = $request->file('image');
             $image_name = time() . '.' . $image_file->getClientOriginalExtension();
             $image_file->move(public_path('images/testimoni'), $image_name);
             $data['image'] = $image_name;
         }
-    
+
         $testimoni->update($data);
-    
+
         return redirect()->route('admin.testimoni.index')->with('success', 'Testimoni updated successfully');
     }
 
@@ -108,7 +110,7 @@ class AdminTestimoni extends Controller
             }
         }
         $testimoni->delete();
-    
+
         return redirect()->route('admin.testimoni.index')->with('success', 'Testimoni deleted successfully');
     }
 }

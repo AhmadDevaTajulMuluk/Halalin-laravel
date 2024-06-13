@@ -13,5 +13,6 @@ class Testimoni extends Model
         'author',
         'content',
         'image',
+        'rating',
     ];
 }
