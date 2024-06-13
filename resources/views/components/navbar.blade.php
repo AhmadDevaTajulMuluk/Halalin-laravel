@@ -20,7 +20,7 @@
             <p class="close-nav" onclick="toggleDropdown()">x</p>
             <div class="navbar-items">
                 <nav>
-                    <a id="beranda-navbar" href="/dashboard" class="{{ Request::is('dashboard') ? 'active' : '' }}">Beranda</a>
+                    <a id="beranda-navbar" href="/dashboard" class="{{ Request::is('dashboard') ? 'active' : '' }} {{ Request::is('/') ? 'active' : '' }}">Beranda</a>
                     <a id="artikel-navbar" href="/artikel" class="{{ Request::segment(1) == 'artikel' ? 'active' : '' }}">Artikel</a>
                     <a id="pelatihan-navbar" href="/pelatihan/bab/1" class="{{ Request::segment(1) == 'pelatihan' ? 'active' : '' }}">Pelatihan</a>
                     <a id="chat-navbar" href="/chat" class="{{ Request::segment(1) == 'chat' ? 'active' : '' }}">
