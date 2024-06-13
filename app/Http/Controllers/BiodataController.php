@@ -418,55 +418,64 @@ class BiodataController extends Controller
         return view('user.biodata', compact('education'));
     }
 
-    public function storeEducation(Request $request)
-    {
-        $request->validate([
-            'last_education' => 'required|string|max:50',
-            'elementarySchool' => 'required|string|max:50',
-            'juniorHighSchool' => 'nullable|string|max:50',
-            'seniorHighSchool' => 'nullable|string|max:50',
-            'collegeS1' => 'nullable|string|max:50',
-            'majorS1' => 'nullable|string|max:50',
-            'collegeS2' => 'nullable|string|max:50',
-            'majorS2' => 'nullable|string|max:50',
-            'collegeS3' => 'nullable|string|max:50',
-            'majorS3' => 'nullable|string|max:50',
-        ], [
-            'elementarySchool.required' => 'Nama SD dasar harus diisi.',
-        ]);
+public function storeEducation(Request $request)
+{
+    $request->validate([
+        'last_education' => 'required|string|max:50',
+        'other_education' => 'nullable|string|max:50',
+        'elementarySchool' => 'required|string|max:50',
+        'juniorHighSchool' => 'nullable|string|max:50',
+        'seniorHighSchool' => 'nullable|string|max:50',
+        'collegeS1' => 'nullable|string|max:50',
+        'majorS1' => 'nullable|string|max:50',
+        'collegeS2' => 'nullable|string|max:50',
+        'majorS2' => 'nullable|string|max:50',
+        'collegeS3' => 'nullable|string|max:50',
+        'majorS3' => 'nullable|string|max:50',
+        'prestasi' => 'nullable|string|max:150',
+    ], [
+        'elementarySchool.required' => 'Nama SD dasar harus diisi.',
+    ]);
 
-        $data = [
-            'user_id' => auth()->user()->id,
-            'last_education' => $request->input('last_education'),
-            'elementarySchool' => $request->input('elementarySchool'),
-            'juniorHighSchool' => $request->input('juniorHighSchool'),
-            'seniorHighSchool' => $request->input('seniorHighSchool'),
-            'collegeS1' => $request->input('collegeS1'),
-            'majorS1' => $request->input('majorS1'),
-            'collegeS2' => $request->input('collegeS2'),
-            'majorS2' => $request->input('majorS2'),
-            'collegeS3' => $request->input('collegeS3'),
-            'majorS3' => $request->input('majorS3'),
-        ];
-
-        $education = Educations::where('user_id', auth()->id())->first();
-        if ($education) {
-            $education->update($data);
-            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            Session::flash('success', 'Data pendidikan berhasil diperbarui!');
-            return redirect()->route('biodata');
-        } else {
-            Educations::create($data);
-            DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
-            Session::flash('success', 'Data pendidikan berhasil disimpan!');
-            return redirect()->route('biodata');
-        }
+    $lastEducation = $request->input('last_education');
+    if ($lastEducation === 'other') {
+        $lastEducation = $request->input('other_education');
     }
+
+    $data = [
+        'user_id' => auth()->user()->id,
+        'last_education' => $lastEducation,
+        'elementarySchool' => $request->input('elementarySchool'),
+        'juniorHighSchool' => $request->input('juniorHighSchool'),
+        'seniorHighSchool' => $request->input('seniorHighSchool'),
+        'collegeS1' => $request->input('collegeS1'),
+        'majorS1' => $request->input('majorS1'),
+        'collegeS2' => $request->input('collegeS2'),
+        'majorS2' => $request->input('majorS2'),
+        'collegeS3' => $request->input('collegeS3'),
+        'majorS3' => $request->input('majorS3'),
+        'prestasi' => $request->input('prestasi'),
+    ];
+
+    $education = Educations::where('user_id', auth()->id())->first();
+    if ($education) {
+        $education->update($data);
+        DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
+        Session::flash('success', 'Data pendidikan berhasil diperbarui!');
+        return redirect()->route('biodata');
+    } else {
+        Educations::create($data);
+        DB::statement('CALL update_is_complete(?)', [auth()->user()->id]);
+        Session::flash('success', 'Data pendidikan berhasil disimpan!');
+        return redirect()->route('biodata');
+    }
+}
 
     public function updateEducation(Request $request)
     {
         $request->validate([
             'last_education' => 'required|string|max:50',
+            'other_education' => 'nullable|string|max:50',
             'elementarySchool' => 'required|string|max:50',
             'juniorHighSchool' => 'nullable|string|max:50',
             'seniorHighSchool' => 'nullable|string|max:50',
@@ -476,6 +485,8 @@ class BiodataController extends Controller
             'majorS2' => 'nullable|string|max:50',
             'collegeS3' => 'nullable|string|max:50',
             'majorS3' => 'nullable|string|max:50',
+            'prestasi' => 'nullable|string|max:150',
+            
         ]);
 
         $education = Educations::where('user_id', auth()->id())->first();
@@ -483,6 +494,7 @@ class BiodataController extends Controller
         $data = [
             'user_id' => auth()->user()->id,
             'last_education' => $request->input('last_education'),
+            'other_education' => $request->input('other_education'),
             'elementarySchool' => $request->input('elementarySchool'),
             'juniorHighSchool' => $request->input('juniorHighSchool'),
             'seniorHighSchool' => $request->input('seniorHighSchool'),
@@ -492,6 +504,7 @@ class BiodataController extends Controller
             'majorS2' => $request->input('majorS2'),
             'collegeS3' => $request->input('collegeS3'),
             'majorS3' => $request->input('majorS3'),
+            'prestasi' => $request->input('prestasi'),
         ];
 
         $education->update($data);

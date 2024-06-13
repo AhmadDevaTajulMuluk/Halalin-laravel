@@ -247,16 +247,19 @@
 							@endif
 							<div class="field-bio">
 								<p>Pendidikan Terakhir</p>
-									<select class="pendidikanterakhir" name="last_education" required>
-										<option value="" disabled selected {{ !$education ? 'selected' : '' }}>--- Pilih Pendidikan Terakhir Anda ---</option>
-										<option value="SD" {{ old('last_education', $education ? $education->last_education : '') == 'SD' ? 'selected' : '' }}>SD</option>
-										<option value="SMP sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMP sederajat' ? 'selected' : '' }}>SMP sederajat</option>
-										<option value="SMA sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMA sederajat' ? 'selected' : '' }}>SMA sederajat</option>
-										<option value="Sarjana" {{ old('last_education', $education ? $education->last_education : '') == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
-										<option value="Magister" {{ old('last_education', $education ? $education->last_education : '') == 'Magister' ? 'selected' : '' }}>Magister</option>
-										<option value="Doktor" {{ old('last_education', $education ? $education->last_education : '') == 'Doktor' ? 'selected' : '' }}>Doktor</option>
-									</select>
-								<div class="sekolahdasar">
+								<select class="pendidikanterakhir" name="last_education" id="last_education" required onchange="checkOther(this);">
+									<option value="" disabled selected {{ !$education ? 'selected' : '' }}>--- Pilih Pendidikan Terakhir Anda ---</option>
+									<option value="SD" {{ old('last_education', $education ? $education->last_education : '') == 'SD' ? 'selected' : '' }}>SD</option>
+									<option value="SMP sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMP sederajat' ? 'selected' : '' }}>SMP sederajat</option>
+									<option value="SMA sederajat" {{ old('last_education', $education ? $education->last_education : '') == 'SMA sederajat' ? 'selected' : '' }}>SMA sederajat</option>
+									<option value="Sarjana" {{ old('last_education', $education ? $education->last_education : '') == 'Sarjana' ? 'selected' : '' }}>Sarjana</option>
+									<option value="Magister" {{ old('last_education', $education ? $education->last_education : '') == 'Magister' ? 'selected' : '' }}>Magister</option>
+									<option value="Doktor" {{ old('last_education', $education ? $education->last_education : '') == 'Doktor' ? 'selected' : '' }}>Doktor</option>
+									<option value="other" {{ old('last_education', $education ? $education->last_education : '') == 'Other' ? 'selected' : '' }}>Lainnya</option>
+								</select>
+								<input type="text" class="pendidikanterakhir" id="other_education" name="other_education" placeholder="Masukkan pendidikan terakhir Anda" value="{{ old('other_education', $education ? $education->other_education : '') }}" style="{{ old('last_education', $education ? $education->last_education : '') == 'Other' ? 'display: block; width:650px' : 'display: none; width:650px' }}" />
+								
+									<div class="sekolahdasar">
 									<p>Sekolah Dasar (SD)</p>
 									<input type="text" class="sekolahdasar-input" placeholder="Dimana anda bersekolah dasar" name="elementarySchool" value="{{ old('elementarySchool', $education ? $education->elementarySchool : '') }}" required/>
 								</div>
@@ -291,6 +294,11 @@
 								<div class="jurusan">
 									<p>Jurusan</p>
 									<input type="text" class="jurusans1-input" placeholder="Apa jurusan yang anda ikuti" name="majorS3" value="{{ old('majorS3', $education ? $education->majorS3 : '') }}"/>
+								</div>
+								<div class="prestasi">
+									<p>Prestasi (optional)</p>
+									<textarea style="width: 100%; height: 130px; font-size: 16px; border-radius: 5px; padding: 10px; color: #4b5c98; border: 1px solid #b4b4b4; resize: none;" 
+									placeholder="Masukkan prestasi yang anda miliki" name="prestasi" required>{{ old('prestasi', $education ? $education->prestasi : '') }}</textarea>
 								</div>
 							</div>
 							<div class="divbutton">
@@ -445,16 +453,25 @@
 			</div>
 			
 		</div>
-
 		<!----Icon Jenis Kelamin--->
 		<script
 			type="module"
 			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
 		</script>
 		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-	
+		<script>
+			function checkOther(select) {
+				var otherInput = document.getElementById('other_education');
+				if(select.value === 'other') {
+					otherInput.style.display = 'block';
+				} else {
+					otherInput.style.display = 'none';
+				}
+			}
+		</script>
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
+				checkOther(select);
 				const forms = document.querySelectorAll('form');
 				forms.forEach(form => {
 					form.addEventListener('submit', function(event) {
@@ -517,3 +534,4 @@
 		</script>
 	</body>
 </html>
+
