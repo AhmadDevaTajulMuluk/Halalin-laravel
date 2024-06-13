@@ -15,6 +15,7 @@ class KuisController extends Controller
     public function index()
     {
         $soals = Soal::with('jawabans')->get();
+        $soals = $soals->shuffle();
         return view('user.kuis', compact('soals'));
     }
 
