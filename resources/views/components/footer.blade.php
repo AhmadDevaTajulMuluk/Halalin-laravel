@@ -16,6 +16,7 @@
     <li><a href="#">Privacy Policy</a></li>
     <li><a href="#">Terms & Conditions</a></li>
     <li><a href="#">Address</a></li>
+    <li><a href="{{ route('faq') }}">FAQ</a></li>
     </ul>
     </div>
     

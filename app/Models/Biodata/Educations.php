@@ -16,6 +16,7 @@ class Educations extends Model
     protected $fillable = [
         'user_id',
         'last_education',
+        'other_education',
         'elementarySchool',
         'juniorHighSchool',
         'seniorHighSchool',

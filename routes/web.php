@@ -18,6 +18,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChatUstadzController;
 use App\Http\Controllers\RequestTaarufController;
 use App\Http\Controllers\UserController as ControllersUserController;
+use App\Http\Controllers\FaqsController;
 use App\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\ChatRoom;
@@ -175,3 +176,5 @@ Route::prefix('ustadz')->group(function () {
 Route::get('/chat/show/{id}', [ChatController::class, 'show'])->name('chat.show');
 Route::post('/chat/send/{id}', [ChatController::class, 'send'])->name('chat.send');
 Route::get('/get-latest-chats/{relationId}', [ChatController::class, 'getLatestChats'])->name('get.latest.chats');
+
+Route::get('/faq', [FaqsController::class, 'index'])->name('faq');
