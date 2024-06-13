@@ -155,7 +155,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/ustadz/login', [UstadzController::class, 'showLoginForm'])->name('ustadz.login');
 Route::post('/ustadz/login', [UstadzController::class, 'login'])->name('ustadz.login.submit');
-Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show')->middleware('auth:ustadz');
+// Route::get('/artikel-content/{id}', [ArtikelController::class, 'show'])->name('artikel.show')->middleware('auth:ustadz');
 
 Route::prefix('ustadz')->group(function () {
     Route::get('/dashboard', [UstadzController::class, 'dashboard'])->name('ustadz.dashboard')->middleware('auth:ustadz');

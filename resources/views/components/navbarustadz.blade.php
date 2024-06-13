@@ -31,7 +31,7 @@
                         @else
                             <p>Silakan Login</p>
                         @endif  
-                        <p>Lihat Profil</p>
+                        {{-- <p>Lihat Profil</p> --}}
                     </div>
                 </a>
             </div>
@@ -45,7 +45,7 @@
             <p style="padding-top: 0; margin-top: 0; font-weight: 800">{{ $ustadz->name }}</p>
         @endif  
         <hr>
-        <p>Lihat Profil</p>
+        {{-- <p>Lihat Profil</p> --}}
           <a href="/logout">Logout</a>
     </div>
   </div>

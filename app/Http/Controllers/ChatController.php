@@ -98,6 +98,9 @@ class ChatController extends Controller
         } else if (auth('ustadz')->check()) {
             $sender = "ustadz";
         }
+        if ($relation->ustadz_id == null) {
+            return redirect()->route('dashboard')->with('error', 'Anda tidak diizinkan mengakses chat ini.');
+        }
         $user = User::where('id', auth()->id())->first();
         $chats = Chat::where('hubungan_id', $id)->get();
         return view('user.chat.show', compact('relation', 'chats', 'sender', 'user'));
@@ -105,7 +108,6 @@ class ChatController extends Controller
 
     public function send(Request $request, $id)
     {
-        @dd("siuuu");
         // Validasi data yang dikirim dari form
         $request->validate([
             'send_by' => 'required',
@@ -130,16 +132,25 @@ class ChatController extends Controller
         $relation->maleUser = Profile::where('user_id', $relation->maleuser_id)->first();
         $relation->femaleUser = Profile::where('user_id', $relation->femaleuser_id)->first();
         $relation->ustadz = Ustadz::where('ustadz_id', $relation->ustadz_id)->first();
-        $chats = Chat::where('hubungan_id', $relationId)->get();
+
+        $sender = null;
         if (auth('web')->id() == $relation->maleuser_id || auth('web')->id() == $relation->femaleuser_id) {
-            $sender = User::where('id', auth()->id())->first();
-            $sender = $sender->username;
+            $sender = User::where('id', auth('web')->id())->first()->username;
         } else if (auth('ustadz')->check()) {
             $sender = "ustadz";
         }
+
         $user = User::where('id', auth()->id())->first();
-        return response()->json(['chats' => $chats, 'relation' => $relation, 'sender' => $sender, 'user' => $user]);
+        $chats = Chat::where('hubungan_id', $relationId)->get();
+
+        return response()->json([
+            'chats' => $chats,
+            'relation' => $relation,
+            'sender' => $sender,
+            'user' => $user
+        ]);
     }
+
 
 
     /**

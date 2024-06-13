@@ -11,6 +11,9 @@
 <body>
     <div id="app">
         <header class="header-chat">
+            <button onclick="window.location.href='/chat'" class="back-button">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
             <h1>Room Chat</h1>
         </header>
         <main class="page-konsultasi" wire:poll>
