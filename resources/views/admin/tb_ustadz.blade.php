@@ -32,10 +32,29 @@
                     <td>{{ $ustadz->phone }}</td>
                     <td>
                         <a href="{{ route('admin.ustadz.edit', $ustadz->ustadz_id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('admin.ustadz.destroy', $ustadz->ustadz_id) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $ustadz->ustadz_id }}">Delete</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmDeleteModal{{ $ustadz->ustadz_id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $ustadz->ustadz_id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel{{ $ustadz->ustadz_id }}">Confirm Delete</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this ustadz?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <form action="{{ route('admin.ustadz.destroy', $ustadz->ustadz_id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach

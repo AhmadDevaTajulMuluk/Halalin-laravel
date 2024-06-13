@@ -45,10 +45,29 @@
                             <td>{{ $admin->username }}</td>
                             <td>
                                 <a href="{{ route('admin.edit', $admin->admin_id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('admin.destroy', $admin->admin_id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $admin->admin_id }}">Delete</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="confirmDeleteModal{{ $admin->admin_id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $admin->admin_id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="confirmDeleteModalLabel{{ $admin->admin_id }}">Confirm Delete</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this admin?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('admin.destroy', $admin->admin_id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
