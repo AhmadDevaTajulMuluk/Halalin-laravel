@@ -37,7 +37,9 @@
                 <div class="inputbox">
                     <input type="text" wire:model.defer="message" placeholder="Ketik pesan..." required>
                     <div class="icon-kirim">
-                        <button type="submit">kirim</button>
+                        <button class="button" type="submit" style="padding: 5px 10px">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             </form>

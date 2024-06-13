@@ -35,6 +35,7 @@ class KuisController extends Controller
             $jawabanBenar = 0;
             $jawabanDiberikan = [];
             $jawabanDipilih = $request->jawaban;
+            
 
             foreach ($request->jawaban as $jawabanId) {
                 $jawaban = Jawaban::find($jawabanId);
@@ -46,7 +47,11 @@ class KuisController extends Controller
         } else {
             return redirect()->back()->with('error', 'Anda Belum Memilih Jawaban');
         }
+
         $totalSoal = Soal::count();
+        if(count($request->jawaban) < $totalSoal){
+            return redirect()->back()->with('error', 'Anda harus mengisi semua soal');
+        }
         $nilai = round(($jawabanBenar / $totalSoal) * 100, 1);
         $jumlah_benar = $jawabanBenar;
         $jumlah_salah = $totalSoal - $jawabanBenar;
@@ -54,7 +59,7 @@ class KuisController extends Controller
         if ($nilai > 70.0) {
             $user->pelatihan_completion = 3;
             $user->save();
-        }
+            }
         return view('user.hasil', compact('nilai', 'jawabanDiberikan', 'jumlah_benar', 'jumlah_salah', 'jawabanDipilih'));
     }
 

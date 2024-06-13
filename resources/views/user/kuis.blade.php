@@ -83,6 +83,13 @@
               <div id="siuuu" class="alert-danger" style="cursor: pointer; padding: 10px" onclick="document.getElementById('siuuu').style.display='none';">
                   {{ session('error') }}
               </div>
+              <script>
+                  // Setelah 3 detik, sembunyikan pesan error
+                  setTimeout(function() {
+                      var errorAlert = document.getElementById('siuuu');
+                      errorAlert.style.display = 'none';
+                  }, 2000);
+              </script>
           @endif
           <div class="card-soal">
             <form id="form-kuis" style="display: flex; flex-direction: column; gap: 1rem"  action="{{ route('kuis.store') }}" method="POST" onsubmit="return false;">
