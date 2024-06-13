@@ -95,13 +95,14 @@
             <form id="form-kuis" style="display: flex; flex-direction: column; gap: 1rem"  action="{{ route('kuis.store') }}" method="POST" onsubmit="return false;">
                         @csrf
                         @foreach($soals as $index => $soal)
+                        <?php $shuffledJawabans = $soal->jawabans->shuffle(); ?>
                             <div class="soal" id="soal{{ $index }}" data-index="{{ $index }}">
                                 <div id="soal-container">
                                     <h1 id="judul-soal">{{ $soal->judul }}</h1>
                                     <p id="isi-soal" style="font-size: 18px">{{ $soal->isi }}</p>
                                 </div>
                                 <div class="choice-container">
-                                    @foreach($soal->jawabans as $jawaban)
+                                  @foreach($shuffledJawabans as $jawaban)
                                         <div class="choice">
                                             <p class="choice-prefix">{{ chr(64 + $loop->iteration) }}</p>
                                             <p class="choice-text" id="jawaban" data-number="{{ $jawaban->id }}">
