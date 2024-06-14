@@ -70,6 +70,7 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::get('/admin/articles', [AdminArticleController::class, 'index'])->name('admin.articles.index');
     Route::get('/admin/articles/create', [AdminArticleController::class, 'create'])->name('admin.articles.create');
+    Route::post('/articles/upload', [AdminArticleController::class, 'upload'])->name('admin.articles.upload');
     Route::post('/admin/articles', [AdminArticleController::class, 'store'])->name('admin.articles.store');
     Route::get('/admin/articles/{article}/edit', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
     Route::put('/admin/articles/{article}', [AdminArticleController::class, 'update'])->name('admin.articles.update');

@@ -20,30 +20,49 @@ class ArticleController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            'writer' => 'required',
-            'content' => 'required',
-            'publish_date' => 'required|date',
-            'reference' => 'required',
-            'article_image' => 'nullable|image',
-        ]);
+{
+    $request->validate([
+        'title' => 'required',
+        'writer' => 'required',
+        'content' => 'required',
+        'publish_date' => 'required|date',
+        'reference' => 'required',
+        'article_image' => 'nullable|image',
+    ]);
 
-        $data = $request->all();
+    $data = $request->all();
 
-        if ($request->hasFile('article_image')) {
-            $image_file = $request->file('article_image');
-            $image_name = time() . '.' . $image_file->getClientOriginalExtension();
-            $image_file->move(public_path('image'), $image_name);
-            $data['article_image'] = $image_name;
-        }
-
-        $article = new Article($data);
-        $article->save();
-
-        return redirect()->route('admin.articles.index')->with('success', 'Article created successfully');
+    if ($request->hasFile('article_image')) {
+        $image_file = $request->file('article_image');
+        $image_name = time() . '.' . $image_file->getClientOriginalExtension();
+        $image_file->move(public_path('image'), $image_name);
+        $data['article_image'] = $image_name;
     }
+
+    Article::create($data);
+
+    return redirect()->route('admin.articles.index')->with('success', 'Article created successfully');
+}
+
+public function upload(Request $request)
+{
+    if($request->hasFile('upload')) {
+        $originName = $request->file('upload')->getClientOriginalName();
+        $fileName = pathinfo($originName, PATHINFO_FILENAME);
+        $extension = $request->file('upload')->getClientOriginalExtension();
+        $fileName = $fileName.'_'.time().'.'.$extension;
+
+        $request->file('upload')->move(public_path('images'), $fileName);
+
+        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+        $url = asset('images/'.$fileName);
+        $msg = 'Image uploaded successfully';
+        $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+        @header('Content-type: text/html; charset=utf-8');
+        echo $response;
+    }
+}
 
     public function edit($article_id)
     {

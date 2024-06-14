@@ -29,16 +29,18 @@
             </div>
         </div>
         <div class="image">
-            <img src="{{ asset('image/' . $article->article_image) }}" alt="Gambar Artikel" />
+            @if ($article->article_image)
+                <img src="{{ asset('image/' . $article->article_image) }}" alt="Gambar Artikel" />
+            @endif
         </div>
         <article class="article-content">
-            {!! nl2br(e($article->content)) !!}
+            {!! $article->content !!}
         </article>
         <footer class="footer-article">
             <h3 class="h2-article" style="text-align: center;">Referensi:</h3>
             <ul>
                 @foreach (explode("\n", $article->reference) as $reference)
-                    <li><a href="{{ $reference }}">{{ $reference }}</a></li>
+                    <li><a href="{{ $reference }}" target="_blank">{{ $reference }}</a></li>
                 @endforeach
             </ul>
         </footer>
