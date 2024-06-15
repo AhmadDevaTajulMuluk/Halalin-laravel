@@ -26,5 +26,6 @@ class Educations extends Model
         'majorS2',
         'collegeS3',
         'majorS3',
+        'prestasi',
     ];
 }
